@@ -17,6 +17,7 @@ DSA-REPO/
 │   └── searching/            # Core searching algorithm implementations
 ├── Sliding_window/           # Dynamic & fixed-size subarray scanning
 ├── FastAndSlowPointers/       # Floyd's cycle detection, list manipulation
+├── CyclicSort/               # In-place range sorting, missing/duplicate number detection
 ├── Trees/                    # Hierarchical traversal & binary search tree patterns
 ├── dp/                       # Memoization, tabulation, & string alignment
 └── Backtrack/                # Recursive search spaces, permutations, & chess problems
@@ -91,6 +92,20 @@ Complex recursive optimization problems, hierarchical representations, and state
 | DP | Word Wrap | [GeeksforGeeks](https://www.geeksforgeeks.org/word-wrap-problem-dp-19/) | [wordWrap.java](dp/wordWrap.java) | Recursion + Memoization computing minimum extra space squares |
 | Backtrack | N-Queens Puzzle | [LeetCode 51](https://leetcode.com/problems/n-queens/) | [NQueen.java](Backtrack/NQueen.java) | Row-by-row recursive placement checking column/diagonal safety |
 | Backtrack | Permutations | [LeetCode 46](https://leetcode.com/problems/permutations/) | [permutation.java](Backtrack/permutation.java) | Backtracking swap-based permutation space exploration |
+
+### 6. Cyclic Sort Pattern
+In-place range sorting and mismatch scanning for optimal $O(N)$ time and $O(1)$ space range queries.
+
+| # | Problem | Source Link | Solution Code | Optimal Time | Space | Core Approach |
+|---|---------|-------------|---------------|:------------:|:-----:|--------------|
+| 1 | Cyclic Sort | [LeetCode Practice](https://leetcode.com/problems/missing-number/) | [CyclicSort.java](CyclicSort/CyclicSort.java) | $O(N)$ | $O(1)$ | Swap elements to their correct index `val - 1` |
+| 2 | Find the Missing Number | [LeetCode 268](https://leetcode.com/problems/missing-number/) | [MissingNumber.java](CyclicSort/MissingNumber.java) | $O(N)$ | $O(1)$ | Swap `val` to index `val`, return first index mismatch or `N` |
+| 3 | Find All Missing Numbers | [LeetCode 448](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/) | [FindAllMissingNumbers.java](CyclicSort/FindAllMissingNumbers.java) | $O(N)$ | $O(1)$ | Sort range `[1, N]`, return all indices `i` where `nums[i] != i + 1` |
+| 4 | Find the Duplicate Number | [LeetCode 287](https://leetcode.com/problems/find-the-duplicate-number/) | [FindDuplicate.java](CyclicSort/FindDuplicate.java) | $O(N)$ | $O(1)$ | In-place swap; return value if target slot already contains it |
+| 5 | Find All Duplicates | [LeetCode 442](https://leetcode.com/problems/find-all-duplicates-in-an-array/) | [FindAllDuplicates.java](CyclicSort/FindAllDuplicates.java) | $O(N)$ | $O(1)$ | Cyclic sort `[1, N]`, collect `nums[i]` where `nums[i] != i + 1` |
+| 6 | Find Duplicate & Missing Number | [LeetCode 645](https://leetcode.com/problems/set-mismatch/) | [FindDuplicateAndMissing.java](CyclicSort/FindDuplicateAndMissing.java) | $O(N)$ | $O(1)$ | Sort range `[1, N]`, index mismatch `i` gives duplicate `nums[i]` and missing `i + 1` |
+| 7 | Find Smallest Missing Positive | [LeetCode 41](https://leetcode.com/problems/first-missing-positive/) | [FirstMissingPositive.java](CyclicSort/FirstMissingPositive.java) | $O(N)$ | $O(1)$ | Cyclic sort positive numbers `[1, N]`, return first index mismatch `i + 1` |
+| 8 | First K Missing Positive Numbers | [Grokking (LC 41 variant)](https://leetcode.com/problems/first-missing-positive/) | [FirstKMissingPositive.java](CyclicSort/FirstKMissingPositive.java) | $O(N + K)$ | $O(N)$ | Cyclic sort `[1, N]`, scan for mismatches and beyond, tracking seen elements |
 
 ---
 
