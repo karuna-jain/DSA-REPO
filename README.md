@@ -17,6 +17,7 @@ DSA-REPO/
 │   └── searching/            # Core searching algorithm implementations
 ├── Sliding_window/           # Dynamic & fixed-size subarray scanning
 ├── FastAndSlowPointers/       # Floyd's cycle detection, list manipulation
+├── InPlaceLinkedListReversal/ # In-place linked list reversal & rotation patterns
 ├── CyclicSort/               # In-place range sorting, missing/duplicate number detection
 ├── Trees/                    # Hierarchical traversal & binary search tree patterns
 ├── dp/                       # Memoization, tabulation, & string alignment
@@ -106,6 +107,19 @@ In-place range sorting and mismatch scanning for optimal $O(N)$ time and $O(1)$ 
 | 6 | Find Duplicate & Missing Number | [LeetCode 645](https://leetcode.com/problems/set-mismatch/) | [FindDuplicateAndMissing.java](CyclicSort/FindDuplicateAndMissing.java) | $O(N)$ | $O(1)$ | Sort range `[1, N]`, index mismatch `i` gives duplicate `nums[i]` and missing `i + 1` |
 | 7 | Find Smallest Missing Positive | [LeetCode 41](https://leetcode.com/problems/first-missing-positive/) | [FirstMissingPositive.java](CyclicSort/FirstMissingPositive.java) | $O(N)$ | $O(1)$ | Cyclic sort positive numbers `[1, N]`, return first index mismatch `i + 1` |
 | 8 | First K Missing Positive Numbers | [Grokking (LC 41 variant)](https://leetcode.com/problems/first-missing-positive/) | [FirstKMissingPositive.java](CyclicSort/FirstKMissingPositive.java) | $O(N + K)$ | $O(N)$ | Cyclic sort `[1, N]`, scan for mismatches and beyond, tracking seen elements |
+
+### 7. In-place Reversal of a Linked List Pattern
+Iterative pointer redirection for memory-efficient $O(1)$ space manipulation of linear list elements.
+
+| # | Problem | Source Link | Solution Code | Optimal Time | Space | Core Approach |
+|---|---------|-------------|---------------|:------------:|:-----:|--------------|
+| 1 | Reverse a Linked List | [LeetCode 206](https://leetcode.com/problems/reverse-linked-list/) | [ReverseLinkedList.java](InPlaceLinkedListReversal/ReverseLinkedList.java) | $O(N)$ | $O(1)$ | Iterative reversal using three pointers (prev, curr, next) |
+| 2 | Reverse a Sub-list (m to n) | [LeetCode 92](https://leetcode.com/problems/reverse-linked-list-ii/) | [ReverseSubList.java](InPlaceLinkedListReversal/ReverseSubList.java) | $O(N)$ | $O(1)$ | Traverse to index left-1, reverse sub-list, reconnect ends |
+| 3 | Reverse Every K-element Sub-list | [LeetCode 25](https://leetcode.com/problems/reverse-nodes-in-k-group/) | [ReverseKGroup.java](InPlaceLinkedListReversal/ReverseKGroup.java) | $O(N)$ | $O(1)$ | Count k elements, reverse them, repeat iteratively, keep leftovers as is |
+| 4 | Reverse Alternating K-element Sub-list | [Grokking Pattern](https://leetcode.com/) | [ReverseAlternatingKGroup.java](InPlaceLinkedListReversal/ReverseAlternatingKGroup.java) | $O(N)$ | $O(1)$ | Alternating phases: reverse k nodes, skip k nodes, repeat |
+| 5 | Rotate a Linked List | [LeetCode 61](https://leetcode.com/problems/rotate-list/) | [RotateList.java](InPlaceLinkedListReversal/RotateList.java) | $O(N)$ | $O(1)$ | Form circular list, advance len - (k % len) - 1, split circle |
+| 6 | Reverse Nodes in Even Length Groups | [LeetCode 2074](https://leetcode.com/problems/reverse-nodes-in-even-length-groups/) | [ReverseEvenLengthGroups.java](InPlaceLinkedListReversal/ReverseEvenLengthGroups.java) | $O(N)$ | $O(1)$ | Incrementally size groups (1, 2, 3...); reverse if group size is even |
+| 7 | Swap Nodes in Pairs | [LeetCode 24](https://leetcode.com/problems/swap-nodes-in-pairs/) | [SwapPairs.java](InPlaceLinkedListReversal/SwapPairs.java) | $O(N)$ | $O(1)$ | Swap adjacent nodes iteratively in pairs (k=2) |
 
 ---
 
