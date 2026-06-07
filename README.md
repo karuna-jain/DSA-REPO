@@ -19,6 +19,7 @@ DSA-REPO/
 ├── FastAndSlowPointers/       # Floyd's cycle detection, list manipulation
 ├── InPlaceLinkedListReversal/ # In-place linked list reversal & rotation patterns
 ├── CyclicSort/               # In-place range sorting, missing/duplicate number detection
+├── MergeIntervals/           # Interval merging, insertions, and intersections
 ├── Trees/                    # Hierarchical traversal & binary search tree patterns
 ├── dp/                       # Memoization, tabulation, & string alignment
 └── Backtrack/                # Recursive search spaces, permutations, & chess problems
@@ -120,6 +121,15 @@ Iterative pointer redirection for memory-efficient $O(1)$ space manipulation of 
 | 5 | Rotate a Linked List | [LeetCode 61](https://leetcode.com/problems/rotate-list/) | [RotateList.java](InPlaceLinkedListReversal/RotateList.java) | $O(N)$ | $O(1)$ | Form circular list, advance len - (k % len) - 1, split circle |
 | 6 | Reverse Nodes in Even Length Groups | [LeetCode 2074](https://leetcode.com/problems/reverse-nodes-in-even-length-groups/) | [ReverseEvenLengthGroups.java](InPlaceLinkedListReversal/ReverseEvenLengthGroups.java) | $O(N)$ | $O(1)$ | Incrementally size groups (1, 2, 3...); reverse if group size is even |
 | 7 | Swap Nodes in Pairs | [LeetCode 24](https://leetcode.com/problems/swap-nodes-in-pairs/) | [SwapPairs.java](InPlaceLinkedListReversal/SwapPairs.java) | $O(N)$ | $O(1)$ | Swap adjacent nodes iteratively in pairs (k=2) |
+
+### 8. Merge Intervals Pattern
+Sorting or managing interval lists to solve overlaps, scheduling, or range coverage queries.
+
+| # | Problem | Source Link | Solution Code | Optimal Time | Space | Core Approach |
+|---|---------|-------------|---------------|:------------:|:-----:|--------------|
+| 1 | Merge Overlapping Intervals | [LeetCode](https://leetcode.com/problems/merge-intervals/) | [MergeIntervals.java](MergeIntervals/MergeIntervals.java) | $O(N \log N)$ | $O(N)$ | Sort by start time, merge overlapping bounds linearly |
+| 2 | Insert Interval | [LeetCode](https://leetcode.com/problems/insert-interval/) | [InsertInterval.java](MergeIntervals/InsertInterval.java) | $O(N)$ | $O(N)$ | Linear pass: add left-side, merge overlapping, add right-side |
+| 3 | Intervals Intersection | [LeetCode](https://leetcode.com/problems/interval-list-intersections/) | [IntervalIntersection.java](MergeIntervals/IntervalIntersection.java) | $O(N + M)$ | $O(N + M)$ | Two-pointer scan, find overlap start/end, advance smaller end |
 
 ---
 
