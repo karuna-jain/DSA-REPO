@@ -21,6 +21,7 @@ DSA-REPO/
 ├── CyclicSort/               # In-place range sorting, missing/duplicate number detection
 ├── MergeIntervals/           # Interval merging, insertions, and intersections
 ├── Trees/                    # Hierarchical traversal & binary search tree patterns
+│   └── BFS/                  # Breadth-first level-order traversals & patterns
 ├── dp/                       # Memoization, tabulation, & string alignment
 └── Backtrack/                # Recursive search spaces, permutations, & chess problems
 ```
@@ -130,6 +131,17 @@ Sorting or managing interval lists to solve overlaps, scheduling, or range cover
 | 1 | Merge Overlapping Intervals | [LeetCode](https://leetcode.com/problems/merge-intervals/) | [MergeIntervals.java](MergeIntervals/MergeIntervals.java) | $O(N \log N)$ | $O(N)$ | Sort by start time, merge overlapping bounds linearly |
 | 2 | Insert Interval | [LeetCode](https://leetcode.com/problems/insert-interval/) | [InsertInterval.java](MergeIntervals/InsertInterval.java) | $O(N)$ | $O(N)$ | Linear pass: add left-side, merge overlapping, add right-side |
 | 3 | Intervals Intersection | [LeetCode](https://leetcode.com/problems/interval-list-intersections/) | [IntervalIntersection.java](MergeIntervals/IntervalIntersection.java) | $O(N + M)$ | $O(N + M)$ | Two-pointer scan, find overlap start/end, advance smaller end |
+
+### 9. Tree BFS Traversal Pattern
+Level-by-level traversal using a queue to process nodes horizontally across each depth level.
+
+| # | Problem | Source Link | Solution Code | Optimal Time | Space | Core Approach |
+|---|---------|-------------|---------------|:------------:|:-----:|--------------|
+| 1 | Binary Tree Level Order Traversal | [LeetCode 102](https://leetcode.com/problems/binary-tree-level-order-traversal/) | [LevelOrderTraversal.java](Trees/BFS/LevelOrderTraversal.java) | $O(N)$ | $O(N)$ | Queue-based level size iteration, collecting nodes level-by-level |
+| 2 | Reverse Level Order Traversal | [LeetCode 107](https://leetcode.com/problems/binary-tree-level-order-traversal-ii/) | [ReverseLevelOrderTraversal.java](Trees/BFS/ReverseLevelOrderTraversal.java) | $O(N)$ | $O(N)$ | Queue-based level-order traversal, prepending levels to list |
+| 3 | Zigzag Level Order Traversal | [LeetCode 103](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/) | [ZigzagLevelOrderTraversal.java](Trees/BFS/ZigzagLevelOrderTraversal.java) | $O(N)$ | $O(N)$ | Alternate inserting values at front/back of level list using a direction flag |
+| 4 | Level Averages in Binary Tree | [LeetCode 637](https://leetcode.com/problems/average-of-levels-in-binary-tree/) | [LevelAverages.java](Trees/BFS/LevelAverages.java) | $O(N)$ | $O(N)$ | Compute average of each level using double accumulator to avoid overflow |
+| 5 | Minimum Depth of Binary Tree | [LeetCode 111](https://leetcode.com/problems/minimum-depth-of-binary-tree/) | [MinDepthBFS.java](Trees/BFS/MinDepthBFS.java) | $O(N)$ | $O(N)$ | Find first leaf node level-by-level using BFS traversal for early termination |
 
 ---
 
