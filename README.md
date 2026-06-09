@@ -142,6 +142,14 @@ Level-by-level traversal using a queue to process nodes horizontally across each
 | 3 | Zigzag Level Order Traversal | [LeetCode 103](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/) | [ZigzagLevelOrderTraversal.java](Trees/BFS/ZigzagLevelOrderTraversal.java) | $O(N)$ | $O(N)$ | Alternate inserting values at front/back of level list using a direction flag |
 | 4 | Level Averages in Binary Tree | [LeetCode 637](https://leetcode.com/problems/average-of-levels-in-binary-tree/) | [LevelAverages.java](Trees/BFS/LevelAverages.java) | $O(N)$ | $O(N)$ | Compute average of each level using double accumulator to avoid overflow |
 | 5 | Minimum Depth of Binary Tree | [LeetCode 111](https://leetcode.com/problems/minimum-depth-of-binary-tree/) | [MinDepthBFS.java](Trees/BFS/MinDepthBFS.java) | $O(N)$ | $O(N)$ | Find first leaf node level-by-level using BFS traversal for early termination |
+| 6 | Level Order Successor | [Grokking Pattern](https://leetcode.com/) | [LevelOrderSuccessor.java](Trees/BFS/LevelOrderSuccessor.java) | $O(N)$ | $O(N)$ | Queue-based level-order search returning the next item when target is hit |
+| 7 | Connect Level Order Siblings | [LeetCode 116](https://leetcode.com/problems/populating-next-right-pointers-in-each-node/) | [ConnectLevelOrderSiblings.java](Trees/BFS/ConnectLevelOrderSiblings.java) | $O(N)$ | $O(N)$ | Use BFS queue level sizes to point each node to its right sibling on the same level |
+| 8 | Connect All Level Order Siblings | [LeetCode 117](https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/) | [ConnectAllLevelOrderSiblings.java](Trees/BFS/ConnectAllLevelOrderSiblings.java) | $O(N)$ | $O(N)$ | Iterative BFS queue traversal linking previous node next pointer to current node across levels |
+| 9 | Right View of Binary Tree | [LeetCode 199](https://leetcode.com/problems/binary-tree-right-side-view/) | [RightViewBinaryTree.java](Trees/BFS/RightViewBinaryTree.java) | $O(N)$ | $O(N)$ | Level-by-level BFS collecting only the last element of each queue level |
+| 10 | Tree Boundary | [LeetCode 545](https://leetcode.com/problems/boundary-of-binary-tree/) | [TreeBoundary.java](Trees/BFS/TreeBoundary.java) | $O(N)$ | $O(N)$ | Traverse left boundary, recursively collect leaves, and traverse right boundary in reverse |
+| 11 | Word Ladder (BFS on Graph) | [LeetCode 127](https://leetcode.com/problems/word-ladder/) | [WordLadder.java](Trees/BFS/WordLadder.java) | $O(M^2 \cdot N)$ | $O(M^2 \cdot N)$ | Graph-based BFS mutating each word character to find shortest transformation sequence |
+| 12 | Vertical Order Traversal | [LeetCode 987](https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/) | [VerticalOrderTraversal.java](Trees/BFS/VerticalOrderTraversal.java) | $O(N \log N)$ | $O(N)$ | Store coordinates during BFS, sort by column/row/value, and group by column |
+
 
 ---
 
