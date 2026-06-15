@@ -15,6 +15,7 @@ DSA-REPO/
 │   ├── Kadanes/              # Maximum/minimum subarray sum optimization
 │   ├── Sorting/              # Core sorting algorithm implementations
 │   └── searching/            # Core searching algorithm implementations
+│       └── BinarySearch/     # Modified binary search patterns (ceil, range, rotated, peak)
 ├── Sliding_window/           # Dynamic & fixed-size subarray scanning
 ├── FastAndSlowPointers/       # Floyd's cycle detection, list manipulation
 ├── InPlaceLinkedListReversal/ # In-place linked list reversal & rotation patterns
@@ -23,7 +24,8 @@ DSA-REPO/
 ├── Trees/                    # Hierarchical traversal & binary search tree patterns
 │   └── BFS/                  # Breadth-first level-order traversals & patterns
 ├── dp/                       # Memoization, tabulation, & string alignment
-└── Backtrack/                # Recursive search spaces, permutations, & chess problems
+├── Backtrack/                # Recursive search spaces, permutations, & chess problems
+└── Matrix/                   # 2D grid traversals, searching, and sorting patterns
 ```
 
 ---
@@ -50,6 +52,7 @@ Optimizing search/manipulation on sorted structures by moving pointers inward or
 | 11 | Backspace String Compare | [LeetCode 844](https://leetcode.com/problems/backspace-string-compare/) | [BackspaceCompare.java](Arrays/TwoPointer/BackspaceCompare.java) | $O(N+M)$ | $O(1)$ | Two pointers scanning right-to-left, tracking backspace counts |
 | 12 | Trapping Rain Water | [LeetCode 42](https://leetcode.com/problems/trapping-rain-water/) | [TrappingRainWater.java](Arrays/TwoPointer/TrappingRainWater.java) | $O(N)$ | $O(1)$ | Two pointers tracking leftMax and rightMax boundaries |
 | 13 | Minimum Size Subarray Sum | [LeetCode 209](https://leetcode.com/problems/minimum-size-subarray-sum/) | [MinSizeSubarraySum.java](Arrays/TwoPointer/MinSizeSubarraySum.java) | $O(N)$ | $O(1)$ | Sliding window, expand right, shrink left when sum $\ge$ target |
+| 14 | Next Permutation | [LeetCode 31](https://leetcode.com/problems/next-permutation/) | [NextPermutation.java](Arrays/TwoPointer/NextPermutation.java) | $O(N)$ | $O(1)$ | Find pivot, find successor, swap, and reverse suffix |
 
 ### 2. Fast & Slow Pointer Pattern
 Detecting cycles, cycle entry points, or finding middle nodes of linear structures.
@@ -62,6 +65,7 @@ Detecting cycles, cycle entry points, or finding middle nodes of linear structur
 | 4 | Find Cycle Start in Linked List | [LeetCode 142](https://leetcode.com/problems/linked-list-cycle-ii/) | [LinkedListCycleStart.java](FastAndSlowPointers/LinkedListCycleStart.java) | $O(N)$ | $O(1)$ | Floyd's cycle detection + head reset and linear meeting |
 | 5 | Palindrome Linked List | [LeetCode 234](https://leetcode.com/problems/palindrome-linked-list/) | [PalindromeLinkedList.java](FastAndSlowPointers/PalindromeLinkedList.java) | $O(N)$ | $O(1)$ | Midpoint split, reverse second half, comparison, list restore |
 | 6 | Rearrange Linked List (Odd-Even) | [LeetCode 328](https://leetcode.com/problems/odd-even-linked-list/) | [OddEvenLinkedList.java](FastAndSlowPointers/OddEvenLinkedList.java) | $O(N)$ | $O(1)$ | Interleaved linking of odd/even pointers, end-linking |
+| 7 | Find the Duplicate Number (Floyd's) | [LeetCode 287](https://leetcode.com/problems/find-the-duplicate-number/) | [FindDuplicateFloyd.java](FastAndSlowPointers/FindDuplicateFloyd.java) | $O(N)$ | $O(1)$ | Fast & slow pointers meeting in array index cycle |
 
 ### 3. Sliding Window Pattern
 Tracking a subsegment of an array/string that dynamically expands or shrinks based on criteria.
@@ -84,6 +88,8 @@ Classic base implementations of sorting and binary/linear search.
 | Sorting | Quick Sort | [quickSort.java](Arrays/Sorting/quickSort.java) | $O(N \log N)$ | $O(\log N)$ |
 | Searching | Binary Search | [BinarySearch.java](Arrays/searching/BinarySearch.java) | $O(\log N)$ | $O(1)$ |
 | Searching | Linear Search | [LinearSearch.java](Arrays/searching/LinearSearch.java) | $O(N)$ | $O(1)$ |
+| Sorting | Merge Sorted Arrays (In-Place) | [MergeSortedArrays.java](Arrays/MergeSortedArrays.java) | $O((N + M) \log(N + M))$ | $O(1)$ |
+| Sorting | Count Inversions | [CountInversion.java](Arrays/Sorting/CountInversion.java) | $O(N \log N)$ | $O(N)$ |
 
 ### 5. Dynamic Programming, Trees & Backtracking
 Complex recursive optimization problems, hierarchical representations, and state space searches.
@@ -150,6 +156,43 @@ Level-by-level traversal using a queue to process nodes horizontally across each
 | 11 | Word Ladder (BFS on Graph) | [LeetCode 127](https://leetcode.com/problems/word-ladder/) | [WordLadder.java](Trees/BFS/WordLadder.java) | $O(M^2 \cdot N)$ | $O(M^2 \cdot N)$ | Graph-based BFS mutating each word character to find shortest transformation sequence |
 | 12 | Vertical Order Traversal | [LeetCode 987](https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/) | [VerticalOrderTraversal.java](Trees/BFS/VerticalOrderTraversal.java) | $O(N \log N)$ | $O(N)$ | Store coordinates during BFS, sort by column/row/value, and group by column |
 
+### 10. Modified Binary Search Pattern
+Searching sorted spaces, rotated segments, boundaries, or finding optimization answers in logarithmic time.
+
+| # | Problem | Source Link | Solution Code | Optimal Time | Space | Core Approach |
+|---|---------|-------------|---------------|:------------:|:-----:|--------------|
+| 1 | Binary Search (Classic) | [LeetCode 704](https://leetcode.com/problems/binary-search/) | [BinarySearch.java](Arrays/searching/BinarySearch/BinarySearch.java) | $O(\log N)$ | $O(1)$ | Traditional mid check and pointer adjustment |
+| 2 | Find Ceiling of a Number | [LeetCode 35](https://leetcode.com/problems/search-insert-position/) | [SearchInsertPosition.java](Arrays/searching/BinarySearch/SearchInsertPosition.java) | $O(\log N)$ | $O(1)$ | Standard binary search; return `low` if target not found |
+| 3 | Next Letter | [LeetCode 744](https://leetcode.com/problems/find-smallest-letter-greater-than-target/) | [NextLetter.java](Arrays/searching/BinarySearch/NextLetter.java) | $O(\log N)$ | $O(1)$ | Binary search with circular index mapping (`low % length`) |
+| 4 | Find Range of a Number | [LeetCode 34](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/) | [FindRange.java](Arrays/searching/BinarySearch/FindRange.java) | $O(\log N)$ | $O(1)$ | Double binary search finding leftmost and rightmost boundaries |
+| 5 | Search in Infinite Sorted Array | [LeetCode 702 (Premium)](https://leetcode.com/problems/search-in-a-sorted-array-of-unknown-size/) | [SearchInfiniteSortedArray.java](Arrays/searching/BinarySearch/SearchInfiniteSortedArray.java) | $O(\log K)$ | $O(1)$ | Exponential bounds expansion to determine range, then binary search |
+| 6 | Minimum Difference Element | [LeetCode 658 (Closest)](https://leetcode.com/problems/find-k-closest-elements/) | [MinimumDifferenceElement.java](Arrays/searching/BinarySearch/MinimumDifferenceElement.java) | $O(\log N)$ | $O(1)$ | Find closest element using boundary checks at loop termination |
+| 7 | Search in Rotated Sorted Array | [LeetCode 33](https://leetcode.com/problems/search-in-rotated-sorted-array/) | [SearchRotatedArray.java](Arrays/searching/BinarySearch/SearchRotatedArray.java) | $O(\log N)$ | $O(1)$ | Binary search comparing boundaries to find and search sorted half |
+| 8 | Search in Rotated Array II | [LeetCode 81](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/) | [SearchRotatedArrayII.java](Arrays/searching/BinarySearch/SearchRotatedArrayII.java) | $O(N)$ | $O(1)$ | Handle duplicate edge elements by shrinking bounds, then binary search |
+| 9 | Find Minimum in Rotated Sorted Array | [LeetCode 153](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/) | [FindMinRotatedArray.java](Arrays/searching/BinarySearch/FindMinRotatedArray.java) | $O(\log N)$ | $O(1)$ | Binary search moving towards the unsorted side |
+| 10| Search a 2D Matrix | [LeetCode 74](https://leetcode.com/problems/search-a-2d-matrix/) | [Search2DMatrix.java](Arrays/searching/BinarySearch/Search2DMatrix.java) | $O(\log(M \cdot N))$ | $O(1)$ | Flat virtual index mapping to row/col indices |
+| 11| Find Peak Element | [LeetCode 162](https://leetcode.com/problems/find-peak-element/) | [FindPeakElement.java](Arrays/searching/BinarySearch/FindPeakElement.java) | $O(\log N)$ | $O(1)$ | Search in direction of ascending slope |
+| 12| Koko Eating Bananas | [LeetCode 875](https://leetcode.com/problems/koko-eating-bananas/) | [KokoEatingBananas.java](Arrays/searching/BinarySearch/KokoEatingBananas.java) | $O(N \log(\max(P)))$ | $O(1)$ | Binary search over eating rates, validating speeds |
+| 13| Median of Two Sorted Arrays | [LeetCode 4](https://leetcode.com/problems/median-of-two-sorted-arrays/) | [MedianTwoSortedArrays.java](Arrays/searching/BinarySearch/MedianTwoSortedArrays.java) | $O(\log(\min(M, N)))$ | $O(1)$ | Binary search on partitions of smaller array to balance sizes |
+
+### 11. Kadane's Algorithm Pattern
+Maximum and minimum contiguous subarray sum optimization.
+
+| # | Problem | Source Link | Solution Code | Optimal Time | Space | Core Approach |
+|---|---------|-------------|---------------|:------------:|:-----:|--------------|
+| 1 | Maximum Subarray Sum | [LeetCode 53](https://leetcode.com/problems/maximum-subarray/) | [Kadanes.java](Arrays/Kadanes/Kadanes.java) | $O(N)$ | $O(1)$ | Single pass local/global sum optimization |
+| 2 | Minimum Subarray Sum | [Custom](https://leetcode.com/) | [minSum.java](Arrays/Kadanes/minSum.java) | $O(N)$ | $O(1)$ | Single pass local/global sum optimization (minimization) |
+
+### 12. Matrix Pattern
+Grid operations, spiral traversals, boundary search, and multidimensional sorting.
+
+| # | Problem | Source Link | Solution Code | Optimal Time | Space | Core Approach |
+|---|---------|-------------|---------------|:------------:|:-----:|--------------|
+| 1 | Spiral Traversal on a Matrix | [LeetCode 54](https://leetcode.com/problems/spiral-matrix/) | [SpiralTraversal.java](Matrix/SpiralTraversal.java) | $O(M \cdot N)$ | $O(1)$ | Boundary tracking (top, bottom, left, right) and spiral loop |
+| 2 | Search an Element in a Matrix | [LeetCode 74](https://leetcode.com/problems/search-a-2d-matrix/) | [SearchMatrix.java](Matrix/SearchMatrix.java) | $O(\log(M \cdot N))$ | $O(1)$ | Virtual 1D array binary search & Staircase search alternatives |
+| 3 | Find Median in a Row-wise Sorted Matrix | [GeeksforGeeks](https://www.geeksforgeeks.org/find-median-in-a-row-wise-sorted-matrix/) | [MedianRowWiseSorted.java](Matrix/MedianRowWiseSorted.java) | $O(R \cdot \log C \cdot \log(\text{max}-\text{min}))$ | $O(1)$ | Binary search over value range, counting elements with upper-bound search |
+| 4 | Find Row with Maximum no. of 1's | [GeeksforGeeks](https://www.geeksforgeeks.org/find-the-row-with-maximum-number-1s/) | [RowWithMaxOnes.java](Matrix/RowWithMaxOnes.java) | $O(R + C)$ | $O(1)$ | Staircase search starting from top-right, moving left on 1, down on 0 |
+| 5 | Print Elements in Sorted Order | [GeeksforGeeks](https://www.geeksforgeeks.org/print-elements-sorted-order-row-column-wise-sorted-matrix/) | [PrintSortedMatrix.java](Matrix/PrintSortedMatrix.java) | $O(R \cdot C \cdot \log R)$ | $O(R)$ | Merge sorted rows using a Min-Heap (Priority Queue) |
 
 ---
 
