@@ -227,7 +227,7 @@ java -version
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/karuna-jain/DSA-REPO.git
+   git clone https://github.com/username/DSA-REPO.git
    cd DSA-REPO
    ```
 
@@ -254,4 +254,4 @@ Every solution in this repository conforms to these core engineering standards:
 * **Self-Contained Executables**: All solution classes feature a `main` method with diverse, preconfigured test cases for easy execution and instant validation.
 
 ---
-*Developed with ❤️ by Karuna Jain.*
+*Developed with ❤️ by DSA Learner.*
