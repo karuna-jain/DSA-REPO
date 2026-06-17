@@ -628,7 +628,7 @@ function renderCheatsheetsView(container) {
 // SECTION 8: INTERACTIVE DECISION TREE VIEW
 // --------------------------------------------------------------------
 function renderDecisionTreeView(container) {
-    const node = DECISION_TREE[currentTreeNode];
+    const node = typeof currentTreeNode === 'object' ? currentTreeNode : DECISION_TREE[currentTreeNode];
     let contentHtml = '';
 
     if (node.result) {
@@ -1047,6 +1047,15 @@ function openDetailedSolution(patternIdx, problemTitle) {
     document.getElementById('detail-approach').innerHTML = details.approach;
     document.getElementById('detail-pattern-recognition').innerHTML = details.recognition;
 
+    // Populate LeetCode source URL link
+    const sourceLinkEl = document.getElementById('detail-source-link');
+    if (problem.sourceUrl) {
+        sourceLinkEl.style.display = 'inline-flex';
+        sourceLinkEl.href = problem.sourceUrl;
+    } else {
+        sourceLinkEl.style.display = 'none';
+    }
+
     // Populate Trace/Dry-Run Tab Content
     let timelineHtml = '';
     details.dryrun.forEach((step, idx) => {
@@ -1096,7 +1105,7 @@ function compileDynamicDetails(problem, patternName) {
 function switchDetailTab(tabId) {
     // De-activate all tab buttons and panes
     document.querySelectorAll('.details-tabs .tab-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelectorAll('.details-panel .tab-pane').forEach(pane => pane.classList.remove('active'));
+    document.querySelectorAll('.code-details-panel .tab-pane').forEach(pane => pane.classList.remove('active'));
 
     // Find active button and activate it
     const activeBtn = Array.from(document.querySelectorAll('.details-tabs .tab-btn')).find(b => b.getAttribute('onclick').includes(tabId));
