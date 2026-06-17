@@ -25,7 +25,8 @@ DSA-REPO/
 │   └── BFS/                  # Breadth-first level-order traversals & patterns
 ├── dp/                       # Memoization, tabulation, & string alignment
 ├── Backtrack/                # Recursive search spaces, permutations, & chess problems
-└── Matrix/                   # 2D grid traversals, searching, and sorting patterns
+├── Matrix/                   # 2D grid traversals, searching, and sorting patterns
+└── String/                   # String manipulation, rotations, shuffles, and patterns
 ```
 
 ---
@@ -193,6 +194,20 @@ Grid operations, spiral traversals, boundary search, and multidimensional sortin
 | 3 | Find Median in a Row-wise Sorted Matrix | [GeeksforGeeks](https://www.geeksforgeeks.org/find-median-in-a-row-wise-sorted-matrix/) | [MedianRowWiseSorted.java](Matrix/MedianRowWiseSorted.java) | $O(R \cdot \log C \cdot \log(\text{max}-\text{min}))$ | $O(1)$ | Binary search over value range, counting elements with upper-bound search |
 | 4 | Find Row with Maximum no. of 1's | [GeeksforGeeks](https://www.geeksforgeeks.org/find-the-row-with-maximum-number-1s/) | [RowWithMaxOnes.java](Matrix/RowWithMaxOnes.java) | $O(R + C)$ | $O(1)$ | Staircase search starting from top-right, moving left on 1, down on 0 |
 | 5 | Print Elements in Sorted Order | [GeeksforGeeks](https://www.geeksforgeeks.org/print-elements-sorted-order-row-column-wise-sorted-matrix/) | [PrintSortedMatrix.java](Matrix/PrintSortedMatrix.java) | $O(R \cdot C \cdot \log R)$ | $O(R)$ | Merge sorted rows using a Min-Heap (Priority Queue) |
+
+### 13. String Manipulation Pattern
+Optimal string search, manipulation, verification, and run-length patterns.
+
+| # | Problem | Source Link | Solution Code | Optimal Time | Space | Core Approach |
+|---|---------|-------------|---------------|:------------:|:-----:|--------------|
+| 1 | Reverse a String | [LeetCode 344](https://leetcode.com/problems/reverse-string/) | [ReverseString.java](String/ReverseString.java) | $O(N)$ | $O(1)$ | Two-pointer swap from boundaries inward |
+| 2 | Check String Palindrome | [LeetCode 125](https://leetcode.com/problems/valid-palindrome/) | [PalindromeCheck.java](String/PalindromeCheck.java) | $O(N)$ | $O(1)$ | Two-pointer inward alphanumeric comparison |
+| 3 | Find Duplicate Characters | [Custom](https://leetcode.com/) | [DuplicateCharacters.java](String/DuplicateCharacters.java) | $O(N)$ | $O(1)$ | Hash-map or frequency array character occurrence scanning |
+| 4 | Why Strings are Immutable in Java? | [Conceptual](String/StringImmutability.java) | [StringImmutability.java](String/StringImmutability.java) | N/A | N/A | Explanation & demo of memory pool, security, thread safety, and hash caching |
+| 5 | Check String Rotation | [LeetCode 796](https://leetcode.com/problems/rotate-string/) | [StringRotation.java](String/StringRotation.java) | $O(N)$ | $O(N)$ | Checking if s2 is a substring of concatenated s1 + s1 |
+| 6 | Check Valid Shuffle / Interleave | [LeetCode 97](https://leetcode.com/problems/interleaving-string/) | [ValidShuffle.java](String/ValidShuffle.java) | $O(M \cdot N)$ | $O(M \cdot N)$ | 2D dynamic programming tracking character interleaving |
+| 7 | Count and Say | [LeetCode 38](https://leetcode.com/problems/count-and-say/) | [CountAndSay.java](String/CountAndSay.java) | $O(2^N)$ | $O(2^N)$ | Iterative run-length encoding tracking count and character |
+| 8 | Longest Palindromic Substring | [LeetCode 5](https://leetcode.com/problems/longest-palindromic-substring/) | [LongestPalindromicSubstring.java](String/LongestPalindromicSubstring.java) | $O(N^2)$ | $O(1)$ | Expand around odd/even indices tracking boundaries |
 
 ---
 
