@@ -855,6 +855,89 @@ header.top-bar {
     text-align: right;
 }
 
+/* Roadmap Problems Collapsible List & Chevron styles */
+.roadmap-node-chevron {
+    margin-left: 12px;
+    font-size: 13px;
+    color: var(--text-dark);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s ease;
+}
+
+.roadmap-node-card:hover .roadmap-node-chevron {
+    color: #ffffff;
+}
+
+.roadmap-node-chevron.expanded-chevron {
+    transform: rotate(180deg);
+    color: var(--accent-cyan);
+}
+
+.roadmap-node-card.expanded {
+    border-color: rgba(6, 182, 212, 0.25);
+    background: rgba(255, 255, 255, 0.01);
+}
+
+.roadmap-problems-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    background: rgba(7, 9, 19, 0.3);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    margin-left: 8px;
+}
+
+.roadmap-problem-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.roadmap-problem-item:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(6, 182, 212, 0.15);
+    transform: translateX(4px);
+}
+
+.roadmap-problem-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.roadmap-problem-status-bullet {
+    font-size: 11px;
+}
+
+.roadmap-problem-title {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.roadmap-problem-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.roadmap-problem-complexity {
+    font-size: 12.5px;
+    color: var(--text-muted);
+}
+
+.roadmap-problem-complexity i {
+    color: var(--accent-cyan);
+    margin-right: 4px;
+}
+
 /* ==========================================
      SECTION 4: ENHANCED PROBLEM CARDS
      ========================================== */
@@ -2095,6 +2178,26 @@ header.top-bar {
     position: relative;
 }
 
+/* Sidebar Toggle Button for Mobile Drawer */
+.sidebar-toggle-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: var(--transition-fast);
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--accent-cyan);
+}
+
 /* Animations */
 .animated-fadeIn {
     animation: fade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -2102,31 +2205,6 @@ header.top-bar {
 
 /* Mobile & Tablet Responsiveness */
 @media (max-width: 1100px) {
-
-    .app-container {
-        flex-direction: column;
-        height: auto;
-        overflow: visible;
-    }
-    aside.sidebar {
-        width: 100%;
-        height: auto;
-        position: static;
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-    }
-    .sidebar-nav-section {
-        flex-direction: row;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-    .menu-item {
-        flex-shrink: 0;
-    }
-    main.main-content {
-        height: auto;
-        overflow: visible;
-    }
     .analytics-row {
         grid-template-columns: 100%;
     }
@@ -2136,5 +2214,187 @@ header.top-bar {
     }
     .recruiter-container {
         grid-template-columns: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar-toggle-btn {
+        display: inline-flex;
+        margin-right: 8px;
+    }
+
+    .app-container {
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        position: relative;
+    }
+
+    aside.sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 280px;
+        height: 100%;
+        z-index: 999;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.7);
+        background: rgba(7, 9, 19, 0.98);
+        backdrop-filter: blur(24px);
+    }
+
+    aside.sidebar.active {
+        transform: translateX(0);
+    }
+
+    /* Keep sidebar layout vertical since it is inside a drawer */
+    .sidebar-nav-section {
+        flex-direction: column;
+        overflow-x: visible;
+        white-space: normal;
+    }
+
+    .menu-item {
+        flex-shrink: 1;
+    }
+
+    main.main-content {
+        padding: 0 16px 16px 16px;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    /* Top Bar styling stack */
+    header.top-bar {
+        padding: 12px 16px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .search-wrapper {
+        flex-direction: row;
+        width: 100%;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .filters-container {
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .filter-select {
+        flex: 1;
+        font-size: 12px;
+        padding: 8px 10px;
+    }
+
+    .top-bar-stats {
+        padding-left: 0;
+        justify-content: space-around;
+        border-top: 1px solid var(--border-color);
+        padding-top: 10px;
+        width: 100%;
+        margin-top: 4px;
+    }
+
+    /* Welcome / Hero Branding */
+    .hero-branding {
+        padding: 24px 20px;
+        flex-direction: column-reverse;
+        gap: 24px;
+        text-align: center;
+        align-items: center;
+    }
+
+    .hero-profile-info {
+        align-items: center;
+    }
+
+    .hero-name {
+        font-size: 28px;
+    }
+
+    .hero-social-links {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    /* Stats Grid */
+    .stats-cards-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .dashboard-stat-card {
+        padding: 16px;
+    }
+
+    .stat-value {
+        font-size: 24px;
+    }
+
+    /* Problems Grid */
+    .problems-grid {
+        grid-template-columns: 100%;
+        gap: 16px;
+    }
+
+    .enhanced-card {
+        padding: 18px;
+    }
+
+    /* Code details tab overlay */
+    .code-viewer-container {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        overflow: visible;
+    }
+
+    .code-details-panel {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 20px 16px;
+        height: auto;
+        overflow-y: visible;
+    }
+
+    .code-editor-panel {
+        padding: 16px;
+        height: auto;
+        overflow: visible;
+    }
+
+    .code-pre-wrapper {
+        max-height: 400px;
+        overflow: auto;
+    }
+
+    /* Timeline details */
+    .details-tabs {
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    .tab-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    /* Cheatsheet grid */
+    .cheatsheet-grid {
+        grid-template-columns: 100%;
+    }
+
+    /* Roadmap problems list margins */
+    .roadmap-problems-list {
+        margin-left: 0;
+        padding: 8px;
     }
 }

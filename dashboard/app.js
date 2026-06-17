@@ -329,7 +329,7 @@ const MENTOR_HINTS = {
 
 // State Manager
 let state = {
-    currentTab: 'dashboard', // 'dashboard' | 'roadmap' | 'paths' | 'wiki' | 'companies' | 'decision-tree' | 'simulator' | 'interview' | 'recruiter' | 'patterns'
+    currentTab: 'dashboard', // 'dashboard' | 'roadmap' | 'paths' | 'wiki' | 'simulator' | 'interview' | 'recruiter' | 'patterns'
     selectedPatternIndex: 0,
     searchQuery: '',
     difficultyFilter: 'all',
@@ -363,7 +363,8 @@ let state = {
     interviewRound: 0,
     notes: ['', '', ''],
     
-    hintCounts: {}
+    hintCounts: {},
+    expandedRoadmapPatterns: []
 };
 
 // Heuristics Helper functions
@@ -401,82 +402,7 @@ function getProblemRevision(title) {
 }
 
 // Interactive flowchart nodes
-const DECISION_TREE = {
-    start: {
-        text: "What is the primary data structure of your input?",
-        options: [
-            { text: "Linear (Array, String, Linked List)", next: "linear" },
-            { text: "Hierarchical (Tree, Graph)", next: "hierarchy" },
-            { text: "Intervals / Ranges", next: "intervals" },
-            { text: "Multi-dimensional Grid (Matrix)", next: "matrix" }
-        ]
-    },
-    linear: {
-        text: "Are you searching for contiguous subarrays or substrings?",
-        options: [
-            { text: "Yes", next: "contiguous" },
-            { text: "No", next: "linear_non_contiguous" }
-        ]
-    },
-    contiguous: {
-        text: "Is the size of the target window/subarray dynamic based on a condition?",
-        options: [
-            { text: "Yes, expands/shrinks dynamic bounds", result: "Sliding Window Pattern" },
-            { text: "No, target size is fixed / comparing bounds", result: "Two-Pointer Pattern" }
-        ]
-    },
-    linear_non_contiguous: {
-        text: "Is the input sequence sorted?",
-        options: [
-            { text: "Yes", next: "linear_sorted" },
-            { text: "No", next: "linear_unsorted" }
-        ]
-    },
-    linear_sorted: {
-        text: "Do you need to search an element/boundary in logarithmic time O(log N)?",
-        options: [
-            { text: "Yes", result: "Modified Binary Search Pattern" },
-            { text: "No", result: "Two-Pointer Pattern" }
-        ]
-    },
-    linear_unsorted: {
-        text: "Are the elements numbers within a specified range [1, N]?",
-        options: [
-            { text: "Yes", result: "Cyclic Sort Pattern" },
-            { text: "No", next: "list_type" }
-        ]
-    },
-    list_type: {
-        text: "Is the input list a Linked List?",
-        options: [
-            { text: "Yes, requires pointer redirection", result: "In-place Reversal of a Linked List Pattern" },
-            { text: "No, standard array/list traversal", result: "Fast & Slow Pointer Pattern" }
-        ]
-    },
-    hierarchy: {
-        text: "Do you need to traverse the nodes level-by-level (horizontally)?",
-        options: [
-            { text: "Yes", result: "Tree BFS Traversal Pattern" },
-            { text: "No (Depth / Path-based search)", result: "Trees / Backtracking Pattern" }
-        ]
-    },
-    intervals: {
-        text: "Do you need to merge overlapping ranges or calculate intersections?",
-        options: [
-            { text: "Yes", result: "Merge Intervals Pattern" },
-            { text: "No (Optimization / Alignment)", result: "Dynamic Programming (DP)" }
-        ]
-    },
-    matrix: {
-        text: "Do you need to search step-by-step or traverse in a spiral boundary?",
-        options: [
-            { text: "Yes", result: "Matrix Pattern" },
-            { text: "No (Recursive Grid Search)", result: "Backtracking / DFS" }
-        ]
-    }
-};
 
-let currentTreeNode = 'start';
 
 // Render Managers
 function renderSidebar() {
@@ -578,10 +504,6 @@ function renderView() {
         renderPathsView(viewContainer);
     } else if (state.currentTab === 'wiki') {
         renderWikiView(viewContainer);
-    } else if (state.currentTab === 'companies') {
-        renderCompaniesView(viewContainer);
-    } else if (state.currentTab === 'decision-tree') {
-        renderDecisionTreeView(viewContainer);
     } else if (state.currentTab === 'simulator') {
         renderSimulatorView(viewContainer);
     } else if (state.currentTab === 'interview') {
@@ -809,21 +731,52 @@ function renderRoadmapView(container) {
         const status = pct === 100 ? 'completed' : pct > 0 ? 'in-progress' : 'not-started';
         const statusLabel = pct === 100 ? 'Completed' : pct > 0 ? 'In Progress' : 'Not Started';
 
+        const isExpanded = state.expandedRoadmapPatterns && state.expandedRoadmapPatterns.includes(index);
+        
+        let problemsListHtml = '';
+        if (isExpanded) {
+            problemsListHtml = `<div class="roadmap-problems-list animated-fadeIn">`;
+            pattern.problems.forEach(prob => {
+                const diff = getProblemDifficulty(prob.title);
+                const diffClass = `difficulty-${diff.toLowerCase()}`;
+                const rev = getProblemRevision(prob.title);
+                const statusBullet = rev === 'Mastered' ? '🟢' : rev === 'Needs Revision' ? '🟡' : '🔴';
+                problemsListHtml += `
+                    <div class="roadmap-problem-item" onclick="openDetailedSolution(${index}, '${prob.title.replace(/'/g, "\\'")}')">
+                        <div class="roadmap-problem-left">
+                            <span class="roadmap-problem-status-bullet">${statusBullet}</span>
+                            <span class="roadmap-problem-title">${prob.title}</span>
+                        </div>
+                        <div class="roadmap-problem-right">
+                            <span class="difficulty-badge ${diffClass}">${diff}</span>
+                            <span class="roadmap-problem-complexity"><i class="fas fa-clock"></i> ${prob.timeComplexity}</span>
+                            <span class="roadmap-problem-complexity"><i class="fas fa-memory"></i> ${prob.spaceComplexity}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            problemsListHtml += `</div>`;
+        }
+
         nodesHtml += `
             <div class="roadmap-node ${status}">
                 <div class="roadmap-node-dot"></div>
-                <div class="roadmap-node-card">
-                    <div class="roadmap-node-info">
-                        <span class="roadmap-node-status">${statusLabel}</span>
-                        <div class="roadmap-node-title">${pattern.name}</div>
-                        <span style="font-size:12px; color:var(--text-muted); margin-top:4px;">${total} core algorithmic problems</span>
-                    </div>
-                    <div class="roadmap-node-progress">
-                        <div class="roadmap-node-bar">
-                            <div class="roadmap-node-bar-fill" style="width: ${pct}%;"></div>
+                <div style="display: flex; flex-direction: column; flex: 1; gap: 12px;">
+                    <div class="roadmap-node-card ${isExpanded ? 'expanded' : ''}" onclick="toggleRoadmapPattern(${index})" style="cursor: pointer;">
+                        <div class="roadmap-node-info">
+                            <span class="roadmap-node-status">${statusLabel}</span>
+                            <div class="roadmap-node-title">${pattern.name}</div>
+                            <span style="font-size:12px; color:var(--text-muted); margin-top:4px;">${total} core algorithmic problems</span>
                         </div>
-                        <span class="roadmap-node-percent">${pct}%</span>
+                        <div class="roadmap-node-progress">
+                            <div class="roadmap-node-bar">
+                                <div class="roadmap-node-bar-fill" style="width: ${pct}%;"></div>
+                            </div>
+                            <span class="roadmap-node-percent">${pct}%</span>
+                            <i class="fas fa-chevron-down roadmap-node-chevron ${isExpanded ? 'expanded-chevron' : ''}"></i>
+                        </div>
                     </div>
+                    ${problemsListHtml}
                 </div>
             </div>
         `;
@@ -842,6 +795,19 @@ function renderRoadmapView(container) {
             </div>
         </div>
     `;
+}
+
+function toggleRoadmapPattern(index) {
+    if (!state.expandedRoadmapPatterns) {
+        state.expandedRoadmapPatterns = [];
+    }
+    const pos = state.expandedRoadmapPatterns.indexOf(index);
+    if (pos === -1) {
+        state.expandedRoadmapPatterns.push(index);
+    } else {
+        state.expandedRoadmapPatterns.splice(pos, 1);
+    }
+    renderView();
 }
 
 // --------------------------------------------------------------------
@@ -909,73 +875,7 @@ function renderCheatsheetsView(container) {
     `;
 }
 
-// --------------------------------------------------------------------
-// SECTION 8: INTERACTIVE DECISION TREE VIEW
-// --------------------------------------------------------------------
-function renderDecisionTreeView(container) {
-    const node = typeof currentTreeNode === 'object' ? currentTreeNode : DECISION_TREE[currentTreeNode];
-    let contentHtml = '';
 
-    if (node.result) {
-        contentHtml = `
-            <div class="tree-result-box animated-fadeIn">
-                <div class="tree-result-title"><i class="fas fa-trophy"></i> Suggested Pattern</div>
-                <div class="tree-result-val">${node.result}</div>
-                <p style="font-size:13px; color:var(--text-muted); margin-top:8px; max-width:400px;">
-                    This classification is determined by your input data characteristics and search parameters.
-                </p>
-            </div>
-            <button class="tree-btn no" onclick="resetDecisionTree()" style="margin-top:16px;">
-                <i class="fas fa-redo"></i> Start Over
-            </button>
-        `;
-    } else {
-        contentHtml = `
-            <div class="tree-question animated-fadeIn">${node.text}</div>
-            <div class="tree-options">
-                ${node.options.map((opt, idx) => `
-                    <button class="tree-btn ${idx === 0 ? 'yes' : 'no'}" onclick="advanceDecisionTree('${opt.next || ''}', '${opt.result || ''}')">
-                        ${opt.text}
-                    </button>
-                `).join('')}
-            </div>
-            ${currentTreeNode !== 'start' ? `
-                <button class="back-button" onclick="resetDecisionTree()" style="margin-top:24px; align-self:center;">
-                    <i class="fas fa-redo"></i> Reset Quiz
-                </button>
-            ` : ''}
-        `;
-    }
-
-    container.innerHTML = `
-        <div class="decision-tree-view-container animated-fadeIn" style="display:flex; flex-direction:column; gap:24px;">
-            <div class="pattern-header">
-                <h1 class="pattern-title">Pattern Matcher Decision Tree</h1>
-                <p class="pattern-description">
-                    Unsure which coding pattern to use? Go through our classification workflow to identify the optimal pattern for your problem constraints.
-                </p>
-            </div>
-            <div class="tree-container">
-                <div style="font-size:36px; color:var(--accent-cyan); margin-bottom:8px;"><i class="fas fa-network-wired"></i></div>
-                ${contentHtml}
-            </div>
-        </div>
-    `;
-}
-
-function advanceDecisionTree(next, result) {
-    if (result) {
-        currentTreeNode = { result: result };
-    } else {
-        currentTreeNode = next;
-    }
-    renderView();
-}
-
-function resetDecisionTree() {
-    currentTreeNode = 'start';
-    renderView();
-}
 
 // --------------------------------------------------------------------
 // SECTION 13: RECRUITER PORTAL VIEW
@@ -1539,7 +1439,7 @@ function registerNavTab(tabId) {
 }
 
 function initNavigation() {
-    const tabs = ['dashboard', 'roadmap', 'paths', 'wiki', 'companies', 'decision-tree', 'simulator', 'interview', 'recruiter'];
+    const tabs = ['dashboard', 'roadmap', 'paths', 'wiki', 'simulator', 'interview', 'recruiter'];
     tabs.forEach(registerNavTab);
 
     // Advanced search filter triggers
@@ -1796,74 +1696,7 @@ function selectWikiTopic(idx) {
     renderView();
 }
 
-function renderCompaniesView(container) {
-    // Compile problem count per company
-    const compMap = {};
-    COMPANIES.forEach(c => {
-        compMap[c] = 0;
-    });
 
-    dsaData.forEach(pattern => {
-        pattern.problems.forEach(prob => {
-            const comps = getProblemCompanies(prob.title);
-            comps.forEach(c => {
-                if (compMap[c] !== undefined) {
-                    compMap[c]++;
-                }
-            });
-        });
-    });
-
-    let companyGridHtml = '';
-    COMPANIES.forEach(companyName => {
-        const iconClass = COMPANY_ICONS[companyName] || 'fas fa-building';
-        const solvedCount = compMap[companyName];
-
-        companyGridHtml += `
-            <div class="company-card" onclick="selectCompanyFocus('${companyName}')">
-                <div class="company-header">
-                    <span class="company-logo"><i class="${iconClass}"></i></span>
-                    <span class="company-stats-pill">${solvedCount} Solved</span>
-                </div>
-                <div class="company-name" style="margin-top:8px;">${companyName}</div>
-                <p style="font-size:12px; color:var(--text-muted); line-height:1.4; margin:0;">
-                    Targeted interview problems curated matching historical frequencies at ${companyName}.
-                </p>
-            </div>
-        `;
-    });
-
-    container.innerHTML = `
-        <div class="company-view-container animated-fadeIn" style="display:flex; flex-direction:column; gap:24px;">
-            <div class="pattern-header">
-                <h1 class="pattern-title">Company Preparation Hub</h1>
-                <p class="pattern-description">
-                    Focus your practice on curated problems that frequently appear in technical interviews at specific top companies.
-                </p>
-            </div>
-            
-            <div class="company-grid">
-                ${companyGridHtml}
-            </div>
-        </div>
-    `;
-}
-
-function selectCompanyFocus(companyName) {
-    // Set search parameters to company focus and render search results
-    state.companyFilter = companyName.toLowerCase();
-    
-    // Update company filter select dropdown element value
-    const compSelectEl = document.getElementById('filter-company');
-    if (compSelectEl) {
-        compSelectEl.value = companyName.toLowerCase();
-    }
-    
-    state.currentTab = 'patterns';
-    state.selectedPatternIndex = 0;
-    renderSidebar();
-    renderView();
-}
 
 function renderSimulatorView(container) {
     const data = SIM_DATA[state.simType];
@@ -2405,9 +2238,38 @@ function sendMentorMessage() {
     }, 800);
 }
 
+function initMobileSidebar() {
+    const toggleBtn = document.getElementById('sidebar-toggle');
+    const sidebar = document.querySelector('aside.sidebar');
+    const mainContent = document.querySelector('main.main-content');
+
+    if (toggleBtn && sidebar) {
+        toggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sidebar.classList.toggle('active');
+        });
+
+        if (mainContent) {
+            mainContent.addEventListener('click', () => {
+                if (window.innerWidth <= 768 && sidebar.classList.contains('active')) {
+                    sidebar.classList.remove('active');
+                }
+            });
+        }
+
+        sidebar.addEventListener('click', (e) => {
+            const clickedMenuItem = e.target.closest('.menu-item');
+            if (clickedMenuItem && window.innerWidth <= 768) {
+                sidebar.classList.remove('active');
+            }
+        });
+    }
+}
+
 // Init App on Load
 window.addEventListener('DOMContentLoaded', () => {
     initNavigation();
+    initMobileSidebar();
     renderSidebar();
     renderView();
 });
