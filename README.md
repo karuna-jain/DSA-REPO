@@ -2,6 +2,8 @@
 
 Welcome to my **Data Structures and Algorithms (DSA)** repository. This repository showcases optimized solutions to core algorithmic problems, primarily sourced from LeetCode. Each solution is implemented in **Java** with an emphasis on **clean code, proper engineering principles, and optimal time & space complexity**.
 
+💻 **Interactive Web Dashboard**: Open [dashboard/index.html](dashboard/index.html) directly in your browser to search, filter, and visually explore all solutions, statistics, and Java source code with an integrated dark-themed code viewer!
+
 ---
 
 ## 🛠️ Repository Architecture
