@@ -643,13 +643,13 @@ function renderDashboardView(container) {
                     <span class="hero-title">Java Backend Developer | DSA Enthusiast</span>
                     <h1 class="hero-name">Karuna Jain</h1>
                     <p class="hero-desc">
-                        Building robust problem-solving frameworks through structural, pattern-based algorithms. 
-                        This platform represents active skill verification across core interview topics.
+                        B.Tech CSE student at Acropolis Institute of Technology and Research. 
+                        Building robust problem-solving frameworks through structural, pattern-based algorithms and active skill verification.
                     </p>
                     <div class="hero-social-links">
                         <a href="https://github.com/karuna-jain" target="_blank" class="social-btn primary"><i class="fab fa-github"></i> GitHub Profile</a>
-                        <a href="https://linkedin.com/in/karuna-jain" target="_blank" class="social-btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                        <a href="#" class="social-btn" onclick="alert('Resume download triggered')"><i class="fas fa-file-download"></i> Download Resume</a>
+                        <a href="https://linkedin.com/in/karunajain02" target="_blank" class="social-btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="mailto:jainkaruna52@gmail.com" class="social-btn"><i class="fas fa-envelope"></i> Contact Developer</a>
                     </div>
                 </div>
 
@@ -984,31 +984,37 @@ function renderRecruiterView(container) {
     const stats = updateGlobalStats();
 
     container.innerHTML = `
-        <div class="recruiter-container animated-fadeIn">
+        <div class="recruiter-container animated-fadeIn" style="grid-template-columns: 320px 1fr; gap: 32px;">
             
             <!-- Bio Profile Card -->
             <div class="recruiter-profile-card">
                 <img src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?w=200&auto=format&fit=crop&q=80" alt="Karuna Jain" class="recruiter-avatar">
-                <div>
-                    <h2 style="font-size:24px; font-weight:800; color:#ffffff;">Karuna Jain</h2>
-                    <span style="font-size:13px; font-weight:600; color:var(--accent-cyan); text-transform:uppercase; letter-spacing:1px;">Java Backend Developer</span>
+                <div style="text-align: center;">
+                    <h2 style="font-size:24px; font-weight:800; color:#ffffff; margin-bottom: 4px;">Karuna Jain</h2>
+                    <span style="font-size:12px; font-weight:700; color:var(--accent-cyan); text-transform:uppercase; letter-spacing:1px;">Java Backend Developer</span>
                 </div>
-                <p style="font-size:13.5px; color:var(--text-muted); line-height:1.6;">
-                    Specialized in backend APIs, thread safety, microservices, and database optimization. Actively solving algorithms to verify optimal code complexity execution.
+                <p style="font-size:13px; color:var(--text-muted); line-height:1.6; text-align: center; margin: 0;">
+                    B.Tech CSE student at Acropolis Institute of Technology and Research. Aspiring Java Backend Developer specializing in Java Core, Spring Boot, REST APIs, and scalable automation systems.
                 </p>
-                <div style="display:flex; flex-direction:column; gap:10px; width:100%;">
-                    <a href="https://github.com/karuna-jain" target="_blank" class="social-btn primary" style="justify-content:center;"><i class="fab fa-github"></i> GitHub</a>
-                    <a href="https://linkedin.com/in/karuna-jain" target="_blank" class="social-btn" style="justify-content:center;"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                    <a href="mailto:karunajain@example.com" class="social-btn" style="justify-content:center;"><i class="fas fa-envelope"></i> Email Developer</a>
+                
+                <div style="display:flex; flex-direction:column; gap:8px; width:100%; border-top: 1px solid var(--border-color); padding-top: 16px;">
+                    <div style="font-size:12px; color:var(--text-muted); display:flex; align-items:center; gap:8px;"><i class="fas fa-envelope" style="color:var(--accent-cyan); width:16px;"></i> <a href="mailto:jainkaruna52@gmail.com" style="color:inherit; text-decoration:none;">jainkaruna52@gmail.com</a></div>
+                    <div style="font-size:12px; color:var(--text-muted); display:flex; align-items:center; gap:8px;"><i class="fas fa-phone" style="color:var(--accent-cyan); width:16px;"></i> +91 62642-55250</div>
+                    <div style="font-size:12px; color:var(--text-muted); display:flex; align-items:center; gap:8px;"><i class="fas fa-map-marker-alt" style="color:var(--accent-cyan); width:16px;"></i> Indore (M.P.), India</div>
+                </div>
+
+                <div style="display:flex; flex-direction:column; gap:10px; width:100%; border-top: 1px solid var(--border-color); padding-top: 16px;">
+                    <a href="https://github.com/karuna-jain" target="_blank" class="social-btn primary" style="justify-content:center;"><i class="fab fa-github"></i> GitHub Profile</a>
+                    <a href="https://linkedin.com/in/karunajain02" target="_blank" class="social-btn" style="justify-content:center;"><i class="fab fa-linkedin"></i> LinkedIn Profile</a>
                 </div>
             </div>
 
             <!-- Developer Capability Grid -->
             <div class="recruiter-details-card">
                 <div>
-                    <h3 style="font-size:18px; font-weight:700; color:#ffffff; margin-bottom:8px;">Software Engineering Stats</h3>
+                    <h3 style="font-size:18px; font-weight:700; color:#ffffff; margin-bottom:8px;">Software Engineering Focus</h3>
                     <p style="font-size:13px; color:var(--text-muted); line-height:1.5;">
-                        A summary of current algorithmic pattern coverage and technical specifications.
+                        Current pattern mastery coverage metrics across active data structures & algorithms repository.
                     </p>
                 </div>
 
@@ -1034,21 +1040,70 @@ function renderRecruiterView(container) {
                 </div>
 
                 <div>
-                    <h4 style="font-size:14px; font-weight:700; text-transform:uppercase; color:var(--text-dark); letter-spacing:0.5px; margin-bottom:12px;">Primary Skills</h4>
-                    <div class="recruiter-skills-grid">
+                    <h4 style="font-size:14px; font-weight:700; text-transform:uppercase; color:var(--text-dark); letter-spacing:0.5px; margin-bottom:12px;">Technical Skills</h4>
+                    <div class="recruiter-skills-grid" style="grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));">
                         <div class="skill-pill"><i class="fab fa-java"></i> Java Core / OOP</div>
                         <div class="skill-pill"><i class="fas fa-server"></i> Spring Boot API</div>
                         <div class="skill-pill"><i class="fas fa-database"></i> MySQL / SQL</div>
-                        <div class="skill-pill"><i class="fab fa-react"></i> React UI</div>
-                        <div class="skill-pill"><i class="fas fa-brain"></i> DSA Optimization</div>
-                        <div class="skill-pill"><i class="fas fa-project-diagram"></i> System Design</div>
+                        <div class="skill-pill"><i class="fab fa-react"></i> React.js UI</div>
+                        <div class="skill-pill"><i class="fab fa-node-js"></i> Node.js Backend</div>
+                        <div class="skill-pill"><i class="fas fa-project-diagram"></i> Data Structures</div>
+                        <div class="skill-pill"><i class="fas fa-brain"></i> Machine Learning</div>
+                        <div class="skill-pill"><i class="fab fa-python"></i> Python Coding</div>
+                        <div class="skill-pill"><i class="fas fa-leaf"></i> MongoDB NoSQL</div>
                     </div>
                 </div>
 
                 <div>
-                    <h4 style="font-size:14px; font-weight:700; text-transform:uppercase; color:var(--text-dark); letter-spacing:0.5px; margin-bottom:8px;">Portfolio Focus</h4>
-                    <p style="font-size:13.5px; color:var(--text-muted); line-height:1.6;">
-                        Each solution in the dashboard features preconfigured test execution setups, time and space complexity evaluations, code-tracing breakdowns, and recursive boundary conditions.
+                    <h4 style="font-size:14px; font-weight:700; text-transform:uppercase; color:var(--text-dark); letter-spacing:0.5px; margin-bottom:12px;">Academic History</h4>
+                    <div style="background:rgba(255,255,255,0.01); border:1px solid var(--border-color); padding:16px; border-radius:12px; display:flex; flex-direction:column; gap:12px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                            <div>
+                                <strong style="color:#ffffff; font-size:14px;">B.Tech in Computer Science & Engineering</strong>
+                                <div style="font-size:12.5px; color:var(--text-muted); margin-top:2px;">Acropolis Institute of Technology and Research, Indore (Affiliated to RGPV)</div>
+                            </div>
+                            <span style="font-size:12px; font-weight:700; color:var(--accent-cyan); text-transform:uppercase; letter-spacing:0.5px;">2023 - 2027 | 77.40% CGPA</span>
+                        </div>
+                        <div style="border-top:1px solid var(--border-color); padding-top:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                            <div>
+                                <strong style="color:#ffffff; font-size:14px;">Higher Secondary Certificate (10+2)</strong>
+                                <div style="font-size:12.5px; color:var(--text-muted); margin-top:2px;">St. Jude's Co-Ed School (State Board)</div>
+                            </div>
+                            <span style="font-size:12px; font-weight:700; color:var(--accent-cyan); text-transform:uppercase; letter-spacing:0.5px;">Class of 2023 | 83.4%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 style="font-size:14px; font-weight:700; text-transform:uppercase; color:var(--text-dark); letter-spacing:0.5px; margin-bottom:12px;">Featured Projects</h4>
+                    <div style="display:flex; flex-direction:column; gap:16px;">
+                        <div style="background:rgba(255,255,255,0.01); border:1px solid var(--border-color); padding:16px; border-radius:12px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                                <strong style="color:#ffffff; font-size:14.5px;">Sanjeevani | Healthcare Management System</strong>
+                                <span style="font-size:11px; font-weight:700; color:var(--accent-cyan); text-transform:uppercase; letter-spacing:0.5px;">June 2025 - Dec 2025</span>
+                            </div>
+                            <div style="font-size:12px; color:var(--accent-amber); font-weight:700; margin-top:2px;">Role: Frontend & ML Integration</div>
+                            <p style="font-size:13px; color:var(--text-muted); line-height:1.5; margin:6px 0 0 0;">
+                                Developed a healthcare platform for rural areas using Machine Learning models to predict disease spread patterns. Integrated web services for real-time health updates and implemented an ML-driven notification system to alert users for timely preventive measures.
+                            </p>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.01); border:1px solid var(--border-color); padding:16px; border-radius:12px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                                <strong style="color:#ffffff; font-size:14.5px;">Paras | Business Automation & Billing Platform</strong>
+                                <span style="font-size:11px; font-weight:700; color:var(--accent-cyan); text-transform:uppercase; letter-spacing:0.5px;">Active Development</span>
+                            </div>
+                            <div style="font-size:12px; color:var(--accent-amber); font-weight:700; margin-top:2px;">Role: Java Backend Engineer</div>
+                            <p style="font-size:13px; color:var(--text-muted); line-height:1.5; margin:6px 0 0 0;">
+                                Engineered an intelligent automation platform capable of converting customer WhatsApp messages into structured business transactions. Developed backend APIs and event-driven workflows for invoice generation, inventory management, and real-time dashboard updates.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 style="font-size:14px; font-weight:700; text-transform:uppercase; color:var(--text-dark); letter-spacing:0.5px; margin-bottom:8px;">Portfolio Design</h4>
+                    <p style="font-size:13px; color:var(--text-muted); line-height:1.6; margin:0;">
+                        Each solution in the dashboard features interactive stepping simulator modules, time and space complexity evaluations, visual dry-run traces, recursive base case verification, and recruiter-curated progression evolution nodes.
                     </p>
                 </div>
             </div>
