@@ -640,7 +640,7 @@ function renderDashboardView(container) {
             <!-- Hero Branding Section -->
             <div class="hero-branding">
                 <div class="hero-profile-info">
-                    <span class="hero-title">Java Backend Developer | DSA Enthusiast</span>
+                    <span class="hero-title">Java & Machine Learning Developer | DSA Enthusiast</span>
                     <h1 class="hero-name">Karuna Jain</h1>
                     <p class="hero-desc">
                         B.Tech CSE student at Acropolis Institute of Technology and Research. 
@@ -991,10 +991,10 @@ function renderRecruiterView(container) {
                 <img src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?w=200&auto=format&fit=crop&q=80" alt="Karuna Jain" class="recruiter-avatar">
                 <div style="text-align: center;">
                     <h2 style="font-size:24px; font-weight:800; color:#ffffff; margin-bottom: 4px;">Karuna Jain</h2>
-                    <span style="font-size:12px; font-weight:700; color:var(--accent-cyan); text-transform:uppercase; letter-spacing:1px;">Java Backend Developer</span>
+                    <span style="font-size:12px; font-weight:700; color:var(--accent-cyan); text-transform:uppercase; letter-spacing:1px;">Java & Machine Learning Developer</span>
                 </div>
                 <p style="font-size:13px; color:var(--text-muted); line-height:1.6; text-align: center; margin: 0;">
-                    B.Tech CSE student at Acropolis Institute of Technology and Research. Aspiring Java Backend Developer specializing in Java Core, Spring Boot, REST APIs, and scalable automation systems.
+                    B.Tech CSE student at Acropolis Institute of Technology and Research. Aspiring Software Engineer specializing in Java Core, Spring Boot, REST APIs, and Machine Learning workflows.
                 </p>
                 
                 <div style="display:flex; flex-direction:column; gap:8px; width:100%; border-top: 1px solid var(--border-color); padding-top: 16px;">
