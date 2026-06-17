@@ -3,75 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DSA Pattern Portfolio Dashboard</title>
-    <!-- FontAwesome Icons -->
+    <title>Karuna Jain | DSA Learning & Interview Platform</title>
+    <!-- FontAwesome for Premium Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- PrismJS Dark Theme for syntax highlighting -->
+    <!-- PrismJS Tomorrow Night syntax highlighting -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
-    <!-- Custom Stylesheet -->
+    <!-- Main SaaS Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="app-container">
         
-        <!-- Sidebar Navigation -->
+        <!-- ==========================================
+             SIDEBAR COMPONENT
+             ========================================== -->
         <aside class="sidebar">
             <div class="sidebar-header">
                 <div class="brand">
-                    <i class="fas fa-terminal brand-icon"></i>
-                    <span class="brand-title">DSA Portfolio</span>
+                    <i class="fas fa-cubes brand-icon"></i>
+                    <div class="brand-text">
+                        <span class="brand-title">AlgoPrep</span>
+                        <span class="brand-subtitle">SaaS Portfolio</span>
+                    </div>
                 </div>
             </div>
-            <div class="sidebar-menu" id="sidebar-menu">
-                <!-- Populated dynamically via JS -->
+            
+            <!-- Global Navigation Sections -->
+            <div class="sidebar-nav-section">
+                <div class="sidebar-nav-title">Platform</div>
+                <div class="menu-item" id="nav-dashboard">
+                    <i class="fas fa-chart-pie menu-icon"></i>
+                    <span class="menu-item-text">Dashboard</span>
+                </div>
+                <div class="menu-item" id="nav-roadmap">
+                    <i class="fas fa-map-signs menu-icon"></i>
+                    <span class="menu-item-text">Pattern Roadmap</span>
+                </div>
+                <div class="menu-item" id="nav-cheatsheets">
+                    <i class="fas fa-scroll menu-icon"></i>
+                    <span class="menu-item-text">Quick Cheatsheets</span>
+                </div>
+                <div class="menu-item" id="nav-decision-tree">
+                    <i class="fas fa-project-diagram menu-icon"></i>
+                    <span class="menu-item-text">Pattern Decision Tree</span>
+                </div>
+                <div class="menu-item" id="nav-recruiter">
+                    <i class="fas fa-briefcase menu-icon"></i>
+                    <span class="menu-item-text">Recruiter Portal</span>
+                </div>
+            </div>
+
+            <!-- Scrollable Patterns Section -->
+            <div class="sidebar-nav-section flex-expand">
+                <div class="sidebar-nav-title">Algorithmic Patterns</div>
+                <div class="sidebar-menu" id="sidebar-menu">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+            
+            <!-- Footer Bio Snippet -->
+            <div class="sidebar-footer">
+                <img src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?w=100&auto=format&fit=crop&q=80" alt="Karuna Jain" class="footer-avatar">
+                <div class="footer-avatar-info">
+                    <span class="footer-user-name">Karuna Jain</span>
+                    <span class="footer-user-role">Java Developer</span>
+                </div>
             </div>
         </aside>
 
-        <!-- Main Content Area -->
+        <!-- ==========================================
+             MAIN CONTENT AREA
+             ========================================== -->
         <main class="main-content">
             
-            <!-- Top Navigation & Controls Bar -->
+            <!-- Top Navigation & Global Search Bar -->
             <header class="top-bar">
-                <div class="search-container">
-                    <i class="fas fa-search search-icon"></i>
-                    <input type="text" id="search-input" class="search-input" placeholder="Search by problem, pattern, approach, or code...">
+                <div class="search-wrapper">
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="search-input" class="search-input" placeholder="Search by name, pattern, company (e.g., Google), or complexity...">
+                    </div>
+                    
+                    <!-- Advanced Filters Toggle & Dropdown -->
+                    <div class="filters-container">
+                        <select id="filter-difficulty" class="filter-select">
+                            <option value="all">All Difficulties</option>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                        
+                        <select id="filter-company" class="filter-select">
+                            <option value="all">All Companies</option>
+                            <option value="google">Google</option>
+                            <option value="amazon">Amazon</option>
+                            <option value="microsoft">Microsoft</option>
+                            <option value="uber">Uber</option>
+                            <option value="adobe">Adobe</option>
+                            <option value="meta">Meta</option>
+                        </select>
+
+                        <select id="filter-status" class="filter-select">
+                            <option value="all">All Revisions</option>
+                            <option value="mastered">🟢 Mastered</option>
+                            <option value="revision">🟡 Needs Revision</option>
+                            <option value="unpracticed">🔴 Unpracticed</option>
+                        </select>
+
+                        <button id="btn-bookmarks" class="filter-btn" title="Show Bookmarked Solutions">
+                            <i class="fas fa-bookmark"></i>
+                        </button>
+                    </div>
                 </div>
 
-                <div class="stats-summary">
-                    <div class="stat-pill" title="Total Solutions">
-                        <i class="fas fa-check-circle stat-pill-icon"></i>
-                        <span>Total: <strong id="stat-total-count">0</strong></span>
+                <!-- Small Dashboard Counters -->
+                <div class="top-bar-stats">
+                    <div class="bar-stat-item" title="Solved Problems">
+                        <span class="bar-stat-val" id="top-solved-count">0</span>
+                        <span class="bar-stat-lbl">Solved</span>
                     </div>
-                    <div class="stat-pill" style="border-color: rgba(16, 185, 129, 0.2);" title="Easy Solutions">
-                        <span style="color: var(--accent-emerald);">●</span>
-                        <span>Easy: <strong id="stat-easy-count" style="color: var(--accent-emerald);">0</strong></span>
-                    </div>
-                    <div class="stat-pill" style="border-color: rgba(245, 158, 11, 0.2);" title="Medium Solutions">
-                        <span style="color: #f59e0b;">●</span>
-                        <span>Medium: <strong id="stat-medium-count" style="color: #f59e0b;">0</strong></span>
-                    </div>
-                    <div class="stat-pill" style="border-color: rgba(239, 68, 68, 0.2);" title="Hard Solutions">
-                        <span style="color: #ef4444;">●</span>
-                        <span>Hard: <strong id="stat-hard-count" style="color: #ef4444;">0</strong></span>
+                    <div class="bar-stat-divider"></div>
+                    <div class="bar-stat-item" title="Completion %">
+                        <span class="bar-stat-val" id="top-progress-percent">0%</span>
+                        <span class="bar-stat-lbl">Progress</span>
                     </div>
                 </div>
             </header>
 
-            <!-- Dynamic View Container (Home, Patterns, Search Results) -->
+            <!-- Dynamic Views Wrapper -->
             <section class="view-container" id="view-container">
-                <!-- Rendered dynamically -->
+                <!-- Inner sub-views are loaded here via app.js -->
             </section>
 
-            <!-- Solution Code Viewer Panel -->
-            <section class="code-viewer-container" id="code-viewer-container">
+            <!-- ==========================================
+                 UPGRADED PROBLEM DETAILS PAGE VIEW
+                 ========================================== -->
+            <section class="code-viewer-container" id="code-viewer-container" style="display: none;">
                 
-                <!-- Left Details Box -->
-                <div class="code-details-panel" id="code-details-content">
-                    <!-- Populated dynamically -->
+                <!-- Left Detailed Explanatory Panel -->
+                <div class="code-details-panel">
+                    <button class="back-button" onclick="closeCodeViewer()"><i class="fas fa-chevron-left"></i> Back to Platform</button>
+                    
+                    <div class="details-header">
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px;">
+                            <span class="difficulty-badge" id="detail-difficulty">Medium</span>
+                            <span class="revision-status-tag" id="detail-revision-badge">🟢 Mastered</span>
+                        </div>
+                        <h1 class="code-title" id="detail-title">Two Sum</h1>
+                        <span class="pattern-tag" id="detail-pattern">Pattern: Two Pointers</span>
+                    </div>
+
+                    <!-- Details Tab System -->
+                    <div class="details-tabs">
+                        <button class="tab-btn active" onclick="switchDetailTab('tab-overview')">Overview</button>
+                        <button class="tab-btn" onclick="switchDetailTab('tab-dry-run')">Trace & Dry Run</button>
+                        <button class="tab-btn" onclick="switchDetailTab('tab-interview')">Interview Guide</button>
+                    </div>
+
+                    <!-- Tab content: Overview -->
+                    <div class="tab-pane active" id="tab-overview">
+                        <div class="details-section">
+                            <h3 class="section-title">Problem Statement</h3>
+                            <div class="section-body text-block" id="detail-statement">
+                                Given an array of integers sorted in ascending order, find two numbers such that they add up to a specific target number.
+                            </div>
+                        </div>
+
+                        <div class="details-section">
+                            <h3 class="section-title">Complexity Analysis</h3>
+                            <div class="complexity-table">
+                                <div class="complexity-row">
+                                    <span class="comp-label">Time Complexity</span>
+                                    <span class="comp-value" id="detail-time">O(N)</span>
+                                </div>
+                                <div class="complexity-row">
+                                    <span class="comp-label">Space Complexity</span>
+                                    <span class="comp-value" id="detail-space">O(1)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="details-section">
+                            <h3 class="section-title">Approach & Intuition</h3>
+                            <div class="approach-box" id="detail-approach">
+                                Place one pointer at the start and one at the end. Calculate the sum. If the sum is smaller than target, increment left. If larger, decrement right.
+                            </div>
+                        </div>
+
+                        <div class="details-section">
+                            <h3 class="section-title">Pattern Recognition</h3>
+                            <div class="section-body text-block" id="detail-pattern-recognition">
+                                Since the array is sorted, scanning from both boundaries guarantees we check all relevant pairs in O(N) without redundant O(N^2) inner iterations.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab content: Trace & Dry Run -->
+                    <div class="tab-pane" id="tab-dry-run">
+                        <div class="details-section">
+                            <h3 class="section-title">Dry Run Trace</h3>
+                            <div class="dryrun-timeline" id="detail-dry-run-timeline">
+                                <!-- Tracing step milestones dynamically injected -->
+                            </div>
+                        </div>
+
+                        <div class="details-section">
+                            <h3 class="section-title">Alternative Approaches</h3>
+                            <div class="section-body text-block" id="detail-alternatives">
+                                1. **Brute Force**: O(N^2) comparison of all pairs.
+                                2. **Hash Map Lookup**: O(N) time and O(N) space, which is optimal for unsorted arrays.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab content: Interview Guide -->
+                    <div class="tab-pane" id="tab-interview">
+                        <div class="details-section">
+                            <h3 class="section-title">Company Frequencies</h3>
+                            <div class="company-freq-tags" id="detail-companies">
+                                <!-- Rendered dynamically -->
+                            </div>
+                        </div>
+
+                        <div class="details-section">
+                            <h3 class="section-title">Common Implementation Mistakes</h3>
+                            <ul class="mistakes-list" id="detail-mistakes">
+                                <li>Forgetting index overflow boundary conditions.</li>
+                                <li>Incorrect pointer increment/decrement logic resulting in infinite loops.</li>
+                            </ul>
+                        </div>
+
+                        <div class="details-section">
+                            <h3 class="section-title">Interview Follow-Up Questions</h3>
+                            <div class="follow-up-box" id="detail-followups">
+                                <!-- Recruiter styled questions -->
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
-                <!-- Right Code Editor Window -->
+                <!-- Right Code Editor Panel -->
                 <div class="code-editor-panel">
                     <div class="code-editor-header">
                         <div class="editor-file-info">
@@ -80,7 +253,13 @@
                         </div>
                         <div class="editor-actions">
                             <button id="editor-copy-btn" class="editor-btn" onclick="copyCode()">
-                                <i class="far fa-copy"></i> Copy Code
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <button id="editor-download-btn" class="editor-btn" onclick="downloadSolution()">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                            <button id="editor-expand-btn" class="editor-btn" onclick="toggleExpandCode()">
+                                <i class="fas fa-expand-alt"></i> Expand
                             </button>
                         </div>
                     </div>
@@ -95,11 +274,11 @@
 
     </div>
 
-    <!-- PrismJS Core and Java Syntax scripts -->
+    <!-- PrismJS Scripts for Java formatting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
     
-    <!-- JS Data and App Controller -->
+    <!-- Loaded compiled metadata database and App Controller script -->
     <script src="data.js"></script>
     <script src="app.js"></script>
 
