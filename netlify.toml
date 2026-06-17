@@ -1,0 +1,7 @@
+# Netlify configuration file for automatic build and deployment
+[build]
+  # Compile the latest Java files and README tables into dashboard/data.js upon deployment
+  command = "node dashboard/generate_data.js"
+  
+  # The directory containing the static web assets to serve
+  publish = "dashboard"
