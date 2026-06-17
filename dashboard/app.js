@@ -88,9 +88,248 @@ const PROBLEM_DETAILS = {
     }
 };
 
+// Curriculum & Learning Paths Database
+const PATHS_DATA = [
+    {
+        id: "faang",
+        title: "FAANG Prep Track (90-Day)",
+        meta: "Advanced Pattern Mastery",
+        icon: "fa-rocket",
+        tasks: [
+            "Master Two-Pointer & Boundaries",
+            "Solve 3Sum and Container With Most Water",
+            "Master Sliding Window Pattern",
+            "Solve Longest Palindromic Substring",
+            "In-place Reversal of LinkedList",
+            "N-Queens Backtracking Puzzle"
+        ]
+    },
+    {
+        id: "placement",
+        title: "Placement Crash Course (30-Day)",
+        meta: "Essential Interview Prep",
+        icon: "fa-graduation-cap",
+        tasks: [
+            "Review Basic Two Sum and Reverse Array",
+            "Fast & Slow Pointers for Loop Detection",
+            "Merge Intervals & Overlapping Ranges",
+            "Dynamic Programming: Edit Distance"
+        ]
+    },
+    {
+        id: "foundation",
+        title: "DSA Foundation Track",
+        meta: "Core Structural Concepts",
+        icon: "fa-project-diagram",
+        tasks: [
+            "Cyclic Sort for Missing Positives",
+            "Tree BFS level-by-level traversal",
+            "Matrix boundary spiral checks",
+            "Learn Pattern Recognition Rules"
+        ]
+    }
+];
+
+// Encyclopedic Wiki Topics
+const WIKI_DATA = [
+    {
+        title: "Sliding Window Pattern",
+        concept: "The Sliding Window pattern is used to perform a search or optimization over a contiguous subarray or substring. Instead of recalculating values from scratch for every index, we maintain a running window sum or state and slide it by adding the new element and removing the old element.",
+        complexity: "Time: O(N) | Space: O(1) auxiliary",
+        template: `public int findMaxSumSubarray(int[] arr, int k) {\n    int maxSum = 0, windowSum = 0;\n    int start = 0;\n    for (int end = 0; end < arr.length; end++) {\n        windowSum += arr[end]; // Add next element\n        if (end >= k - 1) {\n            maxSum = Math.max(maxSum, windowSum);\n            windowSum -= arr[start]; // Subtract oldest element\n            start++; // Slide window\n        }\n    }\n    return maxSum;\n}`
+    },
+    {
+        title: "Two-Pointer Strategy",
+        concept: "Used primarily on sorted arrays or lists. Two pointers are initialized (typically at the start and end of the array) and move toward each other based on comparison results. This allows narrowing down the search space in a single pass.",
+        complexity: "Time: O(N) | Space: O(1) auxiliary",
+        template: `public boolean hasTargetSum(int[] arr, int target) {\n    int left = 0, right = arr.length - 1;\n    while (left < right) {\n        int sum = arr[left] + arr[right];\n        if (sum == target) return true;\n        else if (sum < target) left++;\n        else right--;\n    }\n    return false;\n}`
+    },
+    {
+        title: "Fast & Slow Pointers",
+        concept: "Also known as Floyd's Cycle Detection algorithm. It uses two pointers moving at different speeds (slow moves 1 step, fast moves 2 steps) to traverse a sequence. It is highly effective for detecting cycles in linked lists or cyclic arrays.",
+        complexity: "Time: O(N) | Space: O(1) auxiliary",
+        template: `public boolean hasCycle(ListNode head) {\n    if (head == null) return false;\n    ListNode slow = head, fast = head;\n    while (fast != null && fast.next != null) {\n        slow = slow.next;\n        fast = fast.next.next;\n        if (slow == fast) return true; // Cycle detected\n    }\n    return false;\n}`
+    },
+    {
+        title: "Cyclic Sort Pattern",
+        concept: "Used when the problem input involves numbers in a given range (e.g., [1, N]). It places each number at its correct index in-place. For example, the number '3' should be at index '2'. Once sorted, a single pass can easily identify missing or duplicate numbers.",
+        complexity: "Time: O(N) | Space: O(1) in-place",
+        template: `public void cyclicSort(int[] nums) {\n    int i = 0;\n    while (i < nums.length) {\n        int correct = nums[i] - 1;\n        if (nums[i] > 0 && nums[i] <= nums.length && nums[i] != nums[correct]) {\n            int temp = nums[i];\n            nums[i] = nums[correct];\n            nums[correct] = temp;\n        } else {\n            i++;\n        }\n    }\n}`
+    },
+    {
+        title: "In-place Reversal of LinkedList",
+        concept: "Allows reversing a linked list or subsegment of a list in a single pass without allocating any auxiliary memory. It uses three pointers: previous, current, and next to adjust node pointers in-place.",
+        complexity: "Time: O(N) | Space: O(1) auxiliary",
+        template: `public ListNode reverse(ListNode head) {\n    ListNode prev = null;\n    ListNode curr = head;\n    while (curr != null) {\n        ListNode nextNode = curr.next;\n        curr.next = prev;\n        prev = curr;\n        curr = nextNode;\n    }\n    return prev;\n}`
+    },
+    {
+        title: "Dynamic Programming (DP)",
+        concept: "An algorithmic paradigm that solves a complex problem by breaking it into subproblems, solving each subproblem once, and storing their solutions (using memoization or tabulation) to avoid redundant computations.",
+        complexity: "Time: O(N * M) | Space: O(N * M) or O(M) optimized",
+        template: `public int minOperations(String w1, String w2) {\n    int m = w1.length(), n = w2.length();\n    int[][] dp = new int[m + 1][n + 1];\n    for (int i = 0; i <= m; i++) dp[i][0] = i;\n    for (int j = 0; j <= n; j++) dp[0][j] = j;\n    for (int i = 1; i <= m; i++) {\n        for (int j = 1; j <= n; j++) {\n            if (w1.charAt(i - 1) == w2.charAt(j - 1)) {\n                dp[i][j] = dp[i - 1][j - 1];\n            } else {\n                dp[i][j] = 1 + Math.min(dp[i - 1][j - 1], \n                    Math.min(dp[i - 1][j], dp[i][j - 1]));\n            }\n        }\n    }\n    return dp[m][n];\n}`
+    }
+];
+
+// Company Logicons Setup
+const COMPANY_ICONS = {
+    'Google': 'fab fa-google',
+    'Amazon': 'fab fa-amazon',
+    'Microsoft': 'fab fa-windows',
+    'Uber': 'fas fa-car',
+    'Adobe': 'fas fa-pen-fancy',
+    'Meta': 'fab fa-facebook',
+    'Netflix': 'fas fa-play',
+    'Apple': 'fab fa-apple',
+    'Flipkart': 'fas fa-shopping-bag',
+    'Atlassian': 'fab fa-jira'
+};
+
+// Interactive visual algorithms steps
+const SIM_DATA = {
+    'two-pointer': {
+        name: "Two-Pointer Simulator",
+        array: [1, 2, 4, 6, 8, 9, 14, 15],
+        target: 15,
+        steps: [
+            {
+                left: 0,
+                right: 7,
+                title: "Initialize Boundary Pointers",
+                desc: "Place the left pointer at index 0 (val 1) and right pointer at index 7 (val 15). The current sum is 1 + 15 = 16. Since 16 > target (15), the sum is too large. We decrement the right pointer.",
+                highlights: [0, 7],
+                matched: false
+            },
+            {
+                left: 0,
+                right: 6,
+                title: "Move Right Pointer Inward",
+                desc: "Decremented right pointer to index 6 (val 14). The current sum is 1 + 14 = 15. The sum matches our target of 15! We have found the valid pair at indices [0, 6].",
+                highlights: [0, 6],
+                matched: true
+            }
+        ]
+    },
+    'sliding-window': {
+        name: "Sliding Window Simulator",
+        array: [2, 1, 5, 1, 3, 2],
+        k: 3,
+        steps: [
+            {
+                start: 0,
+                end: 2,
+                title: "Initialize Window",
+                desc: "Build the initial window of size K=3 containing indices [0..2] (values: 2, 1, 5). The initial Window Sum is 2 + 1 + 5 = 8. The Max Sum is updated to 8.",
+                highlights: [0, 1, 2],
+                windowSum: 8,
+                maxSum: 8,
+                matched: false
+            },
+            {
+                start: 1,
+                end: 3,
+                title: "Slide Window - Step 1",
+                desc: "Slide the window rightwards by 1 position (indices [1..3], values: 1, 5, 1). We add index 3 (val 1) and subtract index 0 (val 2). New Window Sum = 8 - 2 + 1 = 7. Max Sum remains 8.",
+                highlights: [1, 2, 3],
+                windowSum: 7,
+                maxSum: 8,
+                matched: false
+            },
+            {
+                start: 2,
+                end: 4,
+                title: "Slide Window - Step 2",
+                desc: "Slide the window rightwards (indices [2..4], values: 5, 1, 3). Add index 4 (val 3) and subtract index 1 (val 1). New Window Sum = 7 - 1 + 3 = 9. Max Sum is updated to 9.",
+                highlights: [2, 3, 4],
+                windowSum: 9,
+                maxSum: 9,
+                matched: true
+            },
+            {
+                start: 3,
+                end: 5,
+                title: "Slide Window - Step 3",
+                desc: "Slide window to last elements (indices [3..5], values: 1, 3, 2). Add index 5 (val 2) and subtract index 2 (val 5). New Window Sum = 9 - 5 + 2 = 6. Max Sum remains 9. Done.",
+                highlights: [3, 4, 5],
+                windowSum: 6,
+                maxSum: 9,
+                matched: false
+            }
+        ]
+    },
+    'binary-search': {
+        name: "Binary Search Simulator",
+        array: [1, 3, 5, 7, 9, 11, 13, 15],
+        target: 9,
+        steps: [
+            {
+                low: 0,
+                high: 7,
+                mid: 3,
+                title: "Initial Range Assessment",
+                desc: "Initialize boundary search bounds: low = 0 (val 1), high = 7 (val 15). Calculate mid index = (low + high) / 2 = 3 (val 7). Since mid value 7 < target 9, target must lie in the right half. Adjust search bounds: low = mid + 1 = 4.",
+                highlights: [3],
+                bounds: [0, 1, 2, 3, 4, 5, 6, 7],
+                matched: false
+            },
+            {
+                low: 4,
+                high: 7,
+                mid: 5,
+                title: "Search Right Half",
+                desc: "Search range updated: low = 4 (val 9), high = 7 (val 15). Calculate mid index = (4 + 7) / 2 = 5 (val 11). Since mid value 11 > target 9, target must lie in the left half. Adjust bounds: high = mid - 1 = 4.",
+                highlights: [5],
+                bounds: [4, 5, 6, 7],
+                matched: false
+            },
+            {
+                low: 4,
+                high: 4,
+                mid: 4,
+                title: "Target Value Match",
+                desc: "Search range updated: low = 4 (val 9), high = 4 (val 9). Calculate mid index = 4 (val 9). The mid value matches our target! Return index 4.",
+                highlights: [4],
+                bounds: [4],
+                matched: true
+            }
+        ]
+    }
+};
+
+// Evolution chain data mapping
+const EVOLUTION_CHAINS = {
+    "Two Sum (Sorted)": ["Two Sum", "3Sum", "3Sum Closest", "4Sum"],
+    "Edit Distance": ["LCS", "Edit Distance", "Distinct Subsequences", "Wildcard Matching"],
+    "N-Queens Puzzle": ["Subset Sum", "Permutations", "N-Queens", "Sudoku Solver"],
+    "Longest Palindromic Substring": ["Reverse String", "Valid Palindrome", "Longest Palindromic Substring", "Palindrome Partitioning"]
+};
+
+// AI Mentor hint library
+const MENTOR_HINTS = {
+    "Two Sum (Sorted)": [
+        "Since the array is sorted, think about whether nested loops are redundant. Can we compare elements at the boundaries?",
+        "If you sum numbers[left] and numbers[right] and it exceeds target, does incrementing left help? No, that only increases the sum. Try decrementing right instead.",
+        "Correct! Decrementing right decreases the sum. Incrementing left increases it. Keep going until they meet."
+    ],
+    "Edit Distance": [
+        "Think of the subproblems: w1[0..i] and w2[0..j]. If w1[i] == w2[j], the cost is w1[0..i-1] and w2[0..j-1] with no new operation.",
+        "If they don't match, we have 3 choices: insert, delete, or replace. The cost is 1 + min of those options.",
+        "Use a 2D grid of size (M+1) x (N+1) where dp[i][j] stores the min edits for w1[0..i-1] and w2[0..j-1]."
+    ],
+    "N-Queens Puzzle": [
+        "This is a constraint satisfaction problem. You can place one queen in each row, checking for conflicts on columns and diagonals.",
+        "Instead of scanning the board diagonals repeatedly in O(N), use boolean arrays to track which columns, main diagonals, and anti-diagonals are occupied.",
+        "After placing a queen and recursing, make sure to undo the state change (backtrack) before trying the next column."
+    ],
+    "Longest Palindromic Substring": [
+        "Every palindrome expands around its center. A string of length N has 2N-1 potential centers (odd and even length center spots).",
+        "At each center index, expand outwards as long as s[left] == s[right]. Track the maximum length and starting index.",
+        "Compare odd expansion centers (i, i) and even expansion centers (i, i+1) to find the absolute longest substring."
+    ]
+};
+
 // State Manager
 let state = {
-    currentTab: 'dashboard', // 'dashboard' | 'roadmap' | 'cheatsheets' | 'decision-tree' | 'recruiter' | 'patterns'
+    currentTab: 'dashboard', // 'dashboard' | 'roadmap' | 'paths' | 'wiki' | 'companies' | 'decision-tree' | 'simulator' | 'interview' | 'recruiter' | 'patterns'
     selectedPatternIndex: 0,
     searchQuery: '',
     difficultyFilter: 'all',
@@ -102,8 +341,29 @@ let state = {
     bookmarks: JSON.parse(localStorage.getItem('algoprep_bookmarks')) || [],
     favorites: JSON.parse(localStorage.getItem('algoprep_favorites')) || [],
     revisions: JSON.parse(localStorage.getItem('algoprep_revisions')) || {}, // maps title to 'Mastered' | 'Needs Revision' | 'Not Practiced Recently'
+    paths: JSON.parse(localStorage.getItem('algoprep_paths')) || {}, // checklist items
     
-    currentProblem: null
+    currentProblem: null,
+    selectedWikiIndex: 0,
+    
+    // Simulator states
+    simType: 'two-pointer',
+    simStep: 0,
+    simIsPlaying: false,
+    simInterval: null,
+    
+    // Interview states
+    interviewActive: false,
+    interviewTimer: 45 * 60,
+    interviewTimerId: null,
+    interviewDifficulty: 'Medium',
+    interviewCompany: 'General',
+    interviewQuestions: [],
+    interviewResults: [false, false, false],
+    interviewRound: 0,
+    notes: ['', '', ''],
+    
+    hintCounts: {}
 };
 
 // Heuristics Helper functions
@@ -298,6 +558,13 @@ function updateGlobalStats() {
 }
 
 function renderView() {
+    // Clear simulator autoplay interval if leaving the simulator tab
+    if (state.currentTab !== 'simulator' && state.simInterval) {
+        clearInterval(state.simInterval);
+        state.simInterval = null;
+        state.simIsPlaying = false;
+    }
+
     // Hide Solution view, show dynamic content
     document.getElementById('code-viewer-container').style.display = 'none';
     const viewContainer = document.getElementById('view-container');
@@ -307,10 +574,18 @@ function renderView() {
         renderDashboardView(viewContainer);
     } else if (state.currentTab === 'roadmap') {
         renderRoadmapView(viewContainer);
-    } else if (state.currentTab === 'cheatsheets') {
-        renderCheatsheetsView(viewContainer);
+    } else if (state.currentTab === 'paths') {
+        renderPathsView(viewContainer);
+    } else if (state.currentTab === 'wiki') {
+        renderWikiView(viewContainer);
+    } else if (state.currentTab === 'companies') {
+        renderCompaniesView(viewContainer);
     } else if (state.currentTab === 'decision-tree') {
         renderDecisionTreeView(viewContainer);
+    } else if (state.currentTab === 'simulator') {
+        renderSimulatorView(viewContainer);
+    } else if (state.currentTab === 'interview') {
+        renderInterviewView(viewContainer);
     } else if (state.currentTab === 'recruiter') {
         renderRecruiterView(viewContainer);
     } else if (state.currentTab === 'patterns') {
@@ -346,7 +621,7 @@ function renderDashboardView(container) {
 
     // Pick Featured Problems (e.g., Two Sum, Edit Distance, N-Queens, Longest Palindromic Substring)
     let featuredHtml = '';
-    const featuredTitles = ["Two Sum (Sorted)", "Edit Distance", "N-Queens Puzzle", "Longest Palindrome in a string. [Longest palindromic Substring]"];
+    const featuredTitles = ["Two Sum (Sorted)", "Edit Distance", "N-Queens Puzzle", "Longest Palindromic Substring"];
     
     dsaData.forEach((pattern, pIdx) => {
         pattern.problems.forEach(prob => {
@@ -430,7 +705,7 @@ function renderDashboardView(container) {
             </div>
 
             <!-- Analytics Row: Heatmap & Progress Bars -->
-            <div class="analytics-row">
+            <div class="analytics-row" style="grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));">
                 
                 <!-- Git-style Heatmap Calendar -->
                 <div class="analytics-panel">
@@ -476,6 +751,14 @@ function renderDashboardView(container) {
                     </div>
                 </div>
 
+                <!-- Category Readiness Chart -->
+                <div class="analytics-panel">
+                    <div class="panel-title"><i class="fas fa-chart-line"></i> Category Readiness</div>
+                    <div class="readiness-chart-container" style="height: 220px;">
+                        <canvas id="readinessChart"></canvas>
+                    </div>
+                </div>
+
             </div>
 
             <!-- Featured Solutions Header -->
@@ -491,6 +774,8 @@ function renderDashboardView(container) {
     
     // Trigger number counts animation
     animateCounter('count-total', 0, stats.total, 800);
+    // Render radar chart
+    renderReadinessChart();
 }
 
 function animateCounter(id, start, end, duration) {
@@ -1015,6 +1300,18 @@ function openDetailedSolution(patternIdx, problemTitle) {
 
     state.currentProblem = problem;
 
+    // Reset AI Mentor Chat Log
+    const chatLog = document.getElementById('mentor-chat-log');
+    if (chatLog) {
+        chatLog.innerHTML = `
+            <div class="mentor-msg bot">
+                Hello! I am your AI DSA Mentor. Let's work through this problem together. 
+                If you are stuck, click the button below to get progressive hints.
+            </div>
+        `;
+    }
+    state.hintCounts[problem.title] = 0;
+
     // Toggle Screen views
     document.getElementById('view-container').style.display = 'none';
     const detailPanel = document.getElementById('code-viewer-container');
@@ -1075,6 +1372,21 @@ function openDetailedSolution(patternIdx, problemTitle) {
     
     document.getElementById('detail-mistakes').innerHTML = details.mistakes.map(m => `<li>${m}</li>`).join('');
     document.getElementById('detail-followups').innerHTML = details.followups;
+
+    // Populate Problem Progression Evolution Chain
+    const evolutionContainer = document.getElementById('detail-evolution-chain');
+    if (evolutionContainer) {
+        const chain = EVOLUTION_CHAINS[problem.title] || [problem.title, problem.title + " II", problem.title + " III"];
+        let evolutionHtml = '';
+        chain.forEach((node, idx) => {
+            const isActive = node === problem.title ? 'active' : '';
+            evolutionHtml += `<div class="evolution-node ${isActive}">${node}</div>`;
+            if (idx < chain.length - 1) {
+                evolutionHtml += `<div class="evolution-arrow"><i class="fas fa-chevron-right"></i></div>`;
+            }
+        });
+        evolutionContainer.innerHTML = evolutionHtml;
+    }
 
     // Default to Overview Tab
     switchDetailTab('tab-overview');
@@ -1172,7 +1484,7 @@ function registerNavTab(tabId) {
 }
 
 function initNavigation() {
-    const tabs = ['dashboard', 'roadmap', 'cheatsheets', 'decision-tree', 'recruiter'];
+    const tabs = ['dashboard', 'roadmap', 'paths', 'wiki', 'companies', 'decision-tree', 'simulator', 'interview', 'recruiter'];
     tabs.forEach(registerNavTab);
 
     // Advanced search filter triggers
@@ -1213,6 +1525,829 @@ function initNavigation() {
             renderView();
         }
     });
+}
+
+// ====================================================================
+// ADVANCED VIEWS & CONTROLLERS: PATHS, WIKI, COMPANIES, SIMULATORS & INTERVIEWS
+// ====================================================================
+
+function renderReadinessChart() {
+    const ctx = document.getElementById('readinessChart');
+    if (!ctx) return;
+
+    // Calculate completions per pattern
+    const labels = [];
+    const data = [];
+
+    dsaData.forEach(pattern => {
+        const shortName = pattern.name.replace(/^\d+\.\s+/, '').replace(/\s+Pattern$/, '');
+        labels.push(shortName);
+
+        const total = pattern.problems.length;
+        let mastered = 0;
+        pattern.problems.forEach(p => {
+            if (getProblemRevision(p.title) === 'Mastered') mastered++;
+        });
+        const pct = total > 0 ? Math.round((mastered / total) * 100) : 0;
+        data.push(pct);
+    });
+
+    new Chart(ctx.getContext('2d'), {
+        type: 'radar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Mastery Level %',
+                data: data,
+                backgroundColor: 'rgba(6, 182, 212, 0.15)',
+                borderColor: 'rgba(6, 182, 212, 0.85)',
+                pointBackgroundColor: 'rgba(6, 182, 212, 1)',
+                pointBorderColor: '#0f172a',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(6, 182, 212, 1)',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                r: {
+                    angleLines: {
+                        color: 'rgba(255, 255, 255, 0.1)'
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.08)'
+                    },
+                    pointLabels: {
+                        color: 'rgba(255, 255, 255, 0.6)',
+                        font: {
+                            family: 'Outfit, Inter, sans-serif',
+                            size: 9,
+                            weight: '600'
+                        }
+                    },
+                    ticks: {
+                        backdropColor: 'transparent',
+                        color: 'rgba(255, 255, 255, 0.3)',
+                        font: {
+                            size: 8
+                        },
+                        stepSize: 20
+                    },
+                    suggestedMin: 0,
+                    suggestedMax: 100
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+}
+
+function renderPathsView(container) {
+    let pathsGridHtml = '';
+    
+    PATHS_DATA.forEach(path => {
+        // Calculate progress percentage
+        let checkedCount = 0;
+        path.tasks.forEach((task, idx) => {
+            const key = `${path.id}_${idx}`;
+            if (state.paths[key]) checkedCount++;
+        });
+        const totalCount = path.tasks.length;
+        const progressPct = totalCount > 0 ? Math.round((checkedCount / totalCount) * 100) : 0;
+
+        let checklistHtml = '';
+        path.tasks.forEach((task, idx) => {
+            const key = `${path.id}_${idx}`;
+            const isChecked = state.paths[key] ? 'checked' : '';
+            checklistHtml += `
+                <label class="checklist-item">
+                    <input type="checkbox" ${isChecked} onchange="togglePathTask('${path.id}', ${idx})">
+                    <span style="${isChecked ? 'text-decoration:line-through; color:var(--text-dark);' : ''}">${task}</span>
+                </label>
+            `;
+        });
+
+        pathsGridHtml += `
+            <div class="path-card">
+                <div class="path-icon-header">
+                    <span class="path-icon"><i class="fas ${path.icon}"></i></span>
+                    <div>
+                        <span class="path-meta">${path.meta}</span>
+                        <h2 class="path-title">${path.title}</h2>
+                    </div>
+                </div>
+                
+                <div class="path-progress-container">
+                    <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:600; color:var(--text-muted);">
+                        <span>Track Progress</span>
+                        <span>${progressPct}%</span>
+                    </div>
+                    <div class="path-progress-bar">
+                        <div class="path-progress-fill" style="width:${progressPct}%;"></div>
+                    </div>
+                </div>
+
+                <div class="path-checklist">
+                    ${checklistHtml}
+                </div>
+            </div>
+        `;
+    });
+
+    container.innerHTML = `
+        <div class="paths-view-container animated-fadeIn" style="display:flex; flex-direction:column; gap:24px;">
+            <div class="pattern-header">
+                <h1 class="pattern-title">Structured Learning Paths</h1>
+                <p class="pattern-description">
+                    Follow structured timelines to prepare for interviews. Track your completion rate as you solve and check off milestones.
+                </p>
+            </div>
+            
+            <div class="paths-grid">
+                ${pathsGridHtml}
+            </div>
+        </div>
+    `;
+}
+
+function togglePathTask(pathId, taskIdx) {
+    const key = `${pathId}_${taskIdx}`;
+    state.paths[key] = !state.paths[key];
+    localStorage.setItem('algoprep_paths', JSON.stringify(state.paths));
+    renderView(); // re-render to update progress bars
+}
+
+function renderWikiView(container) {
+    let wikiMenuHtml = '';
+    WIKI_DATA.forEach((item, idx) => {
+        const isActive = idx === state.selectedWikiIndex ? 'active' : '';
+        wikiMenuHtml += `
+            <div class="wiki-menu-item ${isActive}" onclick="selectWikiTopic(${idx})">
+                ${item.title}
+            </div>
+        `;
+    });
+
+    const topic = WIKI_DATA[state.selectedWikiIndex] || WIKI_DATA[0];
+
+    container.innerHTML = `
+        <div class="wiki-container animated-fadeIn">
+            
+            <!-- Left Wiki Navigation Menu -->
+            <div class="wiki-sidebar">
+                <div style="font-size:11px; text-transform:uppercase; font-weight:700; color:var(--text-dark); letter-spacing:0.5px; margin-bottom:8px; padding-left:14px;">Wiki Directory</div>
+                ${wikiMenuHtml}
+            </div>
+
+            <!-- Right Content Panel -->
+            <div class="wiki-content-panel">
+                <span class="wiki-section-lbl">Concept Deep-Dive</span>
+                <h1 class="wiki-title" style="margin-top:-8px;">${topic.title}</h1>
+                <p class="wiki-text">
+                    ${topic.concept}
+                </p>
+
+                <div style="background:rgba(255,255,255,0.01); border:1px solid var(--border-color); padding:16px 20px; border-radius:12px;">
+                    <div class="wiki-section-lbl" style="font-size:10px;">Complexity Scaling</div>
+                    <div style="font-size:14px; font-weight:700; color:#ffffff; margin-top:4px;">${topic.complexity}</div>
+                </div>
+
+                <div>
+                    <h4 class="wiki-section-lbl" style="margin-bottom:12px;">Optimal Implementation Blueprint</h4>
+                    <div class="code-pre-wrapper" style="border:1px solid var(--border-color); border-radius:12px; overflow:hidden;">
+                        <pre style="margin:0;"><code id="wiki-code" class="language-java">${topic.template}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    `;
+
+    // Highlight blueprint code using PrismJS
+    const codeEl = document.getElementById('wiki-code');
+    if (codeEl) {
+        Prism.highlightElement(codeEl);
+    }
+}
+
+function selectWikiTopic(idx) {
+    state.selectedWikiIndex = idx;
+    renderView();
+}
+
+function renderCompaniesView(container) {
+    // Compile problem count per company
+    const compMap = {};
+    COMPANIES.forEach(c => {
+        compMap[c] = 0;
+    });
+
+    dsaData.forEach(pattern => {
+        pattern.problems.forEach(prob => {
+            const comps = getProblemCompanies(prob.title);
+            comps.forEach(c => {
+                if (compMap[c] !== undefined) {
+                    compMap[c]++;
+                }
+            });
+        });
+    });
+
+    let companyGridHtml = '';
+    COMPANIES.forEach(companyName => {
+        const iconClass = COMPANY_ICONS[companyName] || 'fas fa-building';
+        const solvedCount = compMap[companyName];
+
+        companyGridHtml += `
+            <div class="company-card" onclick="selectCompanyFocus('${companyName}')">
+                <div class="company-header">
+                    <span class="company-logo"><i class="${iconClass}"></i></span>
+                    <span class="company-stats-pill">${solvedCount} Solved</span>
+                </div>
+                <div class="company-name" style="margin-top:8px;">${companyName}</div>
+                <p style="font-size:12px; color:var(--text-muted); line-height:1.4; margin:0;">
+                    Targeted interview problems curated matching historical frequencies at ${companyName}.
+                </p>
+            </div>
+        `;
+    });
+
+    container.innerHTML = `
+        <div class="company-view-container animated-fadeIn" style="display:flex; flex-direction:column; gap:24px;">
+            <div class="pattern-header">
+                <h1 class="pattern-title">Company Preparation Hub</h1>
+                <p class="pattern-description">
+                    Focus your practice on curated problems that frequently appear in technical interviews at specific top companies.
+                </p>
+            </div>
+            
+            <div class="company-grid">
+                ${companyGridHtml}
+            </div>
+        </div>
+    `;
+}
+
+function selectCompanyFocus(companyName) {
+    // Set search parameters to company focus and render search results
+    state.companyFilter = companyName.toLowerCase();
+    
+    // Update company filter select dropdown element value
+    const compSelectEl = document.getElementById('filter-company');
+    if (compSelectEl) {
+        compSelectEl.value = companyName.toLowerCase();
+    }
+    
+    state.currentTab = 'patterns';
+    state.selectedPatternIndex = 0;
+    renderSidebar();
+    renderView();
+}
+
+function renderSimulatorView(container) {
+    const data = SIM_DATA[state.simType];
+    if (!data) return;
+
+    const step = data.steps[state.simStep];
+    if (!step) return;
+
+    // Render Array Nodes
+    let nodesHtml = '';
+    data.array.forEach((val, idx) => {
+        const isHighlighted = step.highlights && step.highlights.includes(idx);
+        let highlightClass = '';
+        if (isHighlighted) {
+            highlightClass = step.matched ? 'matched' : 'highlighted';
+        }
+
+        // Compile overlapping pointer labels
+        let pointerHtml = '';
+        if (state.simType === 'two-pointer') {
+            if (idx === step.left && idx === step.right) {
+                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-cyan);"><i class="fas fa-arrow-up"></i>L & R</div>`;
+            } else if (idx === step.left) {
+                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-cyan);"><i class="fas fa-arrow-up"></i>Left</div>`;
+            } else if (idx === step.right) {
+                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-purple);"><i class="fas fa-arrow-up"></i>Right</div>`;
+            }
+        } else if (state.simType === 'sliding-window') {
+            if (idx === step.start && idx === step.end) {
+                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-cyan);"><i class="fas fa-arrow-up"></i>S & E</div>`;
+            } else if (idx === step.start) {
+                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-cyan);"><i class="fas fa-arrow-up"></i>Start</div>`;
+            } else if (idx === step.end) {
+                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-purple);"><i class="fas fa-arrow-up"></i>End</div>`;
+            }
+        } else if (state.simType === 'binary-search') {
+            if (idx === step.low && idx === step.high && idx === step.mid) {
+                pointerHtml = `<div class="sim-pointer" style="color:#ffffff;"><i class="fas fa-arrow-up"></i>All</div>`;
+            } else if (idx === step.low && idx === step.mid) {
+                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-cyan);"><i class="fas fa-arrow-up"></i>L & M</div>`;
+            } else if (idx === step.high && idx === step.mid) {
+                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-purple);"><i class="fas fa-arrow-up"></i>M & H</div>`;
+            } else if (idx === step.low && idx === step.high) {
+                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-cyan);"><i class="fas fa-arrow-up"></i>L & H</div>`;
+            } else if (idx === step.mid) {
+                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-amber);"><i class="fas fa-arrow-up"></i>Mid</div>`;
+            } else if (idx === step.low) {
+                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-cyan);"><i class="fas fa-arrow-up"></i>Low</div>`;
+            } else if (idx === step.high) {
+                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-purple);"><i class="fas fa-arrow-up"></i>High</div>`;
+            }
+        }
+
+        nodesHtml += `
+            <div class="sim-array-node ${highlightClass}">
+                ${val}
+                ${pointerHtml}
+            </div>
+        `;
+    });
+
+    // Render variables
+    let varsHtml = '';
+    if (state.simType === 'two-pointer') {
+        varsHtml = `
+            <div>Target Sum: <span style="color:var(--accent-cyan); font-weight:800;">${data.target}</span></div>
+            <div style="border-left:1px solid var(--border-color); padding-left:16px;">Current Sum: <span style="color:${step.matched ? 'var(--accent-emerald)' : '#ffffff'}; font-weight:800;">${data.array[step.left] + data.array[step.right]}</span></div>
+            <div style="border-left:1px solid var(--border-color); padding-left:16px;">Status: <span style="color:${step.matched ? 'var(--accent-emerald)' : 'var(--accent-cyan)'}; font-weight:800;">${step.matched ? 'MATCH FOUND!' : 'SEARCHING...'}</span></div>
+        `;
+    } else if (state.simType === 'sliding-window') {
+        varsHtml = `
+            <div>Window Size (K): <span style="color:var(--accent-cyan); font-weight:800;">${data.k}</span></div>
+            <div style="border-left:1px solid var(--border-color); padding-left:16px;">Window Sum: <span style="color:#ffffff; font-weight:800;">${step.windowSum}</span></div>
+            <div style="border-left:1px solid var(--border-color); padding-left:16px;">Max Sum: <span style="color:var(--accent-emerald); font-weight:800;">${step.maxSum}</span></div>
+        `;
+    } else if (state.simType === 'binary-search') {
+        varsHtml = `
+            <div>Target: <span style="color:var(--accent-cyan); font-weight:800;">${data.target}</span></div>
+            <div style="border-left:1px solid var(--border-color); padding-left:16px;">Mid Value: <span style="color:var(--accent-amber); font-weight:800;">${data.array[step.mid]}</span></div>
+            <div style="border-left:1px solid var(--border-color); padding-left:16px;">Status: <span style="color:${step.matched ? 'var(--accent-emerald)' : 'var(--accent-cyan)'}; font-weight:800;">${step.matched ? 'TARGET FOUND!' : 'SEARCHING...'}</span></div>
+        `;
+    }
+
+    container.innerHTML = `
+        <div class="simulator-container animated-fadeIn">
+            
+            <div class="pattern-header">
+                <h1 class="pattern-title">Interactive Visual Simulator</h1>
+                <p class="pattern-description">Trace patterns step-by-step to understand boundary variables, expanding windows, and logarithmic divisions visually.</p>
+            </div>
+
+            <!-- Controls Selector -->
+            <div class="simulator-controls">
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button class="sim-btn ${state.simType === 'two-pointer' ? 'primary' : ''}" onclick="selectSimType('two-pointer')">Two Pointer</button>
+                    <button class="sim-btn ${state.simType === 'sliding-window' ? 'primary' : ''}" onclick="selectSimType('sliding-window')">Sliding Window</button>
+                    <button class="sim-btn ${state.simType === 'binary-search' ? 'primary' : ''}" onclick="selectSimType('binary-search')">Binary Search</button>
+                </div>
+                
+                <div class="sim-btn-group">
+                    <button class="sim-btn" onclick="prevSimStep()"><i class="fas fa-step-backward"></i> Prev</button>
+                    <button class="sim-btn" onclick="togglePlaySim()">
+                        <i class="fas ${state.simIsPlaying ? 'fa-pause' : 'fa-play'}"></i> ${state.simIsPlaying ? 'Pause' : 'Play'}
+                    </button>
+                    <button class="sim-btn" onclick="nextSimStep()"><i class="fas fa-step-forward"></i> Next</button>
+                    <button class="sim-btn" onclick="resetSim()"><i class="fas fa-undo"></i> Reset</button>
+                </div>
+            </div>
+
+            <!-- Canvas -->
+            <div class="simulator-canvas">
+                <div class="sim-array-container">
+                    ${nodesHtml}
+                </div>
+
+                <div style="display:flex; gap:16px; background:rgba(255,255,255,0.01); border:1px solid var(--border-color); padding:12px 24px; border-radius:12px; font-size:13px; font-weight:600; flex-wrap:wrap; justify-content:center;">
+                    ${varsHtml}
+                </div>
+
+                <div class="sim-status-box">
+                    <div class="sim-step-title">${step.title}</div>
+                    <p class="sim-step-desc" style="max-width:550px; margin: 0 auto; line-height:1.5;">${step.desc}</p>
+                </div>
+            </div>
+
+        </div>
+    `;
+}
+
+function selectSimType(type) {
+    if (state.simInterval) {
+        clearInterval(state.simInterval);
+        state.simInterval = null;
+    }
+    state.simType = type;
+    state.simStep = 0;
+    state.simIsPlaying = false;
+    renderView();
+}
+
+function prevSimStep() {
+    if (state.simStep > 0) {
+        state.simStep--;
+        renderView();
+    }
+}
+
+function nextSimStep() {
+    const data = SIM_DATA[state.simType];
+    if (state.simStep < data.steps.length - 1) {
+        state.simStep++;
+        renderView();
+    } else {
+        // Loop back or pause at end
+        if (state.simIsPlaying) {
+            togglePlaySim();
+        }
+    }
+}
+
+function resetSim() {
+    if (state.simInterval) {
+        clearInterval(state.simInterval);
+        state.simInterval = null;
+    }
+    state.simStep = 0;
+    state.simIsPlaying = false;
+    renderView();
+}
+
+function togglePlaySim() {
+    state.simIsPlaying = !state.simIsPlaying;
+    
+    if (state.simIsPlaying) {
+        // If already at end, reset first
+        const data = SIM_DATA[state.simType];
+        if (state.simStep >= data.steps.length - 1) {
+            state.simStep = 0;
+        }
+        
+        state.simInterval = setInterval(() => {
+            nextSimStep();
+        }, 2000);
+    } else {
+        if (state.simInterval) {
+            clearInterval(state.simInterval);
+            state.simInterval = null;
+        }
+    }
+    
+    renderView();
+}
+
+function renderInterviewView(container) {
+    if (state.interviewActive) {
+        const activeProb = state.interviewQuestions[state.interviewRound];
+        if (!activeProb) {
+            container.innerHTML = `<div>Error loading interview round problem.</div>`;
+            return;
+        }
+
+        let roundListHtml = '';
+        state.interviewQuestions.forEach((prob, idx) => {
+            const isActive = idx === state.interviewRound ? 'active' : '';
+            const statusLabel = state.interviewResults[idx] ? '🟢 Solved' : '⚪ Pending';
+            roundListHtml += `
+                <div class="wiki-menu-item ${isActive}" onclick="selectInterviewRound(${idx})" style="display:flex; justify-content:space-between; align-items:center;">
+                    <span>Round ${idx + 1}: ${prob.title.length > 20 ? prob.title.substring(0, 18) + '...' : prob.title}</span>
+                    <span style="font-size:11px;">${statusLabel}</span>
+                </div>
+            `;
+        });
+
+        container.innerHTML = `
+            <div class="wiki-container animated-fadeIn" style="grid-template-columns: 280px 1fr; margin-top:0;">
+                
+                <!-- Sidebar of Rounds -->
+                <div class="wiki-sidebar" style="justify-content: flex-start; gap: 16px;">
+                    <div>
+                        <div class="timer-box" style="width:100%; justify-content:center; box-sizing:border-box;">
+                            <i class="fas fa-clock"></i> <span id="interview-countdown">${formatTime(state.interviewTimer)}</span>
+                        </div>
+                    </div>
+                    <div style="font-size:11px; text-transform:uppercase; font-weight:700; color:var(--text-dark); letter-spacing:0.5px;">Interview Rounds</div>
+                    <div style="display:flex; flex-direction:column; gap:6px;">
+                        ${roundListHtml}
+                    </div>
+                    <button class="sim-btn" onclick="endMockInterview()" style="margin-top:auto; border-color:#ef4444; color:#ef4444; width:100%;">
+                        <i class="fas fa-times-circle"></i> End & Submit
+                    </button>
+                </div>
+
+                <!-- Problem Console -->
+                <div class="wiki-content-panel">
+                    <div class="company-header" style="justify-content:flex-start; gap:8px; align-items:center;">
+                        <span class="difficulty-badge difficulty-${getProblemDifficulty(activeProb.title).toLowerCase()}">${getProblemDifficulty(activeProb.title)}</span>
+                        <span class="company-stats-pill" style="background:rgba(255,255,255,0.05); color:#ffffff; padding:4px 8px;">Round ${state.interviewRound + 1}</span>
+                    </div>
+
+                    <h1 class="wiki-title">${activeProb.title}</h1>
+
+                    <div>
+                        <h4 class="wiki-section-lbl">Complexity Target</h4>
+                        <div style="display:flex; gap:16px; margin-top:8px;">
+                            <span style="font-size:13.5px; color:var(--text-muted);"><i class="fas fa-clock" style="color:var(--accent-cyan);"></i> Time: <code>${activeProb.timeComplexity}</code></span>
+                            <span style="font-size:13.5px; color:var(--text-muted);"><i class="fas fa-memory" style="color:var(--accent-cyan);"></i> Space: <code>${activeProb.spaceComplexity}</code></span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="wiki-section-lbl">Problem Description & Constraints</h4>
+                        <p class="wiki-text" style="margin-top:8px; line-height:1.6;">
+                            ${PROBLEM_DETAILS[activeProb.title]?.statement || `Implement an optimal solution to resolve the coding patterns constraints for <strong>${activeProb.title}</strong>.`}
+                        </p>
+                    </div>
+
+                    <!-- Sandbox Textarea for Recruiter Sandbox -->
+                    <div>
+                        <h4 class="wiki-section-lbl">Sandbox / Interviewer Notes</h4>
+                        <textarea id="interview-notes" class="chat-input" style="width:100%; height:120px; border:1px solid var(--border-color); border-radius:12px; margin-top:8px; padding:12px; background:rgba(7, 9, 19, 0.4); resize:none; font-family:var(--font-mono); font-size:13px; line-height:1.5;" placeholder="Draft your approach, pseudo-code, or runtime complexity analysis here...">${state.notes[state.interviewRound]}</textarea>
+                    </div>
+
+                    <div style="display:flex; gap:12px; justify-content:space-between; flex-wrap:wrap; margin-top:12px;">
+                        <div style="display:flex; gap:12px;">
+                            <button class="sim-btn" onclick="openDetailedSolution(0, '${activeProb.title.replace(/'/g, "\\'")}')" style="border-color:var(--accent-cyan); color:var(--accent-cyan);">
+                                <i class="fas fa-lightbulb"></i> View Hints / AI Support
+                            </button>
+                        </div>
+                        <div style="display:flex; gap:12px;">
+                            <button class="sim-btn" onclick="toggleInterviewResult(${state.interviewRound}, false)" style="border-color:#ef4444; color:${!state.interviewResults[state.interviewRound] ? '#ffffff' : '#ef4444'}; background:${!state.interviewResults[state.interviewRound] ? '#ef4444' : 'transparent'};">
+                                <i class="fas fa-times"></i> Mark Failed
+                            </button>
+                            <button class="sim-btn" onclick="toggleInterviewResult(${state.interviewRound}, true)" style="border-color:var(--accent-emerald); color:${state.interviewResults[state.interviewRound] ? '#ffffff' : 'var(--accent-emerald)'}; background:${state.interviewResults[state.interviewRound] ? 'var(--accent-emerald)' : 'transparent'};">
+                                <i class="fas fa-check"></i> Mark Solved
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        `;
+    } else {
+        // Setup Screen
+        container.innerHTML = `
+            <div class="interview-setup-box animated-fadeIn">
+                <div style="font-size:36px; color:var(--accent-cyan); align-self:center;"><i class="fas fa-user-clock"></i></div>
+                <h2 style="font-size:22px; font-weight:800; color:#ffffff; text-align:center;">Start Coding Mock Interview</h2>
+                <p style="font-size:13.5px; color:var(--text-muted); text-align:center; line-height:1.6;">
+                    Test your memory and logic speed. We compile 3 randomized rounds matching your specifications under a 45-minute strict countdown timer.
+                </p>
+
+                <div style="display:flex; flex-direction:column; gap:8px;">
+                    <label style="font-size:12px; font-weight:700; text-transform:uppercase; color:var(--text-dark); letter-spacing:0.5px;">Difficulty Tier</label>
+                    <select id="interview-diff-select" class="filter-select" style="width:100%; padding:10px 14px; background:rgba(255,255,255,0.02); border:1px solid var(--border-color); border-radius:8px; color:#ffffff;">
+                        <option value="All">All Difficulties</option>
+                        <option value="Easy">Easy</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Hard">Hard</option>
+                    </select>
+                </div>
+
+                <div style="display:flex; flex-direction:column; gap:8px;">
+                    <label style="font-size:12px; font-weight:700; text-transform:uppercase; color:var(--text-dark); letter-spacing:0.5px;">Company Curriculum</label>
+                    <select id="interview-comp-select" class="filter-select" style="width:100%; padding:10px 14px; background:rgba(255,255,255,0.02); border:1px solid var(--border-color); border-radius:8px; color:#ffffff;">
+                        <option value="General">General (All Companies)</option>
+                        ${COMPANIES.map(c => `<option value="${c}">${c}</option>`).join('')}
+                    </select>
+                </div>
+
+                <button class="sim-btn primary" onclick="startMockInterview()" style="width:100%; padding:12px 18px;">
+                    <i class="fas fa-play"></i> Start 45-Min Interview Session
+                </button>
+            </div>
+        `;
+    }
+}
+
+function startMockInterview() {
+    const diff = document.getElementById('interview-diff-select').value;
+    const company = document.getElementById('interview-comp-select').value;
+
+    state.interviewDifficulty = diff;
+    state.interviewCompany = company;
+
+    // Filter problems by difficulty
+    let candidateProblems = [];
+    dsaData.forEach(pattern => {
+        pattern.problems.forEach(prob => {
+            const pDiff = getProblemDifficulty(prob.title);
+            const pComps = getProblemCompanies(prob.title).map(c => c.toLowerCase());
+            
+            let match = true;
+            if (diff !== 'All' && pDiff !== diff) match = false;
+            if (company !== 'General' && !pComps.includes(company.toLowerCase())) match = false;
+
+            if (match) {
+                candidateProblems.push(prob);
+            }
+        });
+    });
+
+    // If we have fewer than 3 matching problems, fall back to matching by difficulty only
+    if (candidateProblems.length < 3) {
+        candidateProblems = [];
+        dsaData.forEach(pattern => {
+            pattern.problems.forEach(prob => {
+                const pDiff = getProblemDifficulty(prob.title);
+                if (diff === 'All' || pDiff === diff) {
+                    candidateProblems.push(prob);
+                }
+            });
+        });
+    }
+
+    if (candidateProblems.length < 3) {
+        candidateProblems = [];
+        dsaData.forEach(pattern => {
+            pattern.problems.forEach(prob => {
+                candidateProblems.push(prob);
+            });
+        });
+    }
+
+    // Pick 3 random distinct problems
+    const selected = [];
+    const tempCandidates = [...candidateProblems];
+    for (let i = 0; i < 3; i++) {
+        if (tempCandidates.length === 0) break;
+        const idx = Math.floor(Math.random() * tempCandidates.length);
+        selected.push(tempCandidates.splice(idx, 1)[0]);
+    }
+
+    state.interviewQuestions = selected;
+    state.interviewActive = true;
+    state.interviewTimer = 45 * 60; // 45 minutes
+    state.interviewRound = 0;
+    state.interviewResults = [false, false, false];
+    state.notes = ['', '', ''];
+
+    // Start timer interval
+    if (state.interviewTimerId) clearInterval(state.interviewTimerId);
+    state.interviewTimerId = setInterval(() => {
+        state.interviewTimer--;
+        if (state.interviewTimer <= 0) {
+            clearInterval(state.interviewTimerId);
+            endMockInterview();
+        } else {
+            const timerEl = document.getElementById('interview-countdown');
+            if (timerEl) {
+                timerEl.textContent = formatTime(state.interviewTimer);
+                if (state.interviewTimer < 300) {
+                    timerEl.parentElement.classList.add('pulse');
+                }
+            }
+        }
+    }, 1000);
+
+    renderView();
+}
+
+function formatTime(sec) {
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return `${m}:${s < 10 ? '0' : ''}${s}`;
+}
+
+function selectInterviewRound(idx) {
+    const notesArea = document.getElementById('interview-notes');
+    if (notesArea) {
+        state.notes[state.interviewRound] = notesArea.value;
+    }
+
+    state.interviewRound = idx;
+    renderView();
+}
+
+function toggleInterviewResult(idx, outcome) {
+    state.interviewResults[idx] = outcome;
+    renderView();
+}
+
+function endMockInterview() {
+    if (state.interviewTimerId) {
+        clearInterval(state.interviewTimerId);
+        state.interviewTimerId = null;
+    }
+    state.interviewActive = false;
+    
+    const notesArea = document.getElementById('interview-notes');
+    if (notesArea) {
+        state.notes[state.interviewRound] = notesArea.value;
+    }
+
+    const viewContainer = document.getElementById('view-container');
+    viewContainer.style.display = 'flex';
+
+    const solvedCount = state.interviewResults.filter(Boolean).length;
+    const scorePct = Math.round((solvedCount / 3) * 100);
+
+    let summaryHtml = `
+        <div class="interview-setup-box animated-fadeIn" style="max-width: 700px; text-align:center;">
+            <div style="font-size: 48px; color: ${scorePct >= 66 ? 'var(--accent-emerald)' : scorePct >= 33 ? 'var(--accent-amber)' : '#ef4444'}; margin-bottom:12px;">
+                <i class="fas ${scorePct >= 66 ? 'fa-medal' : 'fa-graduation-cap'}"></i>
+            </div>
+            <h2 style="font-size:24px; font-weight:800; color:#ffffff;">Interview Session Completed</h2>
+            <p style="font-size:14px; color:var(--text-muted); margin-bottom:16px;">
+                Difficulty: <strong>${state.interviewDifficulty}</strong> | Company: <strong>${state.interviewCompany}</strong>
+            </p>
+
+            <div style="background: rgba(255,255,255,0.02); border:1px solid var(--border-color); padding: 24px; border-radius:16px; margin-bottom:16px;">
+                <div style="font-size:12px; text-transform:uppercase; color:var(--text-dark); font-weight:700; letter-spacing:0.5px;">Success Rate</div>
+                <div style="font-size:36px; font-weight:800; color:#ffffff; margin: 8px 0;">${scorePct}%</div>
+                <div style="font-size:13.5px; color:var(--text-muted);">${solvedCount} out of 3 problems completed successfully</div>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:12px; text-align:left; margin-bottom:24px;">
+                ${state.interviewQuestions.map((prob, idx) => `
+                    <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.1); border:1px solid var(--border-color); padding:12px 18px; border-radius:10px;">
+                        <div>
+                            <div style="font-size:14px; font-weight:700; color:#ffffff;">Round ${idx + 1}: ${prob.title}</div>
+                            <div style="font-size:12px; color:var(--text-muted);">Complexity: Time ${prob.timeComplexity} | Space ${prob.spaceComplexity}</div>
+                        </div>
+                        <span style="font-weight:700; font-size:12px; text-transform:uppercase; padding: 4px 8px; border-radius:6px; background:${state.interviewResults[idx] ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)'}; color:${state.interviewResults[idx] ? 'var(--accent-emerald)' : '#ef4444'};">
+                            ${state.interviewResults[idx] ? 'Solved' : 'Failed/Skipped'}
+                        </span>
+                    </div>
+                `).join('')}
+            </div>
+
+            <button class="sim-btn primary" onclick="state.currentTab = 'interview'; renderView();" style="align-self:center;">
+                <i class="fas fa-redo"></i> Start New Interview
+            </button>
+        </div>
+    `;
+
+    viewContainer.innerHTML = summaryHtml;
+}
+
+function triggerMentorHint() {
+    if (!state.currentProblem) return;
+    const title = state.currentProblem.title;
+    
+    if (!state.hintCounts) {
+        state.hintCounts = {};
+    }
+    if (state.hintCounts[title] === undefined) {
+        state.hintCounts[title] = 0;
+    }
+    
+    const count = state.hintCounts[title];
+    const hints = MENTOR_HINTS[title] || [
+        `Analyze the time complexity constraints. We want to aim for ${state.currentProblem.timeComplexity || 'O(N)'}.`,
+        `The optimal approach is: ${state.currentProblem.approach || 'Linear Scan'}. Think about how to set up the boundary parameters.`,
+        `Verify edge cases like empty arrays, single element inputs, or targets that do not exist.`
+    ];
+    
+    if (count >= 3) {
+        appendMentorMessage("bot", "I have given you all the hints for this problem! Try reviewing the solution code in the editor pane to see the full implementation.");
+        return;
+    }
+    
+    appendMentorMessage("bot", `<strong>💡 Hint ${count + 1}:</strong> ${hints[count]}`);
+    state.hintCounts[title] = count + 1;
+}
+
+function appendMentorMessage(sender, text) {
+    const chatLog = document.getElementById('mentor-chat-log');
+    if (!chatLog) return;
+    
+    const msg = document.createElement('div');
+    msg.className = `mentor-msg ${sender}`;
+    msg.innerHTML = text;
+    chatLog.appendChild(msg);
+    chatLog.scrollTop = chatLog.scrollHeight;
+}
+
+function sendMentorMessage() {
+    const input = document.getElementById('mentor-chat-input');
+    if (!input || input.value.trim() === '') return;
+    
+    const userText = input.value.trim();
+    appendMentorMessage("user", userText);
+    input.value = '';
+    
+    // Simulate AI Mentor reply
+    setTimeout(() => {
+        let reply = "That's a good question! To optimize this solution, consider standard complexity thresholds. Can you explain your thoughts on how to avoid nested loops?";
+        const lowerText = userText.toLowerCase();
+        if (lowerText.includes("time") || lowerText.includes("slow") || lowerText.includes("fast")) {
+            reply = "Time complexity here is " + (state.currentProblem ? state.currentProblem.timeComplexity : "O(N)") + ". We achieve this by pruning redundant branches or using pointers to reduce nested scans.";
+        } else if (lowerText.includes("space") || lowerText.includes("memory")) {
+            reply = "Space complexity is " + (state.currentProblem ? state.currentProblem.spaceComplexity : "O(1)") + ". We optimize this by reusing the input array or list pointers directly rather than creating auxiliary data structures.";
+        } else if (lowerText.includes("java") || lowerText.includes("code")) {
+            reply = "In Java, pay attention to data type ranges (like using `long` for potential overflows) and edge cases like checking if the array length is zero.";
+        } else if (lowerText.includes("help") || lowerText.includes("how")) {
+            reply = "Let's break it down: look at the template in the cheatsheet or wiki section. What part of the loop condition seems unclear?";
+        }
+        appendMentorMessage("bot", reply);
+    }, 800);
 }
 
 // Init App on Load

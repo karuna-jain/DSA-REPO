@@ -1561,18 +1561,548 @@ header.top-bar {
     margin: 40px auto;
 }
 
-/* Animations */
-@keyframes fade {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+/* ==========================================
+     ADVANCED PLATFORM CUSTOM MODULES
+     ========================================== */
+
+/* 1. Learning Paths & Tracks */
+.paths-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 24px;
+    margin-top: 16px;
 }
 
+.path-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: var(--transition-normal);
+}
+
+.path-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-md);
+}
+
+.path-icon-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.path-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--bg-active);
+    color: var(--accent-cyan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    border: 1px solid rgba(6, 182, 212, 0.2);
+}
+
+.path-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.path-meta {
+    font-size: 12px;
+    color: var(--text-dark);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.path-progress-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.path-progress-bar {
+    height: 6px;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.path-progress-fill {
+    height: 100%;
+    background: var(--gradient-primary);
+    width: 0%;
+    transition: width 0.6s ease;
+}
+
+.path-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13.5px;
+    color: var(--text-muted);
+}
+
+.checklist-item input[type="checkbox"] {
+    accent-color: var(--accent-cyan);
+    cursor: pointer;
+}
+
+/* 2. DSA Wiki Tabbed Encyclopedia & Code Library */
+.wiki-container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 32px;
+    margin-top: 16px;
+    height: 100%;
+}
+
+.wiki-sidebar {
+    background: rgba(13, 18, 34, 0.4);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.wiki-menu-item {
+    padding: 10px 14px;
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.wiki-menu-item:hover, .wiki-menu-item.active {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.wiki-menu-item.active {
+    color: var(--accent-cyan);
+    background: rgba(6, 182, 212, 0.06);
+}
+
+.wiki-content-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    overflow-y: auto;
+}
+
+.wiki-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.wiki-section-lbl {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-dark);
+    letter-spacing: 0.5px;
+}
+
+.wiki-text {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+/* 3. Company Prep Hub */
+.company-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 16px;
+}
+
+.company-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 24px;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.company-card:hover, .company-card.active {
+    transform: translateY(-4px);
+    border-color: var(--accent-amber);
+    box-shadow: 0 8px 25px rgba(245, 158, 11, 0.08);
+}
+
+.company-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.company-logo {
+    font-size: 20px;
+    color: var(--accent-amber);
+}
+
+.company-name {
+    font-size: 17px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.company-stats-pill {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--accent-amber);
+}
+
+/* 4. Visual Algorithm Simulator */
+.simulator-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 16px;
+}
+
+.simulator-controls {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.sim-btn-group {
+    display: flex;
+    gap: 10px;
+}
+
+.sim-btn {
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.02);
+    color: #ffffff;
+    transition: var(--transition-fast);
+}
+
+.sim-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.sim-btn.primary {
+    background: var(--gradient-primary);
+    border: none;
+}
+
+.sim-btn.primary:hover {
+    box-shadow: var(--shadow-glow);
+}
+
+.simulator-canvas {
+    background: rgba(13, 18, 34, 0.4);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    min-height: 300px;
+    position: relative;
+}
+
+.sim-array-container {
+    display: flex;
+    gap: 12px;
+    position: relative;
+    padding-bottom: 40px; /* space for pointer labels */
+}
+
+.sim-array-node {
+    width: 54px;
+    height: 54px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.02);
+    border: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 800;
+    color: #ffffff;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.sim-array-node.highlighted {
+    background: rgba(6, 182, 212, 0.12);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+}
+
+.sim-array-node.matched {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: var(--accent-emerald);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+}
+
+.sim-pointer {
+    position: absolute;
+    bottom: -32px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent-cyan);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    width: 100%;
+}
+
+.sim-pointer i {
+    font-size: 12px;
+}
+
+.sim-status-box {
+    text-align: center;
+    max-width: 600px;
+}
+
+.sim-step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 6px;
+}
+
+.sim-step-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* 5. Mock Interview Mode */
+.interview-setup-box {
+    max-width: 600px;
+    margin: 40px auto;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.timer-box {
+    background: rgba(239, 68, 68, 0.05);
+    border: 1px solid rgba(239, 68, 68, 0.15);
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #ef4444;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+}
+
+.timer-box.pulse {
+    animation: timerPulse 1s infinite alternate;
+}
+
+@keyframes timerPulse {
+    from { box-shadow: 0 0 4px rgba(239,68,68,0.1); }
+    to { box-shadow: 0 0 15px rgba(239,68,68,0.3); }
+}
+
+/* 6. AI Mentor Message Bubbles */
+.mentor-chat-log {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 280px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px;
+    background: rgba(7, 9, 19, 0.3);
+}
+
+.mentor-msg {
+    max-width: 85%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 13.5px;
+    line-height: 1.5;
+}
+
+.mentor-msg.bot {
+    align-self: flex-start;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    border-bottom-left-radius: 2px;
+}
+
+.mentor-msg.user {
+    align-self: flex-end;
+    background: rgba(6, 182, 212, 0.1);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+    color: #ffffff;
+    border-bottom-right-radius: 2px;
+}
+
+.mentor-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.mentor-hint-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #ffffff;
+    cursor: pointer;
+    background: rgba(245, 158, 11, 0.12);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: var(--transition-fast);
+}
+
+.mentor-hint-btn:hover {
+    background: rgba(245, 158, 11, 0.2);
+    border-color: var(--accent-amber);
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.15);
+}
+
+.chat-input-wrapper {
+    display: flex;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: rgba(7, 9, 19, 0.3);
+    overflow: hidden;
+}
+
+.chat-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 10px 14px;
+    color: #ffffff;
+    font-size: 13px;
+    outline: none;
+}
+
+.chat-send-btn {
+    background: transparent;
+    border: none;
+    color: var(--accent-cyan);
+    padding: 0 16px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.chat-send-btn:hover {
+    color: #ffffff;
+}
+
+/* 7. Evolution Map Timelines */
+.evolution-chain-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 8px 0;
+}
+
+.evolution-node {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--text-muted);
+}
+
+.evolution-node.active {
+    border-color: var(--accent-purple);
+    color: #ffffff;
+    background: rgba(139, 92, 246, 0.08);
+}
+
+.evolution-arrow {
+    font-size: 11px;
+    color: var(--text-dark);
+}
+
+/* 8. Readiness score Radar charts container */
+.readiness-chart-container {
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Animations */
 .animated-fadeIn {
     animation: fade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Mobile & Tablet Responsiveness */
 @media (max-width: 1100px) {
+
     .app-container {
         flex-direction: column;
         height: auto;

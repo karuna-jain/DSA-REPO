@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karuna Jain | DSA Learning & Interview Platform</title>
+    <title>AlgoPrep | SaaS DSA Learning & Interview Platform</title>
     <!-- FontAwesome for Premium Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- PrismJS Tomorrow Night syntax highlighting -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <!-- Chart.js for progress, growth, and category readiness visual charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Main SaaS Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -24,7 +26,7 @@
                     <i class="fas fa-cubes brand-icon"></i>
                     <div class="brand-text">
                         <span class="brand-title">AlgoPrep</span>
-                        <span class="brand-subtitle">SaaS Portfolio</span>
+                        <span class="brand-subtitle">SaaS Learning Portal</span>
                     </div>
                 </div>
             </div>
@@ -32,25 +34,41 @@
             <!-- Global Navigation Sections -->
             <div class="sidebar-nav-section">
                 <div class="sidebar-nav-title">Platform</div>
-                <div class="menu-item" id="nav-dashboard">
+                <div class="menu-item active" id="nav-dashboard">
                     <i class="fas fa-chart-pie menu-icon"></i>
-                    <span class="menu-item-text">Dashboard</span>
+                    <span class="menu-item-text">Dashboard Home</span>
                 </div>
                 <div class="menu-item" id="nav-roadmap">
                     <i class="fas fa-map-signs menu-icon"></i>
                     <span class="menu-item-text">Pattern Roadmap</span>
                 </div>
-                <div class="menu-item" id="nav-cheatsheets">
-                    <i class="fas fa-scroll menu-icon"></i>
-                    <span class="menu-item-text">Quick Cheatsheets</span>
+                <div class="menu-item" id="nav-paths">
+                    <i class="fas fa-route menu-icon"></i>
+                    <span class="menu-item-text">Learning Paths</span>
+                </div>
+                <div class="menu-item" id="nav-wiki">
+                    <i class="fas fa-book-open menu-icon"></i>
+                    <span class="menu-item-text">DSA Wiki & Templates</span>
+                </div>
+                <div class="menu-item" id="nav-companies">
+                    <i class="fas fa-building menu-icon"></i>
+                    <span class="menu-item-text">Company Prep Hub</span>
                 </div>
                 <div class="menu-item" id="nav-decision-tree">
-                    <i class="fas fa-project-diagram menu-icon"></i>
-                    <span class="menu-item-text">Pattern Decision Tree</span>
+                    <i class="fas fa-network-wired menu-icon"></i>
+                    <span class="menu-item-text">Pattern Matcher</span>
+                </div>
+                <div class="menu-item" id="nav-simulator">
+                    <i class="fas fa-play-circle menu-icon"></i>
+                    <span class="menu-item-text">Visual Simulator</span>
+                </div>
+                <div class="menu-item" id="nav-interview">
+                    <i class="fas fa-user-clock menu-icon"></i>
+                    <span class="menu-item-text">Mock Interview Mode</span>
                 </div>
                 <div class="menu-item" id="nav-recruiter">
-                    <i class="fas fa-briefcase menu-icon"></i>
-                    <span class="menu-item-text">Recruiter Portal</span>
+                    <i class="fas fa-id-card menu-icon"></i>
+                    <span class="menu-item-text">Recruiter Profile</span>
                 </div>
             </div>
 
@@ -164,6 +182,7 @@
                         <button class="tab-btn active" onclick="switchDetailTab('tab-overview')">Overview</button>
                         <button class="tab-btn" onclick="switchDetailTab('tab-dry-run')">Trace & Dry Run</button>
                         <button class="tab-btn" onclick="switchDetailTab('tab-interview')">Interview Guide</button>
+                        <button class="tab-btn" onclick="switchDetailTab('tab-mentor')">AI Mentor</button>
                     </div>
 
                     <!-- Tab content: Overview -->
@@ -243,6 +262,42 @@
                             <h3 class="section-title">Interview Follow-Up Questions</h3>
                             <div class="follow-up-box" id="detail-followups">
                                 <!-- Recruiter styled questions -->
+                            </div>
+                        </div>
+
+                        <div class="details-section">
+                            <h3 class="section-title">Problem Progression Evolution</h3>
+                            <div class="evolution-chain-box" id="detail-evolution-chain">
+                                <!-- Progression nodes -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab content: AI Mentor Hint Panel -->
+                    <div class="tab-pane" id="tab-mentor">
+                        <div class="details-section">
+                            <h3 class="section-title">AI DSA Mentor</h3>
+                            <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.5;">
+                                Stuck on this solution? Ask the AI Mentor for guided hints and conceptual support. 
+                                We help you think through the problem instead of revealing the answer immediately.
+                            </p>
+                            
+                            <!-- Interactive Chat Log -->
+                            <div class="mentor-chat-log" id="mentor-chat-log">
+                                <div class="mentor-msg bot">
+                                    Hello! I am your AI DSA Mentor. Let's work through this problem together. 
+                                    If you are stuck, click the button below to get progressive hints.
+                                </div>
+                            </div>
+
+                            <div class="mentor-controls">
+                                <button id="btn-mentor-hint" class="mentor-hint-btn" onclick="triggerMentorHint()">
+                                    <i class="fas fa-lightbulb"></i> I'm Stuck! Get Hint
+                                </button>
+                                <div class="chat-input-wrapper">
+                                    <input type="text" id="mentor-chat-input" class="chat-input" placeholder="Ask a conceptual question about this problem...">
+                                    <button class="chat-send-btn" onclick="sendMentorMessage()"><i class="fas fa-paper-plane"></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>
