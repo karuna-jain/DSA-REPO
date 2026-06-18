@@ -2398,3 +2398,371 @@ header.top-bar {
         padding: 8px;
     }
 }
+
+/* ====================================================================
+   VISUAL ALGORITHM SIMULATOR STYLING
+   ==================================================================== */
+.sim-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 24px;
+    margin-top: 16px;
+    align-items: start;
+    width: 100%;
+}
+
+.sim-sidebar {
+    background: rgba(13, 18, 34, 0.4);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sim-category {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.sim-category-title {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--text-dark);
+    letter-spacing: 0.5px;
+    padding-left: 8px;
+    margin-top: 8px;
+}
+
+.sim-sidebar-btn {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    text-align: left;
+    transition: var(--transition-fast);
+}
+
+.sim-sidebar-btn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.sim-sidebar-btn.active {
+    color: var(--accent-cyan);
+    background: rgba(6, 182, 212, 0.08);
+    font-weight: 700;
+}
+
+/* Custom Visual Simulators */
+/* Intervals */
+.sim-intervals-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 500px;
+    align-items: stretch;
+}
+
+.sim-interval-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sim-interval-label {
+    width: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.sim-interval-bar-container {
+    flex: 1;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    position: relative;
+}
+
+.sim-interval-bar {
+    position: absolute;
+    height: 100%;
+    border-radius: 6px;
+    background: rgba(6, 182, 212, 0.2);
+    border: 1px solid var(--accent-cyan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.1);
+    transition: all 0.3s ease;
+}
+
+.sim-interval-bar.active {
+    background: rgba(139, 92, 246, 0.25);
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.2);
+}
+
+.sim-interval-bar.merged {
+    background: rgba(16, 185, 129, 0.25);
+    border-color: var(--accent-emerald);
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+}
+
+/* Fast/Slow Linked List */
+.sim-list-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    padding-bottom: 50px;
+}
+
+.sim-list-node {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.02);
+    border: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 800;
+    color: #ffffff;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.sim-list-node.highlighted-slow {
+    border-color: var(--accent-emerald);
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+}
+
+.sim-list-node.highlighted-fast {
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 12px rgba(139, 92, 246, 0.3);
+}
+
+.sim-list-node.highlighted-both {
+    border-color: var(--accent-amber);
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+}
+
+.sim-list-arrow {
+    font-size: 14px;
+    color: var(--text-dark);
+}
+
+/* Trees */
+.sim-tree-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+}
+
+.sim-tree-level {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    width: 100%;
+}
+
+.sim-tree-node {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.02);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 15px;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.sim-tree-node.active {
+    background: rgba(6, 182, 212, 0.15);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 12px rgba(6, 182, 212, 0.3);
+}
+
+.sim-tree-node.visited {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: var(--accent-emerald);
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+}
+
+/* Graph */
+.sim-graph-container {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 24px;
+    width: 100%;
+    max-width: 650px;
+}
+
+.sim-graph-canvas {
+    border: 1px solid var(--border-color);
+    background: rgba(0,0,0,0.15);
+    border-radius: 12px;
+    height: 180px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sim-graph-node {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.02);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    color: #ffffff;
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+.sim-graph-node.active {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 12px rgba(6, 182, 212, 0.3);
+}
+
+.sim-graph-node.visited {
+    border-color: var(--accent-emerald);
+    background: rgba(16, 185, 129, 0.08);
+}
+
+.sim-graph-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid var(--border-color);
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 12.5px;
+    overflow-y: auto;
+}
+
+/* DP Grid Table */
+.sim-dp-table {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.sim-dp-table td, .sim-dp-table th {
+    border: 1px solid var(--border-color);
+    width: 44px;
+    height: 44px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.sim-dp-table th {
+    background: rgba(255,255,255,0.03);
+    color: var(--text-muted);
+}
+
+.sim-dp-table td.active {
+    background: rgba(6, 182, 212, 0.15);
+    border: 2px solid var(--accent-cyan);
+    box-shadow: inset 0 0 8px rgba(6, 182, 212, 0.3);
+}
+
+/* LRU Cache Slots */
+.sim-lru-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.sim-lru-slots {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.sim-lru-slot {
+    flex: 1;
+    max-width: 110px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.sim-lru-slot.mru {
+    border-color: var(--accent-emerald);
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.15);
+}
+
+.sim-lru-slot.lru {
+    border-color: #ef4444;
+}
+
+.sim-lru-badge {
+    position: absolute;
+    top: -8px;
+    font-size: 8px;
+    text-transform: uppercase;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: var(--border-color);
+    color: #ffffff;
+}
+
+.sim-lru-badge.mru {
+    background: var(--accent-emerald);
+}
+
+.sim-lru-badge.lru {
+    background: #ef4444;
+}
+
+.sim-lru-lbl {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.sim-lru-val {
+    font-size: 15px;
+    font-weight: 800;
+    color: #ffffff;
+}
+

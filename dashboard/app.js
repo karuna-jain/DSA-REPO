@@ -185,6 +185,7 @@ const COMPANY_ICONS = {
 };
 
 // Interactive visual algorithms steps
+// Interactive visual algorithms steps
 const SIM_DATA = {
     'two-pointer': {
         name: "Two-Pointer Simulator",
@@ -290,6 +291,622 @@ const SIM_DATA = {
                 highlights: [4],
                 bounds: [4],
                 matched: true
+            }
+        ]
+    },
+    'merge-intervals': {
+        name: "Merge Intervals Simulator",
+        intervals: [[1, 3], [2, 6], [8, 10], [15, 18]],
+        steps: [
+            {
+                index: 0,
+                title: "Initialize Merged List",
+                desc: "Read the first interval [1, 3]. Since the merged list is empty, push [1, 3] as our starting merged interval.",
+                activeInterval: [1, 3],
+                merged: [[1, 3]],
+                highlights: [0]
+            },
+            {
+                index: 1,
+                title: "Check Next Interval (Overlap)",
+                desc: "Read next interval [2, 6]. Since its start (2) <= end of last merged interval (3), they overlap. Merge them: end of last merged interval becomes max(3, 6) = 6. Merged intervals: [[1, 6]].",
+                activeInterval: [2, 6],
+                merged: [[1, 6]],
+                highlights: [0, 1]
+            },
+            {
+                index: 2,
+                title: "Check Next Interval (No Overlap)",
+                desc: "Read next interval [8, 10]. Since its start (8) > end of last merged interval (6), they do not overlap. Push [8, 10] to merged list. Merged intervals: [[1, 6], [8, 10]].",
+                activeInterval: [8, 10],
+                merged: [[1, 6], [8, 10]],
+                highlights: [0, 1, 2]
+            },
+            {
+                index: 3,
+                title: "Check Final Interval (No Overlap)",
+                desc: "Read final interval [15, 18]. Since its start (15) > end of last merged interval (10), they do not overlap. Push [15, 18] to merged list. Final Merged list: [[1, 6], [8, 10], [15, 18]]. Process completed.",
+                activeInterval: [15, 18],
+                merged: [[1, 6], [8, 10], [15, 18]],
+                highlights: [0, 1, 2, 3]
+            }
+        ]
+    },
+    'fast-slow-pointer': {
+        name: "Fast & Slow Pointer Simulator",
+        nodes: [1, 2, 3, 4, 5, 6],
+        cycleConnection: { from: 5, to: 2 },
+        steps: [
+            {
+                slow: 0,
+                fast: 0,
+                title: "Initialize Pointers",
+                desc: "Place both the slow pointer (green) and the fast pointer (purple) at the head of the linked list (node 1).",
+                highlights: [0]
+            },
+            {
+                slow: 1,
+                fast: 2,
+                title: "First Advance Step",
+                desc: "Slow pointer advances 1 step to node 2 (val 2). Fast pointer advances 2 steps to node 3 (val 3).",
+                highlights: [1, 2]
+            },
+            {
+                slow: 2,
+                fast: 4,
+                title: "Second Advance Step",
+                desc: "Slow pointer advances 1 step to node 3 (val 3). Fast pointer advances 2 steps to node 5 (val 5).",
+                highlights: [2, 4]
+            },
+            {
+                slow: 3,
+                fast: 2,
+                title: "Fast Pointer Wraps Cycle",
+                desc: "Slow pointer advances 1 step to node 4 (val 4). Fast pointer advances 2 steps: from node 5 to node 6 (val 6), and then wraps around the cycle back to node 3 (val 3).",
+                highlights: [3, 2]
+            },
+            {
+                slow: 4,
+                fast: 4,
+                title: "Pointers Meet - Cycle Detected!",
+                desc: "Slow pointer advances 1 step to node 5 (val 5). Fast pointer advances 2 steps: from node 3 to node 5 (val 5). Both pointers meet at node 5! This proves a cycle exists.",
+                highlights: [4],
+                matched: true
+            }
+        ]
+    },
+    'tree-dfs': {
+        name: "Tree DFS Simulator",
+        tree: {
+            id: 'A', val: 'A',
+            left: {
+                id: 'B', val: 'B',
+                left: { id: 'D', val: 'D' },
+                right: { id: 'E', val: 'E' }
+            },
+            right: {
+                id: 'C', val: 'C',
+                left: { id: 'F', val: 'F' }
+            }
+        },
+        steps: [
+            {
+                currentNode: 'A',
+                stack: ['C', 'B'],
+                visited: ['A'],
+                title: "Start DFS at Root",
+                desc: "Visit root node A. Push its children C (right) and B (left) onto the stack so that B is processed first."
+            },
+            {
+                currentNode: 'B',
+                stack: ['C', 'E', 'D'],
+                visited: ['A', 'B'],
+                title: "Process Node B",
+                desc: "Pop B from the stack and visit it. Push its children E and D onto the stack."
+            },
+            {
+                currentNode: 'D',
+                stack: ['C', 'E'],
+                visited: ['A', 'B', 'D'],
+                title: "Visit Leaf Node D",
+                desc: "Pop leaf node D from stack and visit it. Since D has no children, the stack remains unchanged."
+            },
+            {
+                currentNode: 'E',
+                stack: ['C'],
+                visited: ['A', 'B', 'D', 'E'],
+                title: "Visit Leaf Node E",
+                desc: "Pop leaf node E from stack and visit it. This completes the left subtree traversal."
+            },
+            {
+                currentNode: 'C',
+                stack: ['F'],
+                visited: ['A', 'B', 'D', 'E', 'C'],
+                title: "Process Node C",
+                desc: "Pop node C from stack and visit it. Push its child node F onto the stack."
+            },
+            {
+                currentNode: 'F',
+                stack: [],
+                visited: ['A', 'B', 'D', 'E', 'C', 'F'],
+                title: "Visit Leaf Node F - Done",
+                desc: "Pop leaf node F and visit it. The stack is now empty, indicating the traversal of all reachable nodes is complete."
+            }
+        ]
+    },
+    'tree-bfs': {
+        name: "Tree BFS Simulator",
+        tree: {
+            id: 'A', val: 'A',
+            left: {
+                id: 'B', val: 'B',
+                left: { id: 'D', val: 'D' },
+                right: { id: 'E', val: 'E' }
+            },
+            right: {
+                id: 'C', val: 'C',
+                left: { id: 'F', val: 'F' }
+            }
+        },
+        steps: [
+            {
+                currentNode: 'A',
+                queue: ['B', 'C'],
+                visited: ['A'],
+                title: "Start BFS at Root",
+                desc: "Enqueue root node A. Dequeue A, visit it, and enqueue its left child B and right child C."
+            },
+            {
+                currentNode: 'B',
+                queue: ['C', 'D', 'E'],
+                visited: ['A', 'B'],
+                title: "Process Node B",
+                desc: "Dequeue node B and visit it. Enqueue B's children D and E. The queue now contains [C, D, E]."
+            },
+            {
+                currentNode: 'C',
+                queue: ['D', 'E', 'F'],
+                visited: ['A', 'B', 'C'],
+                title: "Process Node C",
+                desc: "Dequeue node C and visit it. Enqueue C's child F. The queue now contains [D, E, F]."
+            },
+            {
+                currentNode: 'D',
+                queue: ['E', 'F'],
+                visited: ['A', 'B', 'C', 'D'],
+                title: "Process Node D",
+                desc: "Dequeue leaf node D and visit it. D has no children to enqueue."
+            },
+            {
+                currentNode: 'E',
+                queue: ['F'],
+                visited: ['A', 'B', 'C', 'D', 'E'],
+                title: "Process Node E",
+                desc: "Dequeue leaf node E and visit it. E has no children."
+            },
+            {
+                currentNode: 'F',
+                queue: [],
+                visited: ['A', 'B', 'C', 'D', 'E', 'F'],
+                title: "Process Node F - Done",
+                desc: "Dequeue final leaf node F and visit it. The queue is empty. BFS traversal is complete."
+            }
+        ]
+    },
+    'graph-dfs': {
+        name: "Graph DFS Simulator",
+        graph: {
+            nodes: ['A', 'B', 'C', 'D'],
+            edges: [
+                { u: 'A', v: 'B' },
+                { u: 'A', v: 'C' },
+                { u: 'B', v: 'D' },
+                { u: 'C', v: 'D' }
+            ]
+        },
+        steps: [
+            {
+                currentNode: 'A',
+                stack: ['A'],
+                visited: ['A'],
+                title: "Push Root Node A",
+                desc: "Start Graph DFS from node A. Push A onto the traversal stack and mark it as visited."
+            },
+            {
+                currentNode: 'B',
+                stack: ['A', 'B'],
+                visited: ['A', 'B'],
+                title: "Explore Neighbor B",
+                desc: "From active node A, discover its unvisited neighbor B. Push B onto the stack and mark it as visited."
+            },
+            {
+                currentNode: 'D',
+                stack: ['A', 'B', 'D'],
+                visited: ['A', 'B', 'D'],
+                title: "Explore Neighbor D",
+                desc: "From active node B, discover its unvisited neighbor D. Push D onto the stack and mark it as visited."
+            },
+            {
+                currentNode: 'C',
+                stack: ['A', 'B', 'D', 'C'],
+                visited: ['A', 'B', 'D', 'C'],
+                title: "Explore Neighbor C",
+                desc: "From active node D, discover its unvisited neighbor C. Push C onto the stack and mark it as visited."
+            },
+            {
+                currentNode: 'C',
+                stack: ['A', 'B', 'D'],
+                visited: ['A', 'B', 'D', 'C'],
+                title: "Backtrack from C",
+                desc: "Node C has no unvisited neighbors (A and D are already visited). Pop C from stack and backtrack to D."
+            },
+            {
+                currentNode: 'D',
+                stack: ['A', 'B'],
+                visited: ['A', 'B', 'D', 'C'],
+                title: "Backtrack from D",
+                desc: "Node D has no other unvisited neighbors. Pop D from stack and backtrack to B."
+            },
+            {
+                currentNode: 'B',
+                stack: ['A'],
+                visited: ['A', 'B', 'D', 'C'],
+                title: "Backtrack from B - Done",
+                desc: "Pop B from stack. Backtrack to A. All reachable nodes visited."
+            }
+        ]
+    },
+    'graph-bfs': {
+        name: "Graph BFS Simulator",
+        graph: {
+            nodes: ['A', 'B', 'C', 'D'],
+            edges: [
+                { u: 'A', v: 'B' },
+                { u: 'A', v: 'C' },
+                { u: 'B', v: 'D' },
+                { u: 'C', v: 'D' }
+            ]
+        },
+        steps: [
+            {
+                currentNode: 'A',
+                queue: ['A'],
+                visited: ['A'],
+                title: "Initialize Queue with A",
+                desc: "Start Graph BFS from node A. Enqueue A and mark it as visited."
+            },
+            {
+                currentNode: 'A',
+                queue: ['B', 'C'],
+                visited: ['A', 'B', 'C'],
+                title: "Dequeue A, Enqueue Neighbors",
+                desc: "Dequeue node A. Add its unvisited neighbors B and C to the queue, and mark them as visited."
+            },
+            {
+                currentNode: 'B',
+                queue: ['C', 'D'],
+                visited: ['A', 'B', 'C', 'D'],
+                title: "Dequeue B, Enqueue D",
+                desc: "Dequeue node B. Add its unvisited neighbor D to the queue and mark it as visited."
+            },
+            {
+                currentNode: 'C',
+                queue: ['D'],
+                visited: ['A', 'B', 'C', 'D'],
+                title: "Dequeue C",
+                desc: "Dequeue node C. Its neighbor D is already visited, so do nothing."
+            },
+            {
+                currentNode: 'D',
+                queue: [],
+                visited: ['A', 'B', 'C', 'D'],
+                title: "Dequeue D - Done",
+                desc: "Dequeue node D. The queue is empty. BFS completed successfully."
+            }
+        ]
+    },
+    'dijkstra': {
+        name: "Dijkstra's Simulator",
+        graph: {
+            nodes: ['A', 'B', 'C', 'D'],
+            edges: [
+                { u: 'A', v: 'B', w: 4 },
+                { u: 'A', v: 'C', w: 2 },
+                { u: 'B', v: 'D', w: 3 },
+                { u: 'C', v: 'D', w: 1 }
+            ]
+        },
+        steps: [
+            {
+                currentNode: 'A',
+                distances: { A: 0, B: '∞', C: '∞', D: '∞' },
+                pq: [{ node: 'A', dist: 0 }],
+                title: "Initialize Dijkstra's",
+                desc: "Set distance to start node A as 0, and all other nodes as infinity. Add A (0) to Priority Queue."
+            },
+            {
+                currentNode: 'A',
+                distances: { A: 0, B: 4, C: 2, D: '∞' },
+                pq: [{ node: 'C', dist: 2 }, { node: 'B', dist: 4 }],
+                title: "Relax Neighbors of A",
+                desc: "Pop node A. Update neighbors: dist(B) = min(inf, 0 + 4) = 4, and dist(C) = min(inf, 0 + 2) = 2. Push B(4) and C(2) to PQ."
+            },
+            {
+                currentNode: 'C',
+                distances: { A: 0, B: 4, C: 2, D: 3 },
+                pq: [{ node: 'D', dist: 3 }, { node: 'B', dist: 4 }],
+                title: "Relax Neighbors of C",
+                desc: "Pop C (min distance 2). Update neighbor D: dist(D) = min(inf, 2 + 1) = 3. Add D(3) to PQ."
+            },
+            {
+                currentNode: 'D',
+                distances: { A: 0, B: 4, C: 2, D: 3 },
+                pq: [{ node: 'B', dist: 4 }],
+                title: "Pop Node D",
+                desc: "Pop node D (distance 3). Check neighbors: neighbor B distance through D is 3 + 3 = 6, which is larger than current B distance (4). No update."
+            },
+            {
+                currentNode: 'B',
+                distances: { A: 0, B: 4, C: 2, D: 3 },
+                pq: [],
+                title: "Pop Node B - Done",
+                desc: "Pop node B (distance 4). PQ is empty. Shortest paths found: A:0, B:4, C:2, D:3."
+            }
+        ]
+    },
+    'heap': {
+        name: "Min-Heap Simulator",
+        heapArray: [12, 11, 13, 5, 6, 7],
+        steps: [
+            {
+                array: [12, 11, 13, 5, 6, 7],
+                activeIndices: [],
+                title: "Initial Array Representation",
+                desc: "Represent the array [12, 11, 13, 5, 6, 7] as a binary tree. We will heapify it bottom-up to form a valid Min-Heap."
+            },
+            {
+                array: [12, 5, 13, 11, 6, 7],
+                activeIndices: [1, 3],
+                title: "Heapify Subtree at Index 1",
+                desc: "Compare node 11 at index 1 with its child 5 at index 3. Swap them since 5 < 11."
+            },
+            {
+                array: [5, 12, 13, 11, 6, 7],
+                activeIndices: [0, 1],
+                title: "Heapify Subtree at Root (Index 0)",
+                desc: "Compare root node 12 with its children 5 (index 1) and 13 (index 2). The minimum is 5. Swap them."
+            },
+            {
+                array: [5, 6, 13, 11, 12, 7],
+                activeIndices: [1, 4],
+                title: "Sift Down Root Successor",
+                desc: "Node 12 has sifted to index 1. Compare it with its children 11 and 6. The minimum is 6. Swap them. Min-Heap complete!"
+            }
+        ]
+    },
+    'union-find': {
+        name: "Union-Find (DSU) Simulator",
+        elements: [0, 1, 2, 3, 4],
+        steps: [
+            {
+                parent: [0, 1, 2, 3, 4],
+                title: "Initialize Disjoint Sets",
+                desc: "Create 5 singleton sets. Each element points to itself as its parent: parent = [0, 1, 2, 3, 4].",
+                active: []
+            },
+            {
+                parent: [0, 0, 2, 3, 4],
+                title: "Perform Union(0, 1)",
+                desc: "Find root of 0 (0) and root of 1 (1). Set parent of 1 to 0. Parents: [0, 0, 2, 3, 4].",
+                active: [0, 1]
+            },
+            {
+                parent: [0, 0, 2, 2, 4],
+                title: "Perform Union(2, 3)",
+                desc: "Find root of 2 (2) and root of 3 (3). Link 3 under 2. Parents: [0, 0, 2, 2, 4].",
+                active: [2, 3]
+            },
+            {
+                parent: [0, 0, 0, 2, 4],
+                title: "Perform Union(1, 3)",
+                desc: "Find root of 1 (0) and root of 3 (2). Set parent of 2 to 0. Parents: [0, 0, 0, 2, 4].",
+                active: [1, 3]
+            },
+            {
+                parent: [0, 0, 0, 0, 4],
+                title: "Find(3) with Path Compression",
+                desc: "Find root of 3: traverse 3 -> 2 -> 0. After finding root 0, compress the path by setting parent[3] = 0 directly. Parents: [0, 0, 0, 0, 4].",
+                active: [3]
+            }
+        ]
+    },
+    'trie': {
+        name: "Trie (Prefix Tree) Simulator",
+        steps: [
+            {
+                nodes: { val: 'root', children: {} },
+                title: "Empty Trie",
+                desc: "Initialize a root node with an empty map of children."
+            },
+            {
+                nodes: { val: 'root', children: { 'c': { val: 'c', children: {} } } },
+                title: "Insert 'c' for 'cat'",
+                desc: "Read character 'c' of word 'cat'. Root does not have child 'c', so we create a new 'c' node."
+            },
+            {
+                nodes: { val: 'root', children: { 'c': { val: 'c', children: { 'a': { val: 'a', children: {} } } } } },
+                title: "Insert 'a' for 'cat'",
+                desc: "Read next character 'a'. Node 'c' does not have child 'a', so we create a new 'a' node."
+            },
+            {
+                nodes: { val: 'root', children: { 'c': { val: 'c', children: { 'a': { val: 'a', children: { 't': { val: 't', isWord: true, children: {} } } } } } } },
+                title: "Insert 't' for 'cat'",
+                desc: "Read final character 't'. Create a new node 't' under 'a' and mark it as isWord = true. Insertion of 'cat' is complete."
+            },
+            {
+                nodes: { val: 'root', children: { 'c': { val: 'c', children: { 'a': { val: 'a', children: { 't': { val: 't', isWord: true, children: {} }, 'r': { val: 'r', isWord: true, children: {} } } } } } } },
+                title: "Insert 'car'",
+                desc: "Insert word 'car'. Traverse 'c' -> 'a' (reused from 'cat'). For character 'r', since it doesn't exist under 'a', create a new 'r' node and mark it isWord = true."
+            }
+        ]
+    },
+    'dp-visualizer': {
+        name: "DP Grid Simulator",
+        grid: [
+            ['', 'A', 'B'],
+            ['A', 0, 0],
+            ['B', 0, 0]
+        ],
+        steps: [
+            {
+                cell: null,
+                gridState: [
+                    [0, 0, 0],
+                    [0, 0, 0],
+                    [0, 0, 0]
+                ],
+                title: "Initialize DP Table",
+                desc: "Finding LCS for s1 = 'AB' and s2 = 'AB'. We set up a 3x3 grid (representing length 0, 1, 2 for each string). Fill the base row and column with 0."
+            },
+            {
+                cell: [1, 1],
+                gridState: [
+                    [0, 0, 0],
+                    [0, 1, 0],
+                    [0, 0, 0]
+                ],
+                title: "Process dp[1][1]",
+                desc: "Compare s1[0] ('A') with s2[0] ('A'). Since they match, dp[1][1] = dp[0][0] + 1 = 0 + 1 = 1."
+            },
+            {
+                cell: [1, 2],
+                gridState: [
+                    [0, 0, 0],
+                    [0, 1, 1],
+                    [0, 0, 0]
+                ],
+                title: "Process dp[1][2]",
+                desc: "Compare s1[0] ('A') with s2[1] ('B'). Mismatch, so dp[1][2] = max(dp[0][2], dp[1][1]) = max(0, 1) = 1."
+            },
+            {
+                cell: [2, 1],
+                gridState: [
+                    [0, 0, 0],
+                    [0, 1, 1],
+                    [0, 1, 0]
+                ],
+                title: "Process dp[2][1]",
+                desc: "Compare s1[1] ('B') with s2[0] ('A'). Mismatch, so dp[2][1] = max(dp[1][1], dp[2][0]) = max(1, 0) = 1."
+            },
+            {
+                cell: [2, 2],
+                gridState: [
+                    [0, 0, 0],
+                    [0, 1, 1],
+                    [0, 1, 2]
+                ],
+                title: "Process dp[2][2]",
+                desc: "Compare s1[1] ('B') with s2[1] ('B'). Match, so dp[2][2] = dp[1][1] + 1 = 1 + 1 = 2. LCS length is 2."
+            }
+        ]
+    },
+    'backtracking': {
+        name: "Backtracking Search Space Simulator",
+        steps: [
+            {
+                state: '[]',
+                choices: [1, 2],
+                visited: [],
+                title: "Root State",
+                desc: "Find permutations of [1, 2]. Start with an empty decision state. Choices available: 1 and 2."
+            },
+            {
+                state: '[1]',
+                choices: [2],
+                visited: [],
+                title: "Choose 1",
+                desc: "Choose number 1. Add it to the path. Choices left: 2. Recurse deeper."
+            },
+            {
+                state: '[1, 2]',
+                choices: [],
+                visited: [],
+                title: "Choose 2 - Permutation Found!",
+                desc: "Choose number 2. No choices left. A leaf node in our decision tree has been reached. Save the permutation [1, 2]."
+            },
+            {
+                state: '[1]',
+                choices: [],
+                visited: [2],
+                title: "Backtrack to [1]",
+                desc: "Backtrack: remove 2 from the path. Since there are no more choices at [1], pop 1 to backtrack to root."
+            },
+            {
+                state: '[]',
+                choices: [2],
+                visited: [1],
+                title: "Backtrack to Root",
+                desc: "Backtrack to root. Now explore the next option: choice 2."
+            },
+            {
+                state: '[2]',
+                choices: [1],
+                visited: [],
+                title: "Choose 2",
+                desc: "Choose number 2. Path becomes [2]. Choices left: 1."
+            },
+            {
+                state: '[2, 1]',
+                choices: [],
+                visited: [],
+                title: "Choose 1 - Permutation Found!",
+                desc: "Choose number 1. Leaf reached. Save the permutation [2, 1]. Done."
+            }
+        ]
+    },
+    'lru-cache': {
+        name: "LRU Cache Simulator",
+        capacity: 3,
+        steps: [
+            {
+                operation: "Put(1, 10)",
+                cache: { 1: 10 },
+                order: [1],
+                evicted: null,
+                title: "Insert Key 1",
+                desc: "Cache has space. Insert key-value pair (1: 10). Key 1 is marked as Most Recently Used (MRU)."
+            },
+            {
+                operation: "Put(2, 20)",
+                cache: { 1: 10, 2: 20 },
+                order: [2, 1],
+                evicted: null,
+                title: "Insert Key 2",
+                desc: "Insert (2: 20). 2 becomes the MRU key at the head. Order: 2 (MRU) -> 1 (LRU)."
+            },
+            {
+                operation: "Put(3, 30)",
+                cache: { 1: 10, 2: 20, 3: 30 },
+                order: [3, 2, 1],
+                evicted: null,
+                title: "Insert Key 3",
+                desc: "Insert (3: 30). Cache is now at capacity. Order: 3 (MRU) -> 2 -> 1 (LRU)."
+            },
+            {
+                operation: "Get(1)",
+                cache: { 1: 10, 2: 20, 3: 30 },
+                order: [1, 3, 2],
+                evicted: null,
+                title: "Cache Hit: Get(1)",
+                desc: "Retrieve key 1. Cache hit! Move key 1 from tail to head as it is now the Most Recently Used. Order: 1 (MRU) -> 3 -> 2 (LRU)."
+            },
+            {
+                operation: "Put(4, 40)",
+                cache: { 1: 10, 3: 30, 4: 40 },
+                order: [4, 1, 3],
+                evicted: 2,
+                title: "Cache Eviction: Put(4, 40)",
+                desc: "Cache is full. Key 2 is the Least Recently Used (LRU). Evict key 2 from the cache, and insert key 4 at the head. Order: 4 (MRU) -> 1 -> 3 (LRU)."
             }
         ]
     }
@@ -1567,58 +2184,337 @@ function renderSimulatorView(container) {
     const step = data.steps[state.simStep];
     if (!step) return;
 
-    // Render Array Nodes
+    // Render Nodes based on Simulator Type
     let nodesHtml = '';
-    data.array.forEach((val, idx) => {
-        const isHighlighted = step.highlights && step.highlights.includes(idx);
-        let highlightClass = '';
-        if (isHighlighted) {
-            highlightClass = step.matched ? 'matched' : 'highlighted';
-        }
+    if (state.simType === 'two-pointer' || state.simType === 'sliding-window' || state.simType === 'binary-search') {
+        data.array.forEach((val, idx) => {
+            const isHighlighted = step.highlights && step.highlights.includes(idx);
+            let highlightClass = '';
+            if (isHighlighted) {
+                highlightClass = step.matched ? 'matched' : 'highlighted';
+            }
 
-        // Compile overlapping pointer labels
-        let pointerHtml = '';
-        if (state.simType === 'two-pointer') {
-            if (idx === step.left && idx === step.right) {
-                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-cyan);"><i class="fas fa-arrow-up"></i>L & R</div>`;
-            } else if (idx === step.left) {
-                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-cyan);"><i class="fas fa-arrow-up"></i>Left</div>`;
-            } else if (idx === step.right) {
-                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-purple);"><i class="fas fa-arrow-up"></i>Right</div>`;
+            // Compile overlapping pointer labels
+            let pointerHtml = '';
+            if (state.simType === 'two-pointer') {
+                if (idx === step.left && idx === step.right) {
+                    pointerHtml = `<div class="sim-pointer" style="color:var(--accent-cyan);"><i class="fas fa-arrow-up"></i>L & R</div>`;
+                } else if (idx === step.left) {
+                    pointerHtml = `<div class="sim-pointer" style="color:var(--accent-cyan);"><i class="fas fa-arrow-up"></i>Left</div>`;
+                } else if (idx === step.right) {
+                    pointerHtml = `<div class="sim-pointer" style="color:var(--accent-purple);"><i class="fas fa-arrow-up"></i>Right</div>`;
+                }
+            } else if (state.simType === 'sliding-window') {
+                if (idx === step.start && idx === step.end) {
+                    pointerHtml = `<div class="sim-pointer" style="color:var(--accent-cyan);"><i class="fas fa-arrow-up"></i>S & E</div>`;
+                } else if (idx === step.start) {
+                    pointerHtml = `<div class="sim-pointer" style="color:var(--accent-cyan);"><i class="fas fa-arrow-up"></i>Start</div>`;
+                } else if (idx === step.end) {
+                    pointerHtml = `<div class="sim-pointer" style="color:var(--accent-purple);"><i class="fas fa-arrow-up"></i>End</div>`;
+                }
+            } else if (state.simType === 'binary-search') {
+                if (idx === step.low && idx === step.high && idx === step.mid) {
+                    pointerHtml = `<div class="sim-pointer" style="color:#ffffff;"><i class="fas fa-arrow-up"></i>All</div>`;
+                } else if (idx === step.low && idx === step.mid) {
+                    pointerHtml = `<div class="sim-pointer" style="color:var(--accent-cyan);"><i class="fas fa-arrow-up"></i>L & M</div>`;
+                } else if (idx === step.high && idx === step.mid) {
+                    pointerHtml = `<div class="sim-pointer" style="color:var(--accent-purple);"><i class="fas fa-arrow-up"></i>M & H</div>`;
+                } else if (idx === step.low && idx === step.high) {
+                    pointerHtml = `<div class="sim-pointer" style="color:var(--accent-cyan);"><i class="fas fa-arrow-up"></i>L & H</div>`;
+                } else if (idx === step.mid) {
+                    pointerHtml = `<div class="sim-pointer" style="color:var(--accent-amber);"><i class="fas fa-arrow-up"></i>Mid</div>`;
+                } else if (idx === step.low) {
+                    pointerHtml = `<div class="sim-pointer" style="color:var(--accent-cyan);"><i class="fas fa-arrow-up"></i>Low</div>`;
+                } else if (idx === step.high) {
+                    pointerHtml = `<div class="sim-pointer" style="color:var(--accent-purple);"><i class="fas fa-arrow-up"></i>High</div>`;
+                }
             }
-        } else if (state.simType === 'sliding-window') {
-            if (idx === step.start && idx === step.end) {
-                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-cyan);"><i class="fas fa-arrow-up"></i>S & E</div>`;
-            } else if (idx === step.start) {
-                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-cyan);"><i class="fas fa-arrow-up"></i>Start</div>`;
-            } else if (idx === step.end) {
-                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-purple);"><i class="fas fa-arrow-up"></i>End</div>`;
-            }
-        } else if (state.simType === 'binary-search') {
-            if (idx === step.low && idx === step.high && idx === step.mid) {
-                pointerHtml = `<div class="sim-pointer" style="color:#ffffff;"><i class="fas fa-arrow-up"></i>All</div>`;
-            } else if (idx === step.low && idx === step.mid) {
-                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-cyan);"><i class="fas fa-arrow-up"></i>L & M</div>`;
-            } else if (idx === step.high && idx === step.mid) {
-                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-purple);"><i class="fas fa-arrow-up"></i>M & H</div>`;
-            } else if (idx === step.low && idx === step.high) {
-                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-cyan);"><i class="fas fa-arrow-up"></i>L & H</div>`;
-            } else if (idx === step.mid) {
-                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-amber);"><i class="fas fa-arrow-up"></i>Mid</div>`;
-            } else if (idx === step.low) {
-                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-cyan);"><i class="fas fa-arrow-up"></i>Low</div>`;
-            } else if (idx === step.high) {
-                pointerHtml = `<div class="sim-pointer" style="color:var(--accent-purple);"><i class="fas fa-arrow-up"></i>High</div>`;
-            }
-        }
 
-        nodesHtml += `
-            <div class="sim-array-node ${highlightClass}">
-                ${val}
-                ${pointerHtml}
+            nodesHtml += `
+                <div class="sim-array-node ${highlightClass}">
+                    ${val}
+                    ${pointerHtml}
+                </div>
+            `;
+        });
+        nodesHtml = `<div class="sim-array-container">${nodesHtml}</div>`;
+    } else if (state.simType === 'merge-intervals') {
+        nodesHtml = '<div class="sim-intervals-container">';
+        data.intervals.forEach((interval, idx) => {
+            const isHighlighted = step.highlights && step.highlights.includes(idx);
+            let barClass = 'sim-interval-bar';
+            if (isHighlighted) {
+                barClass += (idx === step.index) ? ' active' : ' merged';
+            }
+            const start = interval[0];
+            const end = interval[1];
+            nodesHtml += `
+                <div class="sim-interval-row">
+                    <span class="sim-interval-label">Interval ${idx + 1}</span>
+                    <div class="sim-interval-bar-container">
+                        <div class="${barClass}" style="left: ${start * 5}%; width: ${(end - start) * 5}%;">
+                            [${start}, ${end}]
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        nodesHtml += '</div>';
+    } else if (state.simType === 'fast-slow-pointer') {
+        nodesHtml = '<div class="sim-list-container">';
+        data.nodes.forEach((val, idx) => {
+            let nodeClass = 'sim-list-node';
+            if (idx === step.slow && idx === step.fast) {
+                nodeClass += ' highlighted-both';
+            } else if (idx === step.slow) {
+                nodeClass += ' highlighted-slow';
+            } else if (idx === step.fast) {
+                nodeClass += ' highlighted-fast';
+            }
+
+            let label = '';
+            if (idx === step.slow && idx === step.fast) {
+                label = '<div class="sim-pointer" style="color:var(--accent-amber);"><i class="fas fa-arrow-up"></i>S&F</div>';
+            } else if (idx === step.slow) {
+                label = '<div class="sim-pointer" style="color:var(--accent-emerald);"><i class="fas fa-arrow-up"></i>Slow</div>';
+            } else if (idx === step.fast) {
+                label = '<div class="sim-pointer" style="color:var(--accent-purple);"><i class="fas fa-arrow-up"></i>Fast</div>';
+            }
+
+            nodesHtml += `
+                <div class="${nodeClass}">
+                    ${val}
+                    ${label}
+                </div>
+            `;
+            if (idx < data.nodes.length - 1) {
+                nodesHtml += '<div class="sim-list-arrow"><i class="fas fa-long-arrow-alt-right"></i></div>';
+            } else {
+                nodesHtml += `
+                    <div class="sim-list-arrow" style="color:var(--accent-purple); font-size:12px; font-weight:800; margin-left:8px;">
+                        <i class="fas fa-undo"></i> points to ${data.cycleConnection.to + 1}
+                    </div>
+                `;
+            }
+        });
+        nodesHtml += '</div>';
+    } else if (state.simType === 'tree-dfs' || state.simType === 'tree-bfs') {
+        const isVisited = (nodeId) => step.visited && step.visited.includes(nodeId);
+        const isActive = (nodeId) => step.currentNode === nodeId;
+
+        const getNodeClass = (nodeId) => {
+            if (isActive(nodeId)) return 'sim-tree-node active';
+            if (isVisited(nodeId)) return 'sim-tree-node visited';
+            return 'sim-tree-node';
+        };
+
+        nodesHtml = `
+            <div class="sim-tree-container">
+                <div class="sim-tree-level">
+                    <div class="${getNodeClass('A')}">A</div>
+                </div>
+                <div class="sim-tree-level" style="gap:120px; margin-top:8px;">
+                    <div class="${getNodeClass('B')}">B</div>
+                    <div class="${getNodeClass('C')}">C</div>
+                </div>
+                <div class="sim-tree-level" style="gap:60px; margin-top:8px;">
+                    <div class="${getNodeClass('D')}">D</div>
+                    <div class="${getNodeClass('E')}">E</div>
+                    <div class="${getNodeClass('F')}">F</div>
+                </div>
             </div>
         `;
-    });
+    } else if (state.simType === 'graph-dfs' || state.simType === 'graph-bfs' || state.simType === 'dijkstra') {
+        const activeNode = step.currentNode;
+        const visitedNodes = step.visited || (step.distances ? Object.keys(step.distances).filter(k => step.distances[k] !== '∞') : []);
+
+        const getGraphNodeClass = (nodeId) => {
+            if (activeNode === nodeId) return 'sim-graph-node active';
+            if (visitedNodes.includes(nodeId)) return 'sim-graph-node visited';
+            return 'sim-graph-node';
+        };
+
+        let graphCanvasHtml = `
+            <div class="sim-graph-canvas" style="width:100%; height:180px; position:relative;">
+                <div class="${getGraphNodeClass('A')}" style="left:10%; top:35%;">A</div>
+                <div class="${getGraphNodeClass('B')}" style="left:40%; top:10%;">B</div>
+                <div class="${getGraphNodeClass('C')}" style="left:40%; top:60%;">C</div>
+                <div class="${getGraphNodeClass('D')}" style="left:70%; top:35%;">D</div>
+                
+                ${state.simType === 'dijkstra' ? `
+                    <div style="position:absolute; left:22%; top:20%; font-size:10px; color:var(--text-muted);">w: 4</div>
+                    <div style="position:absolute; left:22%; top:55%; font-size:10px; color:var(--text-muted);">w: 2</div>
+                    <div style="position:absolute; left:58%; top:20%; font-size:10px; color:var(--text-muted);">w: 3</div>
+                    <div style="position:absolute; left:58%; top:55%; font-size:10px; color:var(--text-muted);">w: 1</div>
+                ` : ''}
+            </div>
+        `;
+
+        let infoTitle = '';
+        let infoContent = '';
+        if (state.simType === 'graph-dfs') {
+            infoTitle = 'DFS Traversal Stack';
+            infoContent = `Stack: [ ${step.stack.join(' -> ')} ]`;
+        } else if (state.simType === 'graph-bfs') {
+            infoTitle = 'BFS Traversal Queue';
+            infoContent = `Queue: [ ${step.queue.join(' <- ')} ]`;
+        } else if (state.simType === 'dijkstra') {
+            infoTitle = "Dijkstra's Path Costs";
+            infoContent = Object.keys(step.distances).map(k => `<div>Node ${k}: <strong>${step.distances[k]}</strong></div>`).join('');
+        }
+
+        nodesHtml = `
+            <div class="sim-graph-container">
+                ${graphCanvasHtml}
+                <div class="sim-graph-info">
+                    <span class="wiki-section-lbl" style="font-size:10px; margin-bottom:4px;">${infoTitle}</span>
+                    <div style="color:#ffffff; font-weight:700; margin-top:4px;">${infoContent}</div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-top:8px;">Visited: [ ${visitedNodes.join(', ')} ]</div>
+                </div>
+            </div>
+        `;
+    } else if (state.simType === 'heap') {
+        nodesHtml = '<div class="sim-array-container">';
+        step.array.forEach((val, idx) => {
+            const isActive = step.activeIndices && step.activeIndices.includes(idx);
+            let nodeClass = 'sim-array-node';
+            if (isActive) {
+                nodeClass += ' highlighted';
+            }
+            nodesHtml += `
+                <div class="${nodeClass}">
+                    ${val}
+                    <div style="font-size:9px; position:absolute; bottom:2px; color:var(--text-dark);">i:${idx}</div>
+                </div>
+            `;
+        });
+        nodesHtml += '</div>';
+    } else if (state.simType === 'union-find') {
+        nodesHtml = '<div class="sim-array-container" style="flex-wrap:wrap; justify-content:center;">';
+        step.parent.forEach((p, idx) => {
+            const isActive = step.active && step.active.includes(idx);
+            let nodeClass = 'sim-array-node';
+            if (isActive) nodeClass += ' highlighted';
+            nodesHtml += `
+                <div class="${nodeClass}" style="flex-direction:column; gap:2px; height:60px; width:65px;">
+                    <span style="font-size:16px;">${idx}</span>
+                    <span style="font-size:10px; color:var(--accent-cyan);">P: ${p}</span>
+                </div>
+            `;
+        });
+        nodesHtml += '</div>';
+    } else if (state.simType === 'trie') {
+        nodesHtml = `
+            <div class="sim-tree-container">
+                <div class="sim-tree-level">
+                    <div class="sim-tree-node active" style="border-radius:8px; width:auto; padding:4px 12px;">Root</div>
+                </div>
+                ${step.title.includes("Insert 'c'") || step.title.includes("Insert 'a'") || step.title.includes("Insert 't'") || step.title.includes("Insert 'car'") ? `
+                    <div class="sim-tree-level" style="margin-top:12px;">
+                        <div class="sim-tree-node visited">c</div>
+                    </div>
+                ` : ''}
+                ${step.title.includes("Insert 'a'") || step.title.includes("Insert 't'") || step.title.includes("Insert 'car'") ? `
+                    <div class="sim-tree-level" style="margin-top:12px;">
+                        <div class="sim-tree-node visited">a</div>
+                    </div>
+                ` : ''}
+                ${step.title.includes("Insert 't'") || step.title.includes("Insert 'car'") ? `
+                    <div class="sim-tree-level" style="margin-top:12px; gap:24px;">
+                        <div class="sim-tree-node visited" style="border-color:var(--accent-emerald);">t <span style="font-size:8px; display:block; color:var(--accent-emerald);">[word]</span></div>
+                        ${step.title.includes("Insert 'car'") ? `<div class="sim-tree-node active" style="border-color:var(--accent-emerald);">r <span style="font-size:8px; display:block; color:var(--accent-emerald);">[word]</span></div>` : ''}
+                    </div>
+                ` : ''}
+            </div>
+        `;
+    } else if (state.simType === 'dp-visualizer') {
+        let tableRows = '';
+        tableRows += `
+            <tr>
+                <th></th>
+                <th>''</th>
+                <th>A</th>
+                <th>B</th>
+            </tr>
+        `;
+        const rowChars = ['', 'A', 'B'];
+        for (let i = 0; i < 3; i++) {
+            let rowHtml = `<tr><th>${rowChars[i] || "''"}</th>`;
+            for (let j = 0; j < 3; j++) {
+                const isActive = step.cell && step.cell[0] === i && step.cell[1] === j;
+                const cellClass = isActive ? 'class="active"' : '';
+                const cellVal = step.gridState[i][j];
+                rowHtml += `<td ${cellClass}>${cellVal}</td>`;
+            }
+            rowHtml += '</tr>';
+            tableRows += rowHtml;
+        }
+
+        nodesHtml = `
+            <table class="sim-dp-table">
+                ${tableRows}
+            </table>
+        `;
+    } else if (state.simType === 'backtracking') {
+        nodesHtml = `
+            <div style="display:flex; flex-direction:column; gap:16px; align-items:center; width:100%;">
+                <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-color); padding:16px 24px; border-radius:12px; text-align:center;">
+                    <span class="wiki-section-lbl" style="font-size:10px;">Path (State)</span>
+                    <div style="font-size:24px; font-weight:800; color:var(--accent-cyan); margin-top:4px;">${step.state}</div>
+                </div>
+                <div style="display:flex; gap:24px; justify-content:center;">
+                    <div>
+                        <span class="wiki-section-lbl" style="font-size:10px;">Available Choices</span>
+                        <div style="font-size:16px; font-weight:700; color:#ffffff; margin-top:4px;">[ ${step.choices.join(', ')} ]</div>
+                    </div>
+                    <div style="border-left:1px solid var(--border-color); padding-left:24px;">
+                        <span class="wiki-section-lbl" style="font-size:10px;">Backtracked/Visited</span>
+                        <div style="font-size:16px; font-weight:700; color:var(--text-dark); margin-top:4px;">[ ${step.visited.join(', ')} ]</div>
+                    </div>
+                </div>
+            </div>
+        `;
+    } else if (state.simType === 'lru-cache') {
+        let slotsHtml = '';
+        const order = step.order;
+        for (let idx = 0; idx < data.capacity; idx++) {
+            const key = order[idx];
+            const hasVal = key !== undefined;
+            const value = hasVal ? step.cache[key] : '-';
+            
+            let slotClass = 'sim-lru-slot';
+            let badgeHtml = '';
+            if (hasVal) {
+                if (idx === 0) {
+                    slotClass += ' mru';
+                    badgeHtml = '<span class="sim-lru-badge mru">MRU</span>';
+                } else if (idx === order.length - 1) {
+                    slotClass += ' lru';
+                    badgeHtml = '<span class="sim-lru-badge lru">LRU</span>';
+                }
+            }
+
+            slotsHtml += `
+                <div class="${slotClass}">
+                    ${badgeHtml}
+                    <span class="sim-lru-lbl">Slot ${idx + 1}</span>
+                    <span class="sim-lru-val">${hasVal ? `Key ${key}: ${value}` : 'Empty'}</span>
+                </div>
+            `;
+        }
+
+        nodesHtml = `
+            <div class="sim-lru-container">
+                <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:600; color:var(--text-muted); margin-bottom:8px;">
+                    <span>Operation: <strong style="color:var(--accent-cyan);">${step.operation}</strong></span>
+                    ${step.evicted ? `<span style="color:#ef4444;"><i class="fas fa-trash-alt"></i> Evicted Key: ${step.evicted}</span>` : ''}
+                </div>
+                <div class="sim-lru-slots">
+                    ${slotsHtml}
+                </div>
+            </div>
+        `;
+    }
 
     // Render variables
     let varsHtml = '';
@@ -1640,48 +2536,142 @@ function renderSimulatorView(container) {
             <div style="border-left:1px solid var(--border-color); padding-left:16px;">Mid Value: <span style="color:var(--accent-amber); font-weight:800;">${data.array[step.mid]}</span></div>
             <div style="border-left:1px solid var(--border-color); padding-left:16px;">Status: <span style="color:${step.matched ? 'var(--accent-emerald)' : 'var(--accent-cyan)'}; font-weight:800;">${step.matched ? 'TARGET FOUND!' : 'SEARCHING...'}</span></div>
         `;
+    } else if (state.simType === 'merge-intervals') {
+        varsHtml = `
+            <div>Current Interval: <span style="color:var(--accent-purple); font-weight:800;">[${step.activeInterval.join(', ')}]</span></div>
+            <div style="border-left:1px solid var(--border-color); padding-left:16px;">Total Merged: <span style="color:var(--accent-emerald); font-weight:800;">${step.merged.length}</span></div>
+        `;
+    } else if (state.simType === 'fast-slow-pointer') {
+        varsHtml = `
+            <div>Slow index: <span style="color:var(--accent-emerald); font-weight:800;">${step.slow}</span></div>
+            <div style="border-left:1px solid var(--border-color); padding-left:16px;">Fast index: <span style="color:var(--accent-purple); font-weight:800;">${step.fast}</span></div>
+            <div style="border-left:1px solid var(--border-color); padding-left:16px;">Status: <span style="color:${step.matched ? 'var(--accent-emerald)' : 'var(--accent-cyan)'}; font-weight:800;">${step.matched ? 'LOOP DETECTED!' : 'TRACING LOOP...'}</span></div>
+        `;
+    } else if (state.simType === 'tree-dfs' || state.simType === 'tree-bfs') {
+        const listName = state.simType === 'tree-dfs' ? 'Stack' : 'Queue';
+        const listVal = state.simType === 'tree-dfs' ? step.stack : step.queue;
+        varsHtml = `
+            <div>Active Node: <span style="color:var(--accent-cyan); font-weight:800;">${step.currentNode}</span></div>
+            <div style="border-left:1px solid var(--border-color); padding-left:16px;">Traversal ${listName}: <span style="color:#ffffff; font-weight:800;">[ ${listVal.join(', ')} ]</span></div>
+        `;
+    } else if (state.simType === 'graph-dfs' || state.simType === 'graph-bfs' || state.simType === 'dijkstra') {
+        varsHtml = `
+            <div>Active Vertex: <span style="color:var(--accent-cyan); font-weight:800;">${step.currentNode}</span></div>
+            <div style="border-left:1px solid var(--border-color); padding-left:16px;">Target Category: <span style="color:#ffffff; font-weight:800;">Graph Operations</span></div>
+        `;
+    } else if (state.simType === 'heap') {
+        varsHtml = `
+            <div>Size: <span style="color:var(--accent-cyan); font-weight:800;">${step.array.length}</span></div>
+            <div style="border-left:1px solid var(--border-color); padding-left:16px;">Heap Property: <span style="color:var(--accent-emerald); font-weight:800;">Min-Heapify</span></div>
+        `;
+    } else if (state.simType === 'union-find') {
+        varsHtml = `
+            <div>Sets Count: <span style="color:var(--accent-cyan); font-weight:800;">5</span></div>
+            <div style="border-left:1px solid var(--border-color); padding-left:16px;">DSU Operation: <span style="color:var(--accent-purple); font-weight:800;">Equivalence Grouping</span></div>
+        `;
+    } else if (state.simType === 'trie') {
+        varsHtml = `
+            <div>Structure: <span style="color:var(--accent-cyan); font-weight:800;">Prefix Trie</span></div>
+            <div style="border-left:1px solid var(--border-color); padding-left:16px;">Key Operations: <span style="color:var(--accent-emerald); font-weight:800;">Insertion / Search</span></div>
+        `;
+    } else if (state.simType === 'dp-visualizer') {
+        varsHtml = `
+            <div>Active Cell: <span style="color:var(--accent-cyan); font-weight:800;">${step.cell ? `dp[${step.cell.join(', ')}]` : 'None'}</span></div>
+            <div style="border-left:1px solid var(--border-color); padding-left:16px;">DP Space: <span style="color:var(--accent-purple); font-weight:800;">O(N * M) Grid</span></div>
+        `;
+    } else if (state.simType === 'backtracking') {
+        varsHtml = `
+            <div>Decisions Path: <span style="color:var(--accent-cyan); font-weight:800;">${step.state}</span></div>
+            <div style="border-left:1px solid var(--border-color); padding-left:16px;">State Space: <span style="color:var(--accent-emerald); font-weight:800;">Permutations</span></div>
+        `;
+    } else if (state.simType === 'lru-cache') {
+        varsHtml = `
+            <div>Capacity: <span style="color:var(--accent-cyan); font-weight:800;">${data.capacity}</span></div>
+            <div style="border-left:1px solid var(--border-color); padding-left:16px;">Current Size: <span style="color:#ffffff; font-weight:800;">${Object.keys(step.cache).length}</span></div>
+            <div style="border-left:1px solid var(--border-color); padding-left:16px;">Hit/Miss Status: <span style="color:${step.operation.includes('Get') ? 'var(--accent-emerald)' : 'var(--accent-cyan)'}; font-weight:800;">${step.operation}</span></div>
+        `;
     }
 
     container.innerHTML = `
-        <div class="simulator-container animated-fadeIn">
+        <div class="simulator-view-container animated-fadeIn">
             
             <div class="pattern-header">
                 <h1 class="pattern-title">Interactive Visual Simulator</h1>
                 <p class="pattern-description">Trace patterns step-by-step to understand boundary variables, expanding windows, and logarithmic divisions visually.</p>
             </div>
 
-            <!-- Controls Selector -->
-            <div class="simulator-controls">
-                <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                    <button class="sim-btn ${state.simType === 'two-pointer' ? 'primary' : ''}" onclick="selectSimType('two-pointer')">Two Pointer</button>
-                    <button class="sim-btn ${state.simType === 'sliding-window' ? 'primary' : ''}" onclick="selectSimType('sliding-window')">Sliding Window</button>
-                    <button class="sim-btn ${state.simType === 'binary-search' ? 'primary' : ''}" onclick="selectSimType('binary-search')">Binary Search</button>
-                </div>
+            <!-- Simulator Layout -->
+            <div class="sim-layout">
                 
-                <div class="sim-btn-group">
-                    <button class="sim-btn" onclick="prevSimStep()"><i class="fas fa-step-backward"></i> Prev</button>
-                    <button class="sim-btn" onclick="togglePlaySim()">
-                        <i class="fas ${state.simIsPlaying ? 'fa-pause' : 'fa-play'}"></i> ${state.simIsPlaying ? 'Pause' : 'Play'}
-                    </button>
-                    <button class="sim-btn" onclick="nextSimStep()"><i class="fas fa-step-forward"></i> Next</button>
-                    <button class="sim-btn" onclick="resetSim()"><i class="fas fa-undo"></i> Reset</button>
+                <!-- Left Sidebar Picker -->
+                <div class="sim-sidebar">
+                    <div class="sim-category">
+                        <span class="sim-category-title">Arrays</span>
+                        <button class="sim-sidebar-btn ${state.simType === 'two-pointer' ? 'active' : ''}" onclick="selectSimType('two-pointer')">Two Pointer</button>
+                        <button class="sim-sidebar-btn ${state.simType === 'sliding-window' ? 'active' : ''}" onclick="selectSimType('sliding-window')">Sliding Window</button>
+                        <button class="sim-sidebar-btn ${state.simType === 'binary-search' ? 'active' : ''}" onclick="selectSimType('binary-search')">Binary Search</button>
+                        <button class="sim-sidebar-btn ${state.simType === 'merge-intervals' ? 'active' : ''}" onclick="selectSimType('merge-intervals')">Merge Intervals</button>
+                    </div>
+                    <div class="sim-category">
+                        <span class="sim-category-title">Linked List</span>
+                        <button class="sim-sidebar-btn ${state.simType === 'fast-slow-pointer' ? 'active' : ''}" onclick="selectSimType('fast-slow-pointer')">Fast & Slow Pointer</button>
+                    </div>
+                    <div class="sim-category">
+                        <span class="sim-category-title">Trees</span>
+                        <button class="sim-sidebar-btn ${state.simType === 'tree-dfs' ? 'active' : ''}" onclick="selectSimType('tree-dfs')">Tree DFS</button>
+                        <button class="sim-sidebar-btn ${state.simType === 'tree-bfs' ? 'active' : ''}" onclick="selectSimType('tree-bfs')">Tree BFS</button>
+                    </div>
+                    <div class="sim-category">
+                        <span class="sim-category-title">Graphs</span>
+                        <button class="sim-sidebar-btn ${state.simType === 'graph-dfs' ? 'active' : ''}" onclick="selectSimType('graph-dfs')">Graph DFS</button>
+                        <button class="sim-sidebar-btn ${state.simType === 'graph-bfs' ? 'active' : ''}" onclick="selectSimType('graph-bfs')">Graph BFS</button>
+                        <button class="sim-sidebar-btn ${state.simType === 'dijkstra' ? 'active' : ''}" onclick="selectSimType('dijkstra')">Dijkstra's Path</button>
+                    </div>
+                    <div class="sim-category">
+                        <span class="sim-category-title">Advanced</span>
+                        <button class="sim-sidebar-btn ${state.simType === 'heap' ? 'active' : ''}" onclick="selectSimType('heap')">Min-Heap</button>
+                        <button class="sim-sidebar-btn ${state.simType === 'union-find' ? 'active' : ''}" onclick="selectSimType('union-find')">Union Find (DSU)</button>
+                        <button class="sim-sidebar-btn ${state.simType === 'trie' ? 'active' : ''}" onclick="selectSimType('trie')">Trie Prefix Tree</button>
+                        <button class="sim-sidebar-btn ${state.simType === 'dp-visualizer' ? 'active' : ''}" onclick="selectSimType('dp-visualizer')">DP Visualizer</button>
+                        <button class="sim-sidebar-btn ${state.simType === 'backtracking' ? 'active' : ''}" onclick="selectSimType('backtracking')">Backtracking</button>
+                        <button class="sim-sidebar-btn ${state.simType === 'lru-cache' ? 'active' : ''}" onclick="selectSimType('lru-cache')">LRU Cache</button>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Canvas -->
-            <div class="simulator-canvas">
-                <div class="sim-array-container">
-                    ${nodesHtml}
+                <!-- Right Canvas Area -->
+                <div style="display:flex; flex-direction:column; gap:24px; flex:1; min-width:0;">
+                    
+                    <!-- Controls Bar -->
+                    <div class="simulator-controls" style="margin-top:0;">
+                        <h2 style="font-size:16px; font-weight:800; color:#ffffff; margin:0;">${data.name}</h2>
+                        <div class="sim-btn-group">
+                            <button class="sim-btn" onclick="prevSimStep()"><i class="fas fa-step-backward"></i> Prev</button>
+                            <button class="sim-btn" onclick="togglePlaySim()">
+                                <i class="fas ${state.simIsPlaying ? 'fa-pause' : 'fa-play'}"></i> ${state.simIsPlaying ? 'Pause' : 'Play'}
+                            </button>
+                            <button class="sim-btn" onclick="nextSimStep()"><i class="fas fa-step-forward"></i> Next</button>
+                            <button class="sim-btn" onclick="resetSim()"><i class="fas fa-undo"></i> Reset</button>
+                        </div>
+                    </div>
+
+                    <!-- Visual Canvas -->
+                    <div class="simulator-canvas" style="padding: 36px 20px;">
+                        ${nodesHtml}
+
+                        <!-- Info Variables Box -->
+                        <div style="display:flex; gap:16px; background:rgba(255,255,255,0.01); border:1px solid var(--border-color); padding:12px 24px; border-radius:12px; font-size:13px; font-weight:600; flex-wrap:wrap; justify-content:center; width:100%; box-sizing:border-box;">
+                            ${varsHtml}
+                        </div>
+
+                        <!-- Step Description Box -->
+                        <div class="sim-status-box">
+                            <div class="sim-step-title">${step.title}</div>
+                            <p class="sim-step-desc" style="max-width:550px; margin: 0 auto; line-height:1.5;">${step.desc}</p>
+                        </div>
+                    </div>
+
                 </div>
 
-                <div style="display:flex; gap:16px; background:rgba(255,255,255,0.01); border:1px solid var(--border-color); padding:12px 24px; border-radius:12px; font-size:13px; font-weight:600; flex-wrap:wrap; justify-content:center;">
-                    ${varsHtml}
-                </div>
-
-                <div class="sim-status-box">
-                    <div class="sim-step-title">${step.title}</div>
-                    <p class="sim-step-desc" style="max-width:550px; margin: 0 auto; line-height:1.5;">${step.desc}</p>
-                </div>
             </div>
 
         </div>
@@ -1712,7 +2702,6 @@ function nextSimStep() {
         state.simStep++;
         renderView();
     } else {
-        // Loop back or pause at end
         if (state.simIsPlaying) {
             togglePlaySim();
         }
@@ -1733,7 +2722,6 @@ function togglePlaySim() {
     state.simIsPlaying = !state.simIsPlaying;
     
     if (state.simIsPlaying) {
-        // If already at end, reset first
         const data = SIM_DATA[state.simType];
         if (state.simStep >= data.steps.length - 1) {
             state.simStep = 0;

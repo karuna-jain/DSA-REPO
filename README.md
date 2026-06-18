@@ -210,6 +210,10 @@ Optimal string search, manipulation, verification, and run-length patterns.
 | 6 | Check Valid Shuffle / Interleave | [LeetCode 97](https://leetcode.com/problems/interleaving-string/) | [ValidShuffle.java](String/ValidShuffle.java) | $O(M \cdot N)$ | $O(M \cdot N)$ | 2D dynamic programming tracking character interleaving |
 | 7 | Count and Say | [LeetCode 38](https://leetcode.com/problems/count-and-say/) | [CountAndSay.java](String/CountAndSay.java) | $O(2^N)$ | $O(2^N)$ | Iterative run-length encoding tracking count and character |
 | 8 | Longest Palindromic Substring | [LeetCode 5](https://leetcode.com/problems/longest-palindromic-substring/) | [LongestPalindromicSubstring.java](String/LongestPalindromicSubstring.java) | $O(N^2)$ | $O(1)$ | Expand around odd/even indices tracking boundaries |
+| 9 | Longest Recurring Subsequence | [GeeksforGeeks](https://www.geeksforgeeks.org/longest-recurring-subsequence/) | [LongestRecurringSubsequence.java](String/LongestRecurringSubsequence.java) | $O(N^2)$ | $O(N^2)$ | Dynamic programming using LCS on the string with itself, ensuring index $i \neq j$ |
+| 10 | Print all Subsequences | [GeeksforGeeks](https://www.geeksforgeeks.org/print-subsequences-string/) | [PrintSubsequences.java](String/PrintSubsequences.java) | $O(2^N)$ | $O(N)$ | Recursive backtracking with pick/don't pick choices |
+| 11 | Print all Permutations | [LeetCode 46](https://leetcode.com/problems/permutations/) | [StringPermutations.java](String/StringPermutations.java) | $O(N \cdot N!)$ | $O(N)$ | Backtracking swap-based character exploration with duplicate skipping |
+| 12 | Split Binary String | [GeeksforGeeks](https://www.geeksforgeeks.org/split-the-binary-string-into-substrings-with-equal-number-of-0s-and-1s/) | [SplitBinaryString.java](String/SplitBinaryString.java) | $O(N)$ | $O(1)$ | Greedy linear scan tracking balanced count of 0s and 1s |
 
 ---
 
