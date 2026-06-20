@@ -102,6 +102,8 @@ Complex recursive optimization problems, hierarchical representations, and state
 | Trees | Vertical Order Sum | [LeetCode 987](https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/) | [verticalSum.java](Trees/verticalSum.java) | TreeMap tracking of horizontal distance coordinates |
 | DP | Edit Distance | [LeetCode 72](https://leetcode.com/problems/edit-distance/) | [edit_distance.java](dp/edit_distance.java) | Bottom-up 2D grid dynamic programming |
 | DP | Word Wrap | [GeeksforGeeks](https://www.geeksforgeeks.org/word-wrap-problem-dp-19/) | [wordWrap.java](dp/wordWrap.java) | Recursion + Memoization computing minimum extra space squares |
+| DP | Count Palindromic Subsequences | [GeeksforGeeks](https://www.geeksforgeeks.org/count-palindromic-subsequence-given-string/) | [CountPalindromicSubsequences.java](dp/CountPalindromicSubsequences.java) | 2D dynamic programming table matching boundaries |
+| DP | Word Break | [LeetCode 139](https://leetcode.com/problems/word-break/) | [WordBreak.java](dp/WordBreak.java) | 1D dynamic programming tracking segmented word suffixes |
 | Backtrack | N-Queens Puzzle | [LeetCode 51](https://leetcode.com/problems/n-queens/) | [NQueen.java](Backtrack/NQueen.java) | Row-by-row recursive placement checking column/diagonal safety |
 | Backtrack | Permutations | [LeetCode 46](https://leetcode.com/problems/permutations/) | [permutation.java](Backtrack/permutation.java) | Backtracking swap-based permutation space exploration |
 
@@ -214,6 +216,12 @@ Optimal string search, manipulation, verification, and run-length patterns.
 | 10 | Print all Subsequences | [GeeksforGeeks](https://www.geeksforgeeks.org/print-subsequences-string/) | [PrintSubsequences.java](String/PrintSubsequences.java) | $O(2^N)$ | $O(N)$ | Recursive backtracking with pick/don't pick choices |
 | 11 | Print all Permutations | [LeetCode 46](https://leetcode.com/problems/permutations/) | [StringPermutations.java](String/StringPermutations.java) | $O(N \cdot N!)$ | $O(N)$ | Backtracking swap-based character exploration with duplicate skipping |
 | 12 | Split Binary String | [GeeksforGeeks](https://www.geeksforgeeks.org/split-the-binary-string-into-substrings-with-equal-number-of-0s-and-1s/) | [SplitBinaryString.java](String/SplitBinaryString.java) | $O(N)$ | $O(1)$ | Greedy linear scan tracking balanced count of 0s and 1s |
+| 13 | Mobile Numeric Keypad Sequence | [GeeksforGeeks](https://www.geeksforgeeks.org/convert-sentence-equivalent-mobile-numeric-keypad-sequence/) | [MobileNumericKeypad.java](String/MobileNumericKeypad.java) | $O(N)$ | $O(N)$ | Static mapping of characters to keypad sequences |
+| 14 | Minimum Bracket Reversals | [GeeksforGeeks](https://www.geeksforgeeks.org/minimum-number-of-bracket-reversals-needed-to-make-an-expression-balanced/) | [BracketReversals.java](String/BracketReversals.java) | $O(N)$ | $O(1)$ | Counter-based tracking of unmatched open/close brackets |
+| 15 | Next Greater Number (Same Digits) | [LeetCode 556](https://leetcode.com/problems/next-greater-element-iii/) | [NextGreaterNumber.java](String/NextGreaterNumber.java) | $O(D)$ | $O(D)$ | Next permutation algorithm on digits |
+| 16 | Balanced Parentheses | [LeetCode 20](https://leetcode.com/problems/valid-parentheses/) | [BalancedParenthesis.java](String/BalancedParenthesis.java) | $O(N)$ | $O(N)$ | Stack-based matching of open and close brackets |
+| 17 | Rabin-Karp Algorithm | [GeeksforGeeks](https://www.geeksforgeeks.org/rabin-karp-algorithm-for-pattern-searching/) | [RabinKarp.java](String/RabinKarp.java) | $O(N + M)$ | $O(1)$ | Pattern searching using rolling hash matching |
+| 18 | KMP Algorithm | [LeetCode 28](https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/) | [KMP.java](String/KMP.java) | $O(N + M)$ | $O(M)$ | Pattern searching using precomputed prefix suffix table |
 
 ---
 
