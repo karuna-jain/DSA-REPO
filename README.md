@@ -89,8 +89,9 @@ Classic base implementations of sorting and binary/linear search.
 | Sorting | Selection Sort | [SelectionSort.java](Arrays/Sorting/SelectionSort.java) | $O(N^2)$ | $O(1)$ |
 | Sorting | Merge Sort | [mergeSort.java](Arrays/Sorting/mergeSort.java) | $O(N \log N)$ | $O(N)$ |
 | Sorting | Quick Sort | [quickSort.java](Arrays/Sorting/quickSort.java) | $O(N \log N)$ | $O(\log N)$ |
-| Searching | Binary Search | [BinarySearch.java](Arrays/searching/BinarySearch.java) | $O(\log N)$ | $O(1)$ |
+| Searching | Binary Search | [BinarySearch.java](Arrays/searching/BinarySearch/BinarySearch.java) | $O(\log N)$ | $O(1)$ |
 | Searching | Linear Search | [LinearSearch.java](Arrays/searching/LinearSearch.java) | $O(N)$ | $O(1)$ |
+| Searching | [Min/Max of Array (Min Comparisons)](https://www.geeksforgeeks.org/maximum-and-minimum-in-an-array/) | [MinMaxArray.java](Arrays/searching/MinMaxArray.java) | $O(N)$ | $O(1)$ |
 | Sorting | Merge Sorted Arrays (In-Place) | [MergeSortedArrays.java](Arrays/MergeSortedArrays.java) | $O((N + M) \log(N + M))$ | $O(1)$ |
 | Sorting | Count Inversions | [CountInversion.java](Arrays/Sorting/CountInversion.java) | $O(N \log N)$ | $O(N)$ |
 
@@ -179,6 +180,8 @@ Searching sorted spaces, rotated segments, boundaries, or finding optimization a
 | 11| Find Peak Element | [LeetCode 162](https://leetcode.com/problems/find-peak-element/) | [FindPeakElement.java](Arrays/searching/BinarySearch/FindPeakElement.java) | $O(\log N)$ | $O(1)$ | Search in direction of ascending slope |
 | 12| Koko Eating Bananas | [LeetCode 875](https://leetcode.com/problems/koko-eating-bananas/) | [KokoEatingBananas.java](Arrays/searching/BinarySearch/KokoEatingBananas.java) | $O(N \log(\max(P)))$ | $O(1)$ | Binary search over eating rates, validating speeds |
 | 13| Median of Two Sorted Arrays | [LeetCode 4](https://leetcode.com/problems/median-of-two-sorted-arrays/) | [MedianTwoSortedArrays.java](Arrays/searching/BinarySearch/MedianTwoSortedArrays.java) | $O(\log(\min(M, N)))$ | $O(1)$ | Binary search on partitions of smaller array to balance sizes |
+| 14| Find a Fixed Point (Value equal to index) | [GeeksforGeeks](https://www.geeksforgeeks.org/find-a-fixed-point-in-a-given-array/) | [FixedPoint.java](Arrays/searching/BinarySearch/FixedPoint.java) | $O(\log N)$ | $O(1)$ | Binary search comparing element and its index |
+| 15| Square root of an integer | [LeetCode 69](https://leetcode.com/problems/sqrtx/) | [Sqrt.java](Arrays/searching/BinarySearch/Sqrt.java) | $O(\log X)$ | $O(1)$ | Binary search using division check mid <= x/mid to avoid overflow |
 
 ### 11. Kadane's Algorithm Pattern
 Maximum and minimum contiguous subarray sum optimization.
