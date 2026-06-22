@@ -105,6 +105,7 @@ Complex recursive optimization problems, hierarchical representations, and state
 | DP | Word Wrap | [GeeksforGeeks](https://www.geeksforgeeks.org/word-wrap-problem-dp-19/) | [wordWrap.java](dp/wordWrap.java) | Recursion + Memoization computing minimum extra space squares |
 | DP | Count Palindromic Subsequences | [GeeksforGeeks](https://www.geeksforgeeks.org/count-palindromic-subsequence-given-string/) | [CountPalindromicSubsequences.java](dp/CountPalindromicSubsequences.java) | 2D dynamic programming table matching boundaries |
 | DP | Word Break | [LeetCode 139](https://leetcode.com/problems/word-break/) | [WordBreak.java](dp/WordBreak.java) | 1D dynamic programming tracking segmented word suffixes |
+| DP | Longest Common Subsequence | [LeetCode 1143](https://leetcode.com/problems/longest-common-subsequence/) | [LongestCommonSubsequence.java](dp/LongestCommonSubsequence.java) | Bottom-up 2D grid dynamic programming tabulation |
 | Backtrack | N-Queens Puzzle | [LeetCode 51](https://leetcode.com/problems/n-queens/) | [NQueen.java](Backtrack/NQueen.java) | Row-by-row recursive placement checking column/diagonal safety |
 | Backtrack | Permutations | [LeetCode 46](https://leetcode.com/problems/permutations/) | [permutation.java](Backtrack/permutation.java) | Backtracking swap-based permutation space exploration |
 
@@ -225,6 +226,10 @@ Optimal string search, manipulation, verification, and run-length patterns.
 | 16 | Balanced Parentheses | [LeetCode 20](https://leetcode.com/problems/valid-parentheses/) | [BalancedParenthesis.java](String/BalancedParenthesis.java) | $O(N)$ | $O(N)$ | Stack-based matching of open and close brackets |
 | 17 | Rabin-Karp Algorithm | [GeeksforGeeks](https://www.geeksforgeeks.org/rabin-karp-algorithm-for-pattern-searching/) | [RabinKarp.java](String/RabinKarp.java) | $O(N + M)$ | $O(1)$ | Pattern searching using rolling hash matching |
 | 18 | KMP Algorithm | [LeetCode 28](https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/) | [KMP.java](String/KMP.java) | $O(N + M)$ | $O(M)$ | Pattern searching using precomputed prefix suffix table |
+| 19 | Longest Common Prefix | [LeetCode 14](https://leetcode.com/problems/longest-common-prefix/) | [LongestCommonPrefix.java](String/LongestCommonPrefix.java) | $O(N \cdot M)$ | $O(1)$ | Vertical scanning comparing characters of all strings |
+| 20 | Alternate Binary String Flips | [GeeksforGeeks](https://www.geeksforgeeks.org/number-flips-make-binary-string-alternate/) | [AlternateBinaryString.java](String/AlternateBinaryString.java) | $O(N)$ | $O(1)$ | Compare with target alternating patterns and minimize flips |
+| 21 | First Repeated Word | [GeeksforGeeks](https://www.geeksforgeeks.org/find-first-repeated-word-string/) | [FirstRepeatedWord.java](String/FirstRepeatedWord.java) | $O(N)$ | $O(K)$ | Split string into words and find the first duplicate using HashSet |
+| 22 | Bracket Balancing Swaps | [GeeksforGeeks](https://www.geeksforgeeks.org/minimum-swaps-bracket-balancing/) | [BracketBalancing.java](String/BracketBalancing.java) | $O(N)$ | $O(1)$ | Greedy tracking of open/close bracket counts and imbalance |
 
 ---
 
