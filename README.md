@@ -56,6 +56,8 @@ Optimizing search/manipulation on sorted structures by moving pointers inward or
 | 12 | Trapping Rain Water | [LeetCode 42](https://leetcode.com/problems/trapping-rain-water/) | [TrappingRainWater.java](Arrays/TwoPointer/TrappingRainWater.java) | $O(N)$ | $O(1)$ | Two pointers tracking leftMax and rightMax boundaries |
 | 13 | Minimum Size Subarray Sum | [LeetCode 209](https://leetcode.com/problems/minimum-size-subarray-sum/) | [MinSizeSubarraySum.java](Arrays/TwoPointer/MinSizeSubarraySum.java) | $O(N)$ | $O(1)$ | Sliding window, expand right, shrink left when sum $\ge$ target |
 | 14 | Next Permutation | [LeetCode 31](https://leetcode.com/problems/next-permutation/) | [NextPermutation.java](Arrays/TwoPointer/NextPermutation.java) | $O(N)$ | $O(1)$ | Find pivot, find successor, swap, and reverse suffix |
+| 15 | Pair with Given Difference | [GeeksforGeeks](https://www.geeksforgeeks.org/find-a-pair-with-the-given-difference/) | [PairWithDifference.java](Arrays/TwoPointer/PairWithDifference.java) | $O(N \log N)$ | $O(1)$ | Sort, two-pointer scan with pointer adjustment based on difference |
+| 16 | Four Elements Sum to Given Value | [GeeksforGeeks](https://www.geeksforgeeks.org/find-four-elements-that-sum-to-a-given-value/) | [FourSumElements.java](Arrays/TwoPointer/FourSumElements.java) | $O(N^2)$ | $O(N^2)$ | HashMap-based pair sums finding target - current pair sum |
 
 ### 2. Fast & Slow Pointer Pattern
 Detecting cycles, cycle entry points, or finding middle nodes of linear structures.
@@ -92,6 +94,9 @@ Classic base implementations of sorting and binary/linear search.
 | Searching | Binary Search | [BinarySearch.java](Arrays/searching/BinarySearch/BinarySearch.java) | $O(\log N)$ | $O(1)$ |
 | Searching | Linear Search | [LinearSearch.java](Arrays/searching/LinearSearch.java) | $O(N)$ | $O(1)$ |
 | Searching | [Min/Max of Array (Min Comparisons)](https://www.geeksforgeeks.org/maximum-and-minimum-in-an-array/) | [MinMaxArray.java](Arrays/searching/MinMaxArray.java) | $O(N)$ | $O(1)$ |
+| Searching | [Repeating and Missing Number](https://www.geeksforgeeks.org/find-a-repeating-and-a-missing-number/) | [RepeatingAndMissing.java](Arrays/searching/RepeatingAndMissing.java) | $O(N)$ | $O(1)$ |
+| Searching | [Majority Element](https://leetcode.com/problems/majority-element/) | [MajorityElement.java](Arrays/searching/MajorityElement.java) | $O(N)$ | $O(1)$ |
+| Searching | [Search Adjacent Differ by at Most K](https://www.geeksforgeeks.org/searching-array-adjacent-differ-k/) | [SearchAdjacentDifferByK.java](Arrays/searching/SearchAdjacentDifferByK.java) | $O(N)$ | $O(1)$ |
 | Sorting | Merge Sorted Arrays (In-Place) | [MergeSortedArrays.java](Arrays/MergeSortedArrays.java) | $O((N + M) \log(N + M))$ | $O(1)$ |
 | Sorting | Count Inversions | [CountInversion.java](Arrays/Sorting/CountInversion.java) | $O(N \log N)$ | $O(N)$ |
 
@@ -106,6 +111,7 @@ Complex recursive optimization problems, hierarchical representations, and state
 | DP | Count Palindromic Subsequences | [GeeksforGeeks](https://www.geeksforgeeks.org/count-palindromic-subsequence-given-string/) | [CountPalindromicSubsequences.java](dp/CountPalindromicSubsequences.java) | 2D dynamic programming table matching boundaries |
 | DP | Word Break | [LeetCode 139](https://leetcode.com/problems/word-break/) | [WordBreak.java](dp/WordBreak.java) | 1D dynamic programming tracking segmented word suffixes |
 | DP | Longest Common Subsequence | [LeetCode 1143](https://leetcode.com/problems/longest-common-subsequence/) | [LongestCommonSubsequence.java](dp/LongestCommonSubsequence.java) | Bottom-up 2D grid dynamic programming tabulation |
+| DP | Max Sum Non-Adjacent Elements | [GeeksforGeeks](https://www.geeksforgeeks.org/maximum-sum-such-that-no-two-elements-are-adjacent/) | [MaxSumNonAdjacent.java](dp/MaxSumNonAdjacent.java) | Tabulation DP optimized to two state variables (include/exclude choices) |
 | Backtrack | N-Queens Puzzle | [LeetCode 51](https://leetcode.com/problems/n-queens/) | [NQueen.java](Backtrack/NQueen.java) | Row-by-row recursive placement checking column/diagonal safety |
 | Backtrack | Permutations | [LeetCode 46](https://leetcode.com/problems/permutations/) | [permutation.java](Backtrack/permutation.java) | Backtracking swap-based permutation space exploration |
 
