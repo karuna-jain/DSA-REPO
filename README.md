@@ -97,8 +97,10 @@ Classic base implementations of sorting and binary/linear search.
 | Searching | [Repeating and Missing Number](https://www.geeksforgeeks.org/find-a-repeating-and-a-missing-number/) | [RepeatingAndMissing.java](Arrays/searching/RepeatingAndMissing.java) | $O(N)$ | $O(1)$ |
 | Searching | [Majority Element](https://leetcode.com/problems/majority-element/) | [MajorityElement.java](Arrays/searching/MajorityElement.java) | $O(N)$ | $O(1)$ |
 | Searching | [Search Adjacent Differ by at Most K](https://www.geeksforgeeks.org/searching-array-adjacent-differ-k/) | [SearchAdjacentDifferByK.java](Arrays/searching/SearchAdjacentDifferByK.java) | $O(N)$ | $O(1)$ |
+| Searching | [Product Array Puzzle](https://www.geeksforgeeks.org/a-product-array-puzzle/) | [ProductArrayPuzzle.java](Arrays/ProductArrayPuzzle.java) | $O(N)$ | $O(1)$ |
 | Sorting | Merge Sorted Arrays (In-Place) | [MergeSortedArrays.java](Arrays/MergeSortedArrays.java) | $O((N + M) \log(N + M))$ | $O(1)$ |
 | Sorting | Count Inversions | [CountInversion.java](Arrays/Sorting/CountInversion.java) | $O(N \log N)$ | $O(N)$ |
+| Sorting | [Sort by Set Bit Count](https://www.geeksforgeeks.org/sort-an-array-according-to-count-of-set-bits/) | [SortBySetBitCount.java](Arrays/Sorting/SortBySetBitCount.java) | $O(N \log N)$ | $O(N)$ |
 
 ### 5. Dynamic Programming, Trees & Backtracking
 Complex recursive optimization problems, hierarchical representations, and state space searches.
