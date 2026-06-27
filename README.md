@@ -71,6 +71,7 @@ Detecting cycles, cycle entry points, or finding middle nodes of linear structur
 | 5 | Palindrome Linked List | [LeetCode 234](https://leetcode.com/problems/palindrome-linked-list/) | [PalindromeLinkedList.java](FastAndSlowPointers/PalindromeLinkedList.java) | $O(N)$ | $O(1)$ | Midpoint split, reverse second half, comparison, list restore |
 | 6 | Rearrange Linked List (Odd-Even) | [LeetCode 328](https://leetcode.com/problems/odd-even-linked-list/) | [OddEvenLinkedList.java](FastAndSlowPointers/OddEvenLinkedList.java) | $O(N)$ | $O(1)$ | Interleaved linking of odd/even pointers, end-linking |
 | 7 | Find the Duplicate Number (Floyd's) | [LeetCode 287](https://leetcode.com/problems/find-the-duplicate-number/) | [FindDuplicateFloyd.java](FastAndSlowPointers/FindDuplicateFloyd.java) | $O(N)$ | $O(1)$ | Fast & slow pointers meeting in array index cycle |
+| 8 | Detect and Remove Loop in Linked List | [GeeksforGeeks](https://www.geeksforgeeks.org/detect-and-remove-loop-in-a-linked-list/) | [RemoveLinkedListCycle.java](FastAndSlowPointers/RemoveLinkedListCycle.java) | $O(N)$ | $O(1)$ | Floyd's cycle detection + head reset and breaking the cycle |
 
 ### 3. Sliding Window Pattern
 Tracking a subsegment of an array/string that dynamically expands or shrinks based on criteria.
@@ -116,6 +117,7 @@ Complex recursive optimization problems, hierarchical representations, and state
 | DP | Max Sum Non-Adjacent Elements | [GeeksforGeeks](https://www.geeksforgeeks.org/maximum-sum-such-that-no-two-elements-are-adjacent/) | [MaxSumNonAdjacent.java](dp/MaxSumNonAdjacent.java) | Tabulation DP optimized to two state variables (include/exclude choices) |
 | Backtrack | N-Queens Puzzle | [LeetCode 51](https://leetcode.com/problems/n-queens/) | [NQueen.java](Backtrack/NQueen.java) | Row-by-row recursive placement checking column/diagonal safety |
 | Backtrack | Permutations | [LeetCode 46](https://leetcode.com/problems/permutations/) | [permutation.java](Backtrack/permutation.java) | Backtracking swap-based permutation space exploration |
+| Backtrack | Subset Sums | [GeeksforGeeks](https://practice.geeksforgeeks.org/problems/subset-sums2234/1) | [SubsetSums.java](Backtrack/SubsetSums.java) | Recursive backtracking generating sums for all pick/don't-pick decisions |
 
 ### 6. Cyclic Sort Pattern
 In-place range sorting and mismatch scanning for optimal $O(N)$ time and $O(1)$ space range queries.
@@ -136,13 +138,14 @@ Iterative pointer redirection for memory-efficient $O(1)$ space manipulation of 
 
 | # | Problem | Source Link | Solution Code | Optimal Time | Space | Core Approach |
 |---|---------|-------------|---------------|:------------:|:-----:|--------------|
-| 1 | Reverse a Linked List | [LeetCode 206](https://leetcode.com/problems/reverse-linked-list/) | [ReverseLinkedList.java](InPlaceLinkedListReversal/ReverseLinkedList.java) | $O(N)$ | $O(1)$ | Iterative reversal using three pointers (prev, curr, next) |
+| 1 | Reverse a Linked List | [LeetCode 206](https://leetcode.com/problems/reverse-linked-list/) | [ReverseLinkedList.java](InPlaceLinkedListReversal/ReverseLinkedList.java) | $O(N)$ | $O(1)$ | Iterative & recursive in-place reversal |
 | 2 | Reverse a Sub-list (m to n) | [LeetCode 92](https://leetcode.com/problems/reverse-linked-list-ii/) | [ReverseSubList.java](InPlaceLinkedListReversal/ReverseSubList.java) | $O(N)$ | $O(1)$ | Traverse to index left-1, reverse sub-list, reconnect ends |
 | 3 | Reverse Every K-element Sub-list | [LeetCode 25](https://leetcode.com/problems/reverse-nodes-in-k-group/) | [ReverseKGroup.java](InPlaceLinkedListReversal/ReverseKGroup.java) | $O(N)$ | $O(1)$ | Count k elements, reverse them, repeat iteratively, keep leftovers as is |
 | 4 | Reverse Alternating K-element Sub-list | [Grokking Pattern](https://leetcode.com/) | [ReverseAlternatingKGroup.java](InPlaceLinkedListReversal/ReverseAlternatingKGroup.java) | $O(N)$ | $O(1)$ | Alternating phases: reverse k nodes, skip k nodes, repeat |
 | 5 | Rotate a Linked List | [LeetCode 61](https://leetcode.com/problems/rotate-list/) | [RotateList.java](InPlaceLinkedListReversal/RotateList.java) | $O(N)$ | $O(1)$ | Form circular list, advance len - (k % len) - 1, split circle |
 | 6 | Reverse Nodes in Even Length Groups | [LeetCode 2074](https://leetcode.com/problems/reverse-nodes-in-even-length-groups/) | [ReverseEvenLengthGroups.java](InPlaceLinkedListReversal/ReverseEvenLengthGroups.java) | $O(N)$ | $O(1)$ | Incrementally size groups (1, 2, 3...); reverse if group size is even |
 | 7 | Swap Nodes in Pairs | [LeetCode 24](https://leetcode.com/problems/swap-nodes-in-pairs/) | [SwapPairs.java](InPlaceLinkedListReversal/SwapPairs.java) | $O(N)$ | $O(1)$ | Swap adjacent nodes iteratively in pairs (k=2) |
+| 8 | Reverse Linked List in Groups of Size K (GFG) | [GeeksforGeeks](https://practice.geeksforgeeks.org/problems/reverse-a-linked-list-in-groups-of-given-size/1) | [ReverseKGroupGFG.java](InPlaceLinkedListReversal/ReverseKGroupGFG.java) | $O(N)$ | $O(1)$ | Reverse every group of size k, including leftover nodes |
 
 ### 8. Merge Intervals Pattern
 Sorting or managing interval lists to solve overlaps, scheduling, or range coverage queries.
