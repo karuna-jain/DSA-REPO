@@ -72,6 +72,13 @@ Detecting cycles, cycle entry points, or finding middle nodes of linear structur
 | 6 | Rearrange Linked List (Odd-Even) | [LeetCode 328](https://leetcode.com/problems/odd-even-linked-list/) | [OddEvenLinkedList.java](FastAndSlowPointers/OddEvenLinkedList.java) | $O(N)$ | $O(1)$ | Interleaved linking of odd/even pointers, end-linking |
 | 7 | Find the Duplicate Number (Floyd's) | [LeetCode 287](https://leetcode.com/problems/find-the-duplicate-number/) | [FindDuplicateFloyd.java](FastAndSlowPointers/FindDuplicateFloyd.java) | $O(N)$ | $O(1)$ | Fast & slow pointers meeting in array index cycle |
 | 8 | Detect and Remove Loop in Linked List | [GeeksforGeeks](https://www.geeksforgeeks.org/detect-and-remove-loop-in-a-linked-list/) | [RemoveLinkedListCycle.java](FastAndSlowPointers/RemoveLinkedListCycle.java) | $O(N)$ | $O(1)$ | Floyd's cycle detection + head reset and breaking the cycle |
+| 9 | Intersection of two Sorted Linked Lists | [GeeksforGeeks](https://www.geeksforgeeks.org/intersection-of-two-sorted-linked-lists/) | [IntersectionSortedLists.java](FastAndSlowPointers/IntersectionSortedLists.java) | $O(N + M)$ | $O(1)$ | Two-pointer traversal matching common elements |
+| 10 | Intersection Point of two Linked Lists | [LeetCode 160](https://leetcode.com/problems/intersection-of-two-linked-lists/) | [IntersectionPoint.java](FastAndSlowPointers/IntersectionPoint.java) | $O(N + M)$ | $O(1)$ | Dual pointer traversal resetting to opposite heads at end |
+| 11 | Check if Circular Linked List | [GeeksforGeeks](https://www.geeksforgeeks.org/check-if-a-linked-list-is-circular-linked-list/) | [CircularLinkedList.java](FastAndSlowPointers/CircularLinkedList.java) | $O(N)$ | $O(1)$ | Traverse from head to see if we loop back to head |
+| 12 | Split Circular Linked List into Two Halves | [GeeksforGeeks](https://www.geeksforgeeks.org/split-a-circular-linked-list-into-two-halves/) | [SplitCircularList.java](FastAndSlowPointers/SplitCircularList.java) | $O(N)$ | $O(1)$ | Fast & slow pointers to find midpoint and split loops |
+| 13 | Merge Sort for Linked Lists | [LeetCode 148](https://leetcode.com/problems/sort-list/) | [MergeSortLinkedList.java](FastAndSlowPointers/MergeSortLinkedList.java) | $O(N \log N)$ | $O(\log N)$ | Divide list using midpoint split, recursively sort, and merge sorted lists |
+| 14 | Quick Sort for Linked Lists | [GeeksforGeeks](https://www.geeksforgeeks.org/quicksort-on-singly-linked-list/) | [QuickSortLinkedList.java](FastAndSlowPointers/QuickSortLinkedList.java) | $O(N \log N)$ | $O(\log N)$ | Partition around pivot into less, equal, and greater lists, recursively sort, and concatenate |
+
 
 ### 3. Sliding Window Pattern
 Tracking a subsegment of an array/string that dynamically expands or shrinks based on criteria.
